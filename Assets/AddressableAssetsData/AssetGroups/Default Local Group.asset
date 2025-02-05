@@ -15,8 +15,42 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: 0dd17e9b7a0b3884ea127fffbb9f0209
   m_SerializeEntries:
+  - m_GUID: 0015df6562545dd4ebcf323b16b81a8d
+    m_Address: Prefab/Skill/ThrowRock
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefab/Skill
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3ced201c3248da84db43f778cac9f72e
+    m_Address: SO/Skill/Wipe
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SO/Skill
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4c3340c044884984eb590db173be8a76
     m_Address: Prefab/Monster/Slime
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4d5f8d1f647494a489946c0fa13d1895
+    m_Address: SO/Skill/ThrowRock
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SO/Skill
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5806c4924ac78434c9a8acf507b2d0e6
+    m_Address: Prefab/Skill/Wipe
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefab/Skill
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a347464297ce8f84cadc1dba275b895e
+    m_Address: Prefab/Character
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f6d5d98f66d270743bef686a3d09994f
+    m_Address: ScriptableObject/Monster/Slime
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

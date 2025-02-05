@@ -7,16 +7,14 @@ public class MonsterSpawnManager : MonoSingleton<MonsterSpawnManager>
 
     private float maxSpawnDistance = 10;
     private float minSpawnDistance = 5;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (curMonsterCnt >= maxMonsterCnt)
+        {
+            return;
+        }
+        if(GameObject.FindWithTag(Global.PLAYER) == null)
         {
             return;
         }
@@ -24,7 +22,7 @@ public class MonsterSpawnManager : MonoSingleton<MonsterSpawnManager>
     }
     public void SpawnMonster(int monsterId)
     {
-        GameObject temp = ObjectPoolManager.Instance.Pools[monsterId + 1].GetObject();
+        GameObject temp = ObjectPoolManager.Instance.Pools[Global.SLIME].GetObject();
 
         temp.transform.position = GetSpawnPosition();
         curMonsterCnt++;
@@ -37,7 +35,7 @@ public class MonsterSpawnManager : MonoSingleton<MonsterSpawnManager>
         float distance = Random.Range(minSpawnDistance, maxSpawnDistance);
 
         Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
-        Vector2 spawnPosition = (Vector2)GameObject.FindWithTag("Player").transform.position + direction * distance;
+        Vector2 spawnPosition = (Vector2)GameObject.FindWithTag(Global.PLAYER).transform.position + direction * distance;
 
         return spawnPosition;
     }

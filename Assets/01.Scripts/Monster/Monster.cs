@@ -5,7 +5,6 @@ public class Monster : MonoBehaviour
     [SerializeField]private MonsterData baseData;
     private MonsterStat stat;
 
-
     // Update is called once per frame
     void FixedUpdate()
     {
