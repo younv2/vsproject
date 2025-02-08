@@ -1,22 +1,24 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class Pool : MonoBehaviour
+public class Pool<T> : MonoBehaviour where T : Object
 {
-    private ObjectPool<GameObject> pool;
-    private const int maxSize = 100;
+    private ObjectPool<T> pool;
+
+    private const int maxSize = 200;
     private const int initSize = 20;
 
-    private GameObject prefab;
-    
-    public Pool(GameObject prefab)
+    private T prefab;
+
+    public Pool(T prefab)
     {
         this.prefab = prefab;
 
-        pool = new ObjectPool<GameObject>(CreateObject, ActivatePoolObject, DisablePoolObject, DestroyPoolObject, false, initSize, maxSize);
+        pool = new ObjectPool<T>(CreateObject, ActivatePoolObject, DisablePoolObject, DestroyPoolObject, false, initSize, maxSize);
 
-        List<GameObject> tempList = new List<GameObject>();
+        List<T> tempList = new List<T>();
         for (int i = 0; i < initSize; i++)
         {
             tempList.Add(CreateObject());
@@ -27,52 +29,53 @@ public class Pool : MonoBehaviour
         }
     }
 
-    private GameObject CreateObject() // 오브젝트 생성
+    private T CreateObject() // 오브젝트 생성
     {
-        return Instantiate(prefab, ObjectPoolManager.Instance.gameObject.transform);
+        T data = Instantiate(prefab, ObjectPoolManager.Instance.gameObject.transform);
+        return data;
     }
 
-    private void ActivatePoolObject(GameObject obj) // 오브젝트 활성화
+    private void ActivatePoolObject(T obj) // 오브젝트 활성화
     {
-        obj.SetActive(true);
+        if (obj is MonoBehaviour mono)
+        {
+            mono.gameObject.SetActive(true);
+        }
+        if(obj is GameObject go)
+        {
+            go.SetActive(true);
+        }
+        
     }
 
-    private void DisablePoolObject(GameObject obj) // 오브젝트 비활성화
+    private void DisablePoolObject(T obj) // 오브젝트 비활성화
     {
-        obj.SetActive(false);
+        if (obj is MonoBehaviour mono)
+        {
+            mono.gameObject.SetActive(false);
+        }
+        if (obj is GameObject go)
+        {
+            go.SetActive(false);
+        }
     }
 
-    private void DestroyPoolObject(GameObject obj) // 오브젝트 삭제
+    private void DestroyPoolObject(T obj) // 오브젝트 삭제
     {
         Destroy(obj);
     }
 
-    public GameObject GetObject()
+    public T GetObject()
     {
-        GameObject sel = null;
+        T sel = null;
 
-        if (pool.CountActive >= maxSize) // maxSize를 넘는다면 임시 객체 생성 및 반환
-        {
-            sel = CreateObject();
-            sel.tag = "PoolOverObj";
-        }
-        else
-        {
-            sel = pool.Get();
-        }
+        sel = pool.Get();
 
         return sel;
     }
 
-    public void ReleaseObject(GameObject obj)
+    public void ReleaseObject(T obj)
     {
-        if (obj.CompareTag("PoolOverObj"))
-        {
-            Destroy(obj);
-        }
-        else
-        {
-            pool.Release(obj);
-        }
+        pool.Release(obj);
     }
 }

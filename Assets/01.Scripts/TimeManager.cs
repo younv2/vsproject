@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class TimeManager : MonoSingleton<TimeManager>
 {
-    public void Update()
+    public void ManualUpdate()
     {
         
     }

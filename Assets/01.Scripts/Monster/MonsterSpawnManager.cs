@@ -1,16 +1,19 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MonsterSpawnManager : MonoSingleton<MonsterSpawnManager>
 {
-    private int curMonsterCnt = 0;
     private int maxMonsterCnt = 30;
 
     private float maxSpawnDistance = 10;
     private float minSpawnDistance = 5;
 
+    private List<Monster> monsterList = new List<Monster>();
+    public List<Monster> MonsterList { get { return monsterList; } }
+
     void Update()
     {
-        if (curMonsterCnt >= maxMonsterCnt)
+        if (monsterList.Count >= maxMonsterCnt)
         {
             return;
         }
@@ -22,10 +25,11 @@ public class MonsterSpawnManager : MonoSingleton<MonsterSpawnManager>
     }
     public void SpawnMonster(int monsterId)
     {
-        GameObject temp = ObjectPoolManager.Instance.Pools[Global.SLIME].GetObject();
+        Monster temp = ObjectPoolManager.Instance.GetPool<Monster>(Global.SLIME).GetObject();
 
         temp.transform.position = GetSpawnPosition();
-        curMonsterCnt++;
+
+        monsterList.Add(temp);
     }
 
     private Vector2 GetSpawnPosition()

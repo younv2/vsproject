@@ -6,7 +6,7 @@ public class Monster : MonoBehaviour
     private MonsterStat stat;
 
     // Update is called once per frame
-    void FixedUpdate()
+    public void ManualFixedUpdate()
     {
         transform.position  = Vector3.MoveTowards(transform.position, GameObject.FindWithTag("Player").gameObject.transform.position, baseData.MoveSpeed * Time.deltaTime);
     }

@@ -14,14 +14,8 @@ public class SkillManager : MonoSingleton<SkillManager>
     {
         DataManager.Instance.SkillDataList.Find(x => x.SkillName == skillName);
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    public void Update()
+    public void ManualUpdate()
     {
         
     }
