@@ -1,21 +1,44 @@
 using UnityEngine;
+using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "SkillData", menuName = "Scriptable Object/SkillData")]
+[System.Serializable]
+public class SkillLevelInfo
+{
+    public float cooldown = 1f;              // 해당 레벨의 쿨타임
+    public List<SkillEffect> levelEffects;   // 해당 레벨에서 실행될 이펙트 목록
+}
+
+[CreateAssetMenu(menuName = "Game/SkillData")]
 public class SkillData : ScriptableObject
 {
-    [System.Serializable]
-    public class SkillLevelData
+    public int skillId;
+    public string skillName;
+
+    [Header("레벨별 설정")]
+    public List<SkillLevelInfo> levelInfos;
+
+    /// <summary>
+    /// 특정 레벨에 맞는 쿨다운 조회
+    /// </summary>
+    public float GetCooldown(int level)
     {
-        public int level;
-        public float AttackPower;
+        // 레벨 -1을 인덱스로, 범위 초과 시 마지막 레벨 사용
+        int idx = Mathf.Clamp(level - 1, 0, levelInfos.Count - 1);
+        return levelInfos[idx].cooldown;
     }
 
-    [SerializeField]private int skillId;
-    public int SkillId { get { return skillId; } }
-    [SerializeField]private string skillName;
-    public string SkillName { get {  return skillName; } }
+    /// <summary>
+    /// 스킬이 발동될 때, 현재 레벨의 이펙트를 실행
+    /// </summary>
+    public void Activate(SkillRuntime runtime)
+    {
+        int idx = Mathf.Clamp(runtime.Level - 1, 0, levelInfos.Count - 1);
+        var effects = levelInfos[idx].levelEffects;
+        if (effects == null) return;
 
-    [SerializeField] private SkillLevelData[] skillLevelDatas;
-    public SkillLevelData[] SkillLevelDatas { get { return skillLevelDatas; } }
-
+        foreach (var effect in effects)
+        {
+            effect.Execute(runtime);
+        }
+    }
 }

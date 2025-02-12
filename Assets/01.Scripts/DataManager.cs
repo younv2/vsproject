@@ -43,7 +43,14 @@ public class DataManager : MonoSingleton<DataManager>
         isSkillDataLoaded = true;
         Debug.Log("DataManager: 스킬 데이터 로드 완료");
     }
+    public SkillData GetSkillData(int skillId)
+    {
+        return skillDataList.Find(x => x.skillId == skillId);
+    }
+    public SkillData GetSkillData(string skillName)
+    {
+        return skillDataList.Find(x => x.skillName == skillName);
+    }
 
-    
 
 }

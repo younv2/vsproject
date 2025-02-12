@@ -16,12 +16,17 @@ MonoBehaviour:
   skillName: Wipe
   skillLevelDatas:
   - level: 1
-    AttackPower: 10
+    attackPower: 0
+    cooldown: 2
   - level: 2
-    AttackPower: 20
+    attackPower: 0
+    cooldown: 2
   - level: 3
-    AttackPower: 30
+    attackPower: 0
+    cooldown: 2
   - level: 4
-    AttackPower: 40
+    attackPower: 0
+    cooldown: 2
   - level: 5
-    AttackPower: 50
+    attackPower: 0
+    cooldown: 2

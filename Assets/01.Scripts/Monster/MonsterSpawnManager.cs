@@ -25,7 +25,7 @@ public class MonsterSpawnManager : MonoSingleton<MonsterSpawnManager>
     }
     public void SpawnMonster(int monsterId)
     {
-        Monster temp = ObjectPoolManager.Instance.GetPool<Monster>(Global.SLIME). ();
+        Monster temp = ObjectPoolManager.Instance.GetPool<Monster>(Global.SLIME).GetObject();
 
         temp.transform.position = GetSpawnPosition();
 

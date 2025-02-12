@@ -48,8 +48,8 @@ public class ObjectPoolManager : MonoSingleton<ObjectPoolManager>
             {
                 AddPool(character);
             }
-            // Skill 컴포넌트가 있다면 Pool<Skill>로 등록
-            else if (go.TryGetComponent<Skill>(out var skill))
+            // Skill 컴포넌트가 있다면 Pool<Projectile>로 등록
+            else if (go.TryGetComponent<Projectile>(out var skill))
             {
                 AddPool(skill);
             }
