@@ -15,12 +15,13 @@ public class ObjectPoolManager : MonoSingleton<ObjectPoolManager>
         base.Awake();
         DontDestroyOnLoad(this);
     }
-    // Ç® ÃÊ±âÈ­ (ÄÚ·çÆ¾)
+    // í’€ ì´ˆê¸°í™” (ì½”ë£¨í‹´) 
+    // Todo - IPoolableë¡œ ë¬¶ì–´ ê°„ë‹¨í•˜ê²Œ í‘œí˜„í•  ë°©ë²• ì°¾ì•„ë³´ê¸°
     public IEnumerator InitPools()
     {
         pools = new Dictionary<string, object>();
         List<GameObject> list = new List<GameObject>();
-        // Addressables ·Îµå
+        // Addressables ë¡œë“œ
         bool loadDone = false;
         loader.LoadAssetListAsync<GameObject>(addressList, (loadedList) =>
         {
@@ -29,7 +30,7 @@ public class ObjectPoolManager : MonoSingleton<ObjectPoolManager>
             loadDone = true;
         });
         
-        // ·Îµù Á¾·á ´ë±â
+        // ë¡œë”© ì¢…ë£Œ ëŒ€ê¸°
         while (!loadDone)
         {
 
@@ -37,23 +38,28 @@ public class ObjectPoolManager : MonoSingleton<ObjectPoolManager>
         }
         foreach (var go in list)
         {
-            // ¿¹: Monster ÄÄÆ÷³ÍÆ®°¡ ÀÖ´Ù¸é Pool<Monster>·Î µî·Ï
+            // Monster ì»´í¬ë„ŒíŠ¸ê°€ ìˆë‹¤ë©´ Pool<Monster>ë¡œ ë“±ë¡
             if (go.TryGetComponent<Monster>(out var monster))
             {
                 AddPool(monster);
             }
-            // ¿¹: Character ÄÄÆ÷³ÍÆ®°¡ ÀÖ´Ù¸é Pool<Character>·Î µî·Ï
+            // Character ì»´í¬ë„ŒíŠ¸ê°€ ìˆë‹¤ë©´ Pool<Character>ë¡œ ë“±ë¡
             else if (go.TryGetComponent<Character>(out var character))
             {
                 AddPool(character);
             }
+            // Skill ì»´í¬ë„ŒíŠ¸ê°€ ìˆë‹¤ë©´ Pool<Skill>ë¡œ ë“±ë¡
+            else if (go.TryGetComponent<Skill>(out var skill))
+            {
+                AddPool(skill);
+            }
             else
             {
-                // µÑ ´Ù ¾øÀ¸¸é GameObject ÀÚÃ¼·Î Pool »ı¼º
+                // ë‘˜ ë‹¤ ì—†ìœ¼ë©´ GameObject ìì²´ë¡œ Pool ìƒì„±
                 AddPool(go);
             }
         }
-        Debug.Log("ObjectPoolManager: Ç® ÃÊ±âÈ­ ¿Ï·á");
+        Debug.Log("ObjectPoolManager: í’€ ì´ˆê¸°í™” ì™„ë£Œ");
     }
     public void AddPool<T>(T prefab) where T: Object
     {
@@ -62,15 +68,15 @@ public class ObjectPoolManager : MonoSingleton<ObjectPoolManager>
             pools.Add(prefab.name, new Pool<T>(prefab));
         }
     }
-    // Æ¯Á¤ Ç®À» °¡Á®¿À´Â ¸Ş¼­µå
+    // íŠ¹ì • í’€ì„ ê°€ì ¸ì˜¤ëŠ” ë©”ì„œë“œ
     public Pool<T> GetPool<T>(string prefabName) where T : Object
     {
-        // pools¿¡¼­ object·Î ÀúÀåµÈ Ç®À» T Å¸ÀÔÀ¸·Î Ä³½ºÆÃÇØ¼­ ¹İÈ¯
+        // poolsì—ì„œ objectë¡œ ì €ì¥ëœ í’€ì„ T íƒ€ì…ìœ¼ë¡œ ìºìŠ¤íŒ…í•´ì„œ ë°˜í™˜
         if (pools.ContainsKey(prefabName))
         {
-            return (Pool<T>)pools[prefabName];  // Å¸ÀÔÀ» T·Î Ä³½ºÆÃÇÏ¿© ¹İÈ¯
+            return (Pool<T>)pools[prefabName];  // íƒ€ì…ì„ Të¡œ ìºìŠ¤íŒ…í•˜ì—¬ ë°˜í™˜
         }
 
-        return null;  // ÇØ´ç ÀÌ¸§ÀÇ Ç®ÀÌ ¾ø´Ù¸é null ¹İÈ¯
+        return null;  // í•´ë‹¹ ì´ë¦„ì˜ í’€ì´ ì—†ë‹¤ë©´ null ë°˜í™˜
     }
 }

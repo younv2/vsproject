@@ -20,13 +20,14 @@ public class DataManager : MonoSingleton<DataManager>
         base.Awake();
         DontDestroyOnLoad(this);
     }
+    //전체 데이터 로드
     public IEnumerator LoadAllData()
     {
         StartCoroutine(LoadSkillData());
 
         yield return new WaitUntil(() => isSkillDataLoaded);
     }
-
+    //스킬 데이터 로드
     public IEnumerator LoadSkillData()
     {
         bool loadDone = false;
@@ -40,7 +41,7 @@ public class DataManager : MonoSingleton<DataManager>
             yield return null;
         }
         isSkillDataLoaded = true;
-        Debug.Log("DataManager: ��ų ������ �ε� �Ϸ�");
+        Debug.Log("DataManager: 스킬 데이터 로드 완료");
     }
 
     

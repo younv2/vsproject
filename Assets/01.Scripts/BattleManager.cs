@@ -5,7 +5,7 @@ public class BattleManager : MonoSingleton<BattleManager>
     SkillManager skillManagerInstance;
     TimeManager timeManagerInstance;
     MonsterSpawnManager monsterSpawnManagerInstance;
-    //List<Projetile> projetileList;
+    //List<Projetile> projetileList; 
 
     void Start()
     {
@@ -27,7 +27,7 @@ public class BattleManager : MonoSingleton<BattleManager>
             data.ManualFixedUpdate();
         }
 
-        //TODO - Physics SettingsÀÇ Simulation Monde ÃßÈÄ Script·Î ¼öÁ¤ÇØ¼­ Á÷Á¢ Physics °ü¸® ÇÒ °Í 
+        //TODO - Physics Settingsì˜ Simulation Monde ì¶”í›„ Scriptë¡œ ìˆ˜ì •í•´ì„œ ì§ì ‘ Physics ê´€ë¦¬ í•  ê²ƒ 
        /* foreach(var data in projetileList)
         {
             projetileList.Update();

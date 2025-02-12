@@ -6,7 +6,7 @@ using UnityEngine.Pool;
 public class Pool<T> : MonoBehaviour where T : Object
 {
     private ObjectPool<T> pool;
-
+     
     private const int maxSize = 200;
     private const int initSize = 20;
 
@@ -29,13 +29,13 @@ public class Pool<T> : MonoBehaviour where T : Object
         }
     }
 
-    private T CreateObject() // ¿ÀºêÁ§Æ® »ı¼º
+    private T CreateObject() // ì˜¤ë¸Œì íŠ¸ ìƒì„±
     {
         T data = Instantiate(prefab, ObjectPoolManager.Instance.gameObject.transform);
         return data;
     }
 
-    private void ActivatePoolObject(T obj) // ¿ÀºêÁ§Æ® È°¼ºÈ­
+    private void ActivatePoolObject(T obj) // ì˜¤ë¸Œì íŠ¸ í™œì„±í™”
     {
         if (obj is MonoBehaviour mono)
         {
@@ -48,7 +48,7 @@ public class Pool<T> : MonoBehaviour where T : Object
         
     }
 
-    private void DisablePoolObject(T obj) // ¿ÀºêÁ§Æ® ºñÈ°¼ºÈ­
+    private void DisablePoolObject(T obj) // ì˜¤ë¸Œì íŠ¸ ë¹„í™œì„±í™”
     {
         if (obj is MonoBehaviour mono)
         {
@@ -60,7 +60,7 @@ public class Pool<T> : MonoBehaviour where T : Object
         }
     }
 
-    private void DestroyPoolObject(T obj) // ¿ÀºêÁ§Æ® »èÁ¦
+    private void DestroyPoolObject(T obj) // ì˜¤ë¸Œì íŠ¸ ì‚­ì œ
     {
         Destroy(obj);
     }
@@ -78,4 +78,8 @@ public class Pool<T> : MonoBehaviour where T : Object
     {
         pool.Release(obj);
     }
+}
+public interface IPoolable
+{
+
 }

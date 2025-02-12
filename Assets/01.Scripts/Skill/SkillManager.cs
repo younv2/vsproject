@@ -1,14 +1,17 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SkillManager : MonoSingleton<SkillManager>
 {
+    private List<SkillLevel> skillLevel;
+    public List<SkillLevel> SkillLevel { get { return skillLevel; } }
     public void UseSkill(Skill skill)
     {
-        Debug.Log($"{skill.SkillData.SkillName}¸¦ »ç¿ë");
+        Debug.Log($"{skill.SkillData.SkillName}ë¥¼ ì‚¬ìš©");
     }
     public void GetSkill(int skillId)
     {
-        DataManager.Instance.SkillDataList.Find(x => x.SkillId == skillId);
+        DataManager.Instance.SkillDataList.Find(x => x.SkillId == skillId); 
     }
     public void GetSkill(string skillName)
     {

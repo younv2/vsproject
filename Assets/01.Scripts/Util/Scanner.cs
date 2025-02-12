@@ -3,11 +3,11 @@ using System.Linq;
 using UnityEngine;
 
 /// <summary>
-/// ¸ñÀûÀÌ ¹«¾ùÀÎ°¡
-/// ÇØ´ç ÄÄÆ÷³ÍÆ®¸¦ °¡Áö°í ÀÖ´Â °³Ã¼°¡ ÁÖº¯¿¡ ÇØ´çÇÏ´Â ·¹ÀÌ¾î¸¦ Ã£¾Æ³»±â À§ÇÔ
-/// ÂüÁ¶ - °ñµå¸ŞÅ» À¯Æ©ºê - ¹ì¼­¶óÀÌÅ© ¿ø°Å¸® °ø°İ ±¸ÇöÇÏ±â
+/// ëª©ì ì´ ë¬´ì—‡ì¸ê°€
+/// í•´ë‹¹ ì»´í¬ë„ŒíŠ¸ë¥¼ ê°€ì§€ê³  ìˆëŠ” ê°œì²´ê°€ ì£¼ë³€ì— í•´ë‹¹í•˜ëŠ” ë ˆì´ì–´ë¥¼ ì°¾ì•„ë‚´ê¸° ìœ„í•¨
+/// ì°¸ì¡° - ê³¨ë“œë©”íƒˆ ìœ íŠœë¸Œ - ë±€ì„œë¼ì´í¬ ì›ê±°ë¦¬ ê³µê²© êµ¬í˜„í•˜ê¸°
 /// </summary>
-public class Scanner : MonoBehaviour
+public class Scanner : MonoBehaviour 
 {
     public Transform nearstObject;
     public List<RaycastHit2D> hitList;

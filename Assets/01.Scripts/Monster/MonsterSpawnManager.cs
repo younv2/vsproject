@@ -25,7 +25,7 @@ public class MonsterSpawnManager : MonoSingleton<MonsterSpawnManager>
     }
     public void SpawnMonster(int monsterId)
     {
-        Monster temp = ObjectPoolManager.Instance.GetPool<Monster>(Global.SLIME).GetObject();
+        Monster temp = ObjectPoolManager.Instance.GetPool<Monster>(Global.SLIME). ();
 
         temp.transform.position = GetSpawnPosition();
 
@@ -34,7 +34,7 @@ public class MonsterSpawnManager : MonoSingleton<MonsterSpawnManager>
 
     private Vector2 GetSpawnPosition()
     {
-        // ÇÃ·¹ÀÌ¾î À§Ä¡ ±âÁØÀ¸·Î ·£´ı ¹æÇâ°ú °Å¸® °è»ê
+        // í”Œë ˆì´ì–´ ìœ„ì¹˜ ê¸°ì¤€ìœ¼ë¡œ ëœë¤ ë°©í–¥ê³¼ ê±°ë¦¬ ê³„ì‚°
         float angle = Random.Range(0, 360) * Mathf.Deg2Rad;
         float distance = Random.Range(minSpawnDistance, maxSpawnDistance);
 

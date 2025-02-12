@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Monster : MonoBehaviour
+public class Monster : MonoBehaviour, IPoolable
 {
     [SerializeField]private MonsterData baseData;
     private MonsterStat stat;

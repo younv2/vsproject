@@ -7,7 +7,7 @@ public enum SKILLID
     WIPE = 1,
     MAX =100
 }
-public class Skill : MonoBehaviour
+public class Skill : MonoBehaviour, IPoolable
 {
     [SerializeField]private SkillData skilldata;
     public SkillData SkillData { get { return skilldata; } }

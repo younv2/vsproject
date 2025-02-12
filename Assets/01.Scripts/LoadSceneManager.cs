@@ -8,18 +8,18 @@ public class LoadingSceneManager : MonoBehaviour
 
     private IEnumerator Start()
     {
-        // ·Îµù UI Ç¥½Ã
+        // ë¡œë”© UI í‘œì‹œ
         LoadingUI.Instance.ShowLoading();
 
-        // Ç® ÃÊ±âÈ­ ÁøÇà
+        // í’€ ì´ˆê¸°í™” ì§„í–‰
         yield return StartCoroutine(ObjectPoolManager.Instance.InitPools());
 
         yield return StartCoroutine(DataManager.Instance.LoadAllData());
 
-        // ·Îµù UI ²ô±â
+        // ë¡œë”© UI ë„ê¸°
         LoadingUI.Instance.HideLoading();
 
-        // MainScene ·Îµå
+        // MainScene ë¡œë“œ
         SceneManager.LoadScene(nextSceneName);
     }
 }
