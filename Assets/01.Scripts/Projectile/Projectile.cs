@@ -4,25 +4,34 @@ public class Projectile : MonoBehaviour, IPoolable
 {
     private ProjectileData data;
     private Transform owner;
+    private Transform target;
     private float damage;
-
+    private Vector3 movDir;
     private float timeAlive = 0f;
     private int hitCount = 0;
 
-    public void Setup(ProjectileData data, Transform owner, float damage)
+    public void Setup(ProjectileData data, Transform owner,Transform target, float damage)
     {
         this.data = data;
         this.owner = owner;
         this.damage = damage;
-
+        this.target = target;
+        movDir = Vector3.Normalize(target.position - owner.position);
+        transform.position = owner.position;
+        timeAlive = 0f;
         // onSpawn 이펙트 실행
-        ExecuteEffects(data.onSpawnEffects, null);
+        ExecuteModules(data.onSpawnModules, null);
     }
 
     void Update()
     {
+        
+        if(target != null)
+        {
+            
+        }
         // 이동
-        transform.Translate(Vector3.forward * data.speed * Time.deltaTime);
+        transform.Translate(movDir * data.speed * Time.deltaTime);
 
         // 수명 체크
         timeAlive += Time.deltaTime;
@@ -32,7 +41,7 @@ public class Projectile : MonoBehaviour, IPoolable
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         var enemy = other.GetComponent<Monster>();
         if (enemy != null)
@@ -48,24 +57,24 @@ public class Projectile : MonoBehaviour, IPoolable
             }
 
             // onHit 이펙트
-            ExecuteEffects(data.onHitEffects, other.transform);
+            ExecuteModules(data.onHitModules, other.transform);
         }
     }
 
     private void Expire()
     {
         // onExpire 이펙트
-        ExecuteEffects(data.onExpireEffects, null);
-        Destroy(gameObject);
+        ExecuteModules(data.onExpireModules, null);
+        ObjectPoolManager.Instance.GetPool<Projectile>(name.Replace("(Clone)","")).ReleaseObject(this);
     }
 
-    private void ExecuteEffects(System.Collections.Generic.List<SkillEffect> effects, Transform collisionTarget)
+    private void ExecuteModules(System.Collections.Generic.List<SkillModule> modules, Transform collisionTarget)
     {
-        if (effects == null) return;
+        if (modules == null) return;
         var context = new ProjectileContext(this, collisionTarget);
-        foreach (var eff in effects)
+        foreach (var mod in modules)
         {
-            eff.Execute(context);
+            mod.Execute(context);
         }
     }
 }

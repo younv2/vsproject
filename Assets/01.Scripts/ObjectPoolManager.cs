@@ -44,7 +44,7 @@ public class ObjectPoolManager : MonoSingleton<ObjectPoolManager>
                 AddPool(monster);
             }
             // Character 컴포넌트가 있다면 Pool<Character>로 등록
-            else if (go.TryGetComponent<Character>(out var character))
+            else if (go.TryGetComponent<PlayableCharacter>(out var character))
             {
                 AddPool(character);
             }

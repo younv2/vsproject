@@ -10,6 +10,7 @@ public class SkillRuntime
 {
     public SkillData Data { get; private set; }
     public Transform Owner { get; private set; }
+    public Transform Target { get; private set; }
     public int Level { get; private set; } = 1;
 
     private float cooldownTimer;
@@ -18,7 +19,6 @@ public class SkillRuntime
     {
         Data = data;
         Owner = owner;
-
         // 초기 쿨타임 설정
         cooldownTimer = Data.GetCooldown(Level);
     }
@@ -26,6 +26,7 @@ public class SkillRuntime
     public void Update(float deltaTime)
     {
         cooldownTimer -= deltaTime;
+        Target = BattleManager.Instance.GetPlayableCharacter().GetNearstTarget();
         if (cooldownTimer <= 0f)
         {
             // 스킬 발동

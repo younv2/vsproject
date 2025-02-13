@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 
-public class Character : MonoBehaviour, IPoolable
+public class PlayableCharacter : MonoBehaviour, IPoolable
 {
     CharacterStat stat;
     Scanner scanner;
@@ -15,5 +15,9 @@ public class Character : MonoBehaviour, IPoolable
     void Update()
     {
 
+    }
+    public Transform GetNearstTarget()
+    {
+        return scanner.nearstObject.transform;
     }
 }

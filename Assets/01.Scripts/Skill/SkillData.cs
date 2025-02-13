@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class SkillLevelInfo
 {
     public float cooldown = 1f;              // 해당 레벨의 쿨타임
-    public List<SkillEffect> levelEffects;   // 해당 레벨에서 실행될 이펙트 목록
+    public List<SkillModule> levelModules;   // 해당 레벨에서 실행될 모듈 목록
 }
 
 [CreateAssetMenu(menuName = "Game/SkillData")]
@@ -33,12 +33,12 @@ public class SkillData : ScriptableObject
     public void Activate(SkillRuntime runtime)
     {
         int idx = Mathf.Clamp(runtime.Level - 1, 0, levelInfos.Count - 1);
-        var effects = levelInfos[idx].levelEffects;
-        if (effects == null) return;
+        var modules = levelInfos[idx].levelModules;
+        if (modules == null) return;
 
-        foreach (var effect in effects)
+        foreach (var module in modules)
         {
-            effect.Execute(runtime);
+            module.Execute(runtime);
         }
     }
 }

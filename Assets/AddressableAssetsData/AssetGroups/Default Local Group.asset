@@ -21,11 +21,21 @@ MonoBehaviour:
     m_SerializedLabels:
     - Prefab/Skill
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 150e7ef5d39904848925ac20a4999554
+    m_Address: SO/Module/SpawnProjectile
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 3ced201c3248da84db43f778cac9f72e
     m_Address: SO/Skill/Wipe
     m_ReadOnly: 0
     m_SerializedLabels:
     - SO/Skill
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4342570d480e69d45a51892afb95f38a
+    m_Address: Assets/@Resources/SO/Projectile/New Projectile Data.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4c3340c044884984eb590db173be8a76
     m_Address: Prefab/Monster/Slime

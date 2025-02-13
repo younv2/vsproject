@@ -14,19 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillId: 1
   skillName: Wipe
-  skillLevelDatas:
-  - level: 1
-    attackPower: 0
-    cooldown: 2
-  - level: 2
-    attackPower: 0
-    cooldown: 2
-  - level: 3
-    attackPower: 0
-    cooldown: 2
-  - level: 4
-    attackPower: 0
-    cooldown: 2
-  - level: 5
-    attackPower: 0
-    cooldown: 2
+  levelInfos:
+  - cooldown: 0
+    levelEffects: []

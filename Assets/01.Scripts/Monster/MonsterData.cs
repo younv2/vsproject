@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "MonsterData",  menuName = "Scriptable Object/MonsterData")]
+[CreateAssetMenu(fileName = "MonsterData",  menuName = "Game/MonsterData")]
 public class MonsterData : ScriptableObject
 {
     [SerializeField]

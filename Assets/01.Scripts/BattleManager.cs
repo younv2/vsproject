@@ -5,6 +5,7 @@ public class BattleManager : MonoSingleton<BattleManager>
     SkillManager skillManagerInstance;
     TimeManager timeManagerInstance;
     MonsterSpawnManager monsterSpawnManagerInstance;
+    PlayableCharacter playableCharacter;
     //List<Projetile> projetileList; 
 
     void Start()
@@ -12,7 +13,7 @@ public class BattleManager : MonoSingleton<BattleManager>
         skillManagerInstance = SkillManager.Instance;
         timeManagerInstance = TimeManager.Instance;
         monsterSpawnManagerInstance = MonsterSpawnManager.Instance;
-        ObjectPoolManager.Instance.GetPool<Character>(Global.CHARACTER).GetObject();
+        playableCharacter = ObjectPoolManager.Instance.GetPool<PlayableCharacter>(Global.CHARACTER).GetObject();
     }
 
     void Update()
@@ -32,5 +33,9 @@ public class BattleManager : MonoSingleton<BattleManager>
         {
             projetileList.Update();
         }*/
+    }
+    public PlayableCharacter GetPlayableCharacter()
+    {
+        return playableCharacter;
     }
 }

@@ -14,19 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillId: 0
   skillName: ThrowRock
-  skillLevelDatas:
-  - level: 1
-    attackPower: 0
-    cooldown: 1
-  - level: 2
-    attackPower: 0
-    cooldown: 1
-  - level: 3
-    attackPower: 0
-    cooldown: 1
-  - level: 4
-    attackPower: 0
-    cooldown: 1
-  - level: 5
-    attackPower: 0
-    cooldown: 1
+  levelInfos:
+  - cooldown: 1
+    levelModules:
+    - {fileID: 11400000, guid: 150e7ef5d39904848925ac20a4999554, type: 2}
+  - cooldown: 0.5
+    levelModules:
+    - {fileID: 11400000, guid: 150e7ef5d39904848925ac20a4999554, type: 2}

@@ -30,7 +30,7 @@ public class SkillManager : MonoSingleton<SkillManager>
         else
         {
             // 없으면 새로 추가
-            var newSkill = new SkillRuntime(data, this.transform);
+            var newSkill = new SkillRuntime(data,BattleManager.Instance.GetPlayableCharacter().transform);
             activeSkills.Add(newSkill);
         }
     }

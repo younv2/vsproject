@@ -9,7 +9,7 @@ public class ProjectileData : ScriptableObject
     public int penetrateCount = 0; // 0이면 관통X
 
     [Header("이벤트별 이펙트")]
-    public List<SkillEffect> onSpawnEffects;
-    public List<SkillEffect> onHitEffects;
-    public List<SkillEffect> onExpireEffects;
+    public List<SkillModule> onSpawnModules;
+    public List<SkillModule> onHitModules;
+    public List<SkillModule> onExpireModules;
 }
