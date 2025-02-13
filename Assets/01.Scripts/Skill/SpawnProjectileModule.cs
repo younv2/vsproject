@@ -10,7 +10,7 @@ public class SpawnProjectileModule : SkillModule
     public override void Execute(SkillRuntime runtime)
     {
         if (!projectilePrefab || !projectileData) return;
-        SkillLevelInfo curSkillData = runtime.Data.levelInfos[runtime.Level];
+        SkillLevelInfo curSkillData = runtime.Data.levelInfos[runtime.Level-1];
         int half = curSkillData.projectileCount / 2;
         for (int i = 0; i < curSkillData.projectileCount; i++)
         {

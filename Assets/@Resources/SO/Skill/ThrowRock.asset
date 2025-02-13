@@ -16,8 +16,14 @@ MonoBehaviour:
   skillName: ThrowRock
   levelInfos:
   - cooldown: 1
+    baseDamage: 10
+    projectileCount: 1
+    angleBetweenProjectiles: 10
     levelModules:
     - {fileID: 11400000, guid: 150e7ef5d39904848925ac20a4999554, type: 2}
   - cooldown: 0.5
+    baseDamage: 20
+    projectileCount: 3
+    angleBetweenProjectiles: 10
     levelModules:
     - {fileID: 11400000, guid: 150e7ef5d39904848925ac20a4999554, type: 2}
