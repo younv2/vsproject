@@ -5,6 +5,9 @@ using System.Collections.Generic;
 public class SkillLevelInfo
 {
     public float cooldown = 1f;              // 해당 레벨의 쿨타임
+    public float baseDamage = 10f;
+    public int projectileCount = 1;
+    public float angleBetweenProjectiles = 10f;
     public List<SkillModule> levelModules;   // 해당 레벨에서 실행될 모듈 목록
 }
 

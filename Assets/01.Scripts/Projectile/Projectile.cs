@@ -17,19 +17,14 @@ public class Projectile : MonoBehaviour, IPoolable
         this.damage = damage;
         this.target = target;
         movDir = Vector3.Normalize(target.position - owner.position);
-        transform.position = owner.position;
+        
         timeAlive = 0f;
         // onSpawn 이펙트 실행
         ExecuteModules(data.onSpawnModules, null);
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        
-        if(target != null)
-        {
-            
-        }
         // 이동
         transform.Translate(movDir * data.speed * Time.deltaTime);
 
