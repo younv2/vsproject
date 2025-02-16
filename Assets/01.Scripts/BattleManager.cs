@@ -6,7 +6,6 @@ public class BattleManager : MonoSingleton<BattleManager>
     TimeManager timeManagerInstance;
     MonsterSpawnManager monsterSpawnManagerInstance;
     PlayableCharacter playableCharacter;
-    //List<Projetile> projetileList; 
 
     void Start()
     {
@@ -29,10 +28,6 @@ public class BattleManager : MonoSingleton<BattleManager>
         }
 
         //TODO - Physics Settings의 Simulation Monde 추후 Script로 수정해서 직접 Physics 관리 할 것 
-       /* foreach(var data in projetileList)
-        {
-            projetileList.Update();
-        }*/
     }
     public PlayableCharacter GetPlayableCharacter()
     {

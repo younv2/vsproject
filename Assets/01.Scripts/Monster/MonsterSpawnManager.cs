@@ -5,8 +5,8 @@ public class MonsterSpawnManager : MonoSingleton<MonsterSpawnManager>
 {
     private int maxMonsterCnt = 3;
 
-    private float maxSpawnDistance = 10;
-    private float minSpawnDistance = 5;
+    private float maxSpawnDistance = 30;
+    private float minSpawnDistance = 20;
 
     private List<Monster> monsterList = new List<Monster>();
     public List<Monster> MonsterList { get { return monsterList; } }

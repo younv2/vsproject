@@ -18,6 +18,8 @@ public class PlayableCharacter : MonoBehaviour, IPoolable
     }
     public Transform GetNearstTarget()
     {
+        if (scanner.nearstObject == null)
+            return null;
         return scanner.nearstObject.transform;
     }
 }

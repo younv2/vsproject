@@ -183,4 +183,4 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 8
-  range: 5
+  range: 30

@@ -6,7 +6,6 @@ using UnityEngine;
 public class SkillManager : MonoSingleton<SkillManager>
 {
     private List<SkillRuntime> activeSkills = new List<SkillRuntime>();
-
     public void ManualUpdate()
     {
         float dt = Time.deltaTime;

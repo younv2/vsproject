@@ -1,11 +1,5 @@
 using UnityEngine;
 
-
-public enum SKILLID
-{
-    THROWROCK = 0,
-    WIPE = 1
-}
 public class SkillRuntime
 {
     public SkillData Data { get; private set; }

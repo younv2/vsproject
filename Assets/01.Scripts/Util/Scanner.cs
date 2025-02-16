@@ -21,11 +21,14 @@ public class Scanner : MonoBehaviour
 
         nearstObject = FindNearstObject();
     }
-
+    /// <summary>
+    /// 설정한 레이어의 근처에 있는 오브젝트를 찾는 함수
+    /// </summary>
+    /// <returns></returns>
     public Transform FindNearstObject()
     {
         Transform result = null;
-        float diff = 100;
+        float diff = 9999;
         foreach(var hit in hitList)
         {
             float curDiff = Vector2.Distance(transform.position, hit.point);

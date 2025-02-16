@@ -15,9 +15,10 @@ public class SpawnProjectileModule : SkillModule
         for (int i = 0; i < curSkillData.projectileCount; i++)
         {
             float angleOffset = (i - half) * curSkillData.angleBetweenProjectiles;
-            Quaternion rotation = runtime.Owner.rotation * Quaternion.Euler(0, angleOffset, 0);
+            Quaternion rotation = runtime.Owner.rotation * Quaternion.Euler(0, 0, angleOffset);
 
             Projectile projObj = ObjectPoolManager.Instance.GetPool<Projectile>(runtime.Data.skillName).GetObject();
+
             projObj.transform.position = runtime.Owner.position;
             projObj.transform.rotation = rotation;
             if (projObj)
