@@ -48,10 +48,15 @@ public class ObjectPoolManager : MonoSingleton<ObjectPoolManager>
             {
                 AddPool(character);
             }
-            // Skill 컴포넌트가 있다면 Pool<Projectile>로 등록
-            else if (go.TryGetComponent<Projectile>(out var skill))
+            // Projectile 컴포넌트가 있다면 Pool<Projectile>로 등록
+            else if (go.TryGetComponent<Projectile>(out var projectile))
             {
-                AddPool(skill);
+                AddPool(projectile);
+            }
+            // DamageTextUI 컴포넌트가 있다면 Pool<DamageTextUI>로 등록
+            else if (go.TryGetComponent<DamageTextUI>(out var textUI))
+            {
+                AddPool(textUI);
             }
             else
             {

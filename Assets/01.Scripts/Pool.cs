@@ -31,7 +31,21 @@ public class Pool<T> : MonoBehaviour where T : Object
 
     private T CreateObject() // 오브젝트 생성
     {
-        T data = Instantiate(prefab, ObjectPoolManager.Instance.gameObject.transform);
+
+        Transform parent = null;
+
+        if (prefab is MonoBehaviour mono && mono.GetComponent<RectTransform>() != null)
+        {
+            parent = ObjectPoolManager.Instance.transform.Find("Canvas").transform;
+        }
+        else
+        {
+            // 2) 그 외(일반 오브젝트)면 ObjectPoolManager 아래로
+            parent = ObjectPoolManager.Instance.transform;
+        }
+
+        T data = Instantiate(prefab, parent);
+
         return data;
     }
 

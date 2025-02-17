@@ -21,9 +21,12 @@ public class PlayableCharacter : MonoBehaviour, IPoolable
     {
         ObjectPoolManager.Instance.GetPool<PlayableCharacter>(name.Replace("(Clone)", "")).ReleaseObject(this);
     }
+    /// <summary>
+    /// 캐릭터 사망 처리
+    /// </summary>
     public Transform GetNearstTarget()
     {
-        return scanner.nearstObject.transform;
+        return scanner.nearstObject?.transform;
     }
     /// <summary>
     /// 캐릭터 데미지 처리

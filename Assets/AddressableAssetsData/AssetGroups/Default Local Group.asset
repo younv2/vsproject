@@ -54,6 +54,11 @@ MonoBehaviour:
     m_SerializedLabels:
     - Prefab/Skill
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a2bfe652dfb70844c856cd21e0ebb5de
+    m_Address: Assets/@Resources/Prefab/Text (TMP).prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a347464297ce8f84cadc1dba275b895e
     m_Address: Prefab/Character
     m_ReadOnly: 0

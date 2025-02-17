@@ -28,7 +28,12 @@ public class Monster : MonoBehaviour, IPoolable
     {
         Debug.Log($"{damage}의 데미지를 입음");
         stat.TakeDamage(damage);
-        if(stat.IsDead())
+
+        var text = ObjectPoolManager.Instance.GetPool<DamageTextUI>("DamageText").GetObject();
+        text.transform.position = transform.position + new Vector3(0,1.5f,0);
+        text.Setup(damage);
+
+        if (stat.IsDead())
         {
             OnDeath();
         }
