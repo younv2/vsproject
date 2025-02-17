@@ -9,13 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20d519e5bc5057c46bd5c17344be0276, type: 3}
-  m_Name: Rock
+  m_Script: {fileID: 11500000, guid: 190492ae1e2c1744f92f157674540d58, type: 3}
+  m_Name: KnockbackRock
   m_EditorClassIdentifier: 
-  speed: 5
-  lifeTime: 10
-  penetrateCount: 0
-  onSpawnModules: []
-  onHitModules:
-  - {fileID: 11400000, guid: c70f7df651785474a99055c6b2b8e7b2, type: 2}
-  onExpireModules: []
+  knockbackPower: 0.2

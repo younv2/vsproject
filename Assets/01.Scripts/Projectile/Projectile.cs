@@ -29,7 +29,14 @@ public class Projectile : MonoBehaviour, IPoolable
         // onSpawn 이펙트 실행
         ExecuteModules(data.onSpawnModules, null);
     }
-
+    /// <summary>
+    /// 투사체의 방향벡터
+    /// </summary>
+    /// <returns></returns>
+    public Vector3 GetMovDir()
+    {
+        return movDir;
+    }
     void FixedUpdate()
     {
         // 이동

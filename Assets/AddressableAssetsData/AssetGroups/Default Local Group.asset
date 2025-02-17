@@ -59,6 +59,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c70f7df651785474a99055c6b2b8e7b2
+    m_Address: SO/Module/KnockbackRock
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f6d5d98f66d270743bef686a3d09994f
     m_Address: ScriptableObject/Monster/Slime
     m_ReadOnly: 0
