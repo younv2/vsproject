@@ -56,6 +56,6 @@ public class MonsterStat
     }
     public float GetCurrentHPPercent()
     {
-        return CurrentHp / MaxHp;
+        return currentHp / maxHp;
     }
 }

@@ -54,4 +54,12 @@ public class CharacterStat
     {
         Debug.Log("플레이어 사망!");
     }
+    /// <summary>
+    /// 현재 체력 퍼센트
+    /// </summary>
+    /// <returns></returns>
+    public float GetCurrentHPPercent()
+    {
+        return currentHp / maxHp;
+    }
 }

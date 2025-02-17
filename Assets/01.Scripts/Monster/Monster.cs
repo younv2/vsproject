@@ -6,8 +6,8 @@ public class Monster : MonoBehaviour, IPoolable
 {
     [SerializeField] private MonsterData baseData;
     private MonsterStat stat = new MonsterStat();
-    GameObject player;
-    HPBarUI hPBarUI;
+    private GameObject player;
+    private HPBarUI hPBarUI;
     public void OnEnable()
     {
         stat.InitStat(baseData);
