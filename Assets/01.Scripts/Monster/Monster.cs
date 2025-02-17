@@ -32,8 +32,6 @@ public class Monster : MonoBehaviour, IPoolable
         {
             OnDeath();
         }
-
-
     }
     /// <summary>
     /// 몬스터 사망 처리
