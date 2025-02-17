@@ -1,25 +1,24 @@
-using NUnit.Framework;
 using UnityEngine;
-using System.Collections.Generic;
-using System;
 
 public class PlayableCharacter : MonoBehaviour, IPoolable
 {
-    CharacterStat stat;
-    Scanner scanner;
+    private CharacterStat stat = new CharacterStat();
+    private Scanner scanner;
+    public CharacterStat Stat { get { return stat; } }
     void Start()
     {
         scanner = transform.GetComponent<Scanner>();
     }
-
+    void OnEnable()
+    {
+        Stat.Init();
+    }
     void Update()
     {
 
     }
     public Transform GetNearstTarget()
     {
-        if (scanner.nearstObject == null)
-            return null;
         return scanner.nearstObject.transform;
     }
 }
