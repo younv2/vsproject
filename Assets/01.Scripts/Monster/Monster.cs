@@ -6,16 +6,20 @@ public class Monster : MonoBehaviour, IPoolable
 {
     [SerializeField] private MonsterData baseData;
     private MonsterStat stat = new MonsterStat();
+    GameObject player;
     public void OnEnable()
     {
         stat.InitStat(baseData);
+        player = GameObject.FindWithTag("Player");
     }
     /// <summary>
     /// 매니저 클래스에서 업데이트를 관리하기 위함.
     /// </summary>
     public void ManualFixedUpdate()
     {
-        transform.position  = Vector3.MoveTowards(transform.position, GameObject.FindWithTag("Player").gameObject.transform.position, baseData.MoveSpeed * Time.deltaTime);
+        if (player == null)
+            return;
+        transform.position  = Vector3.MoveTowards(transform.position, player.transform.position, baseData.MoveSpeed * Time.deltaTime);
     }
     /// <summary>
     /// 몬스터 체력 감소
@@ -37,5 +41,14 @@ public class Monster : MonoBehaviour, IPoolable
     public void OnDeath()
     { 
         ObjectPoolManager.Instance.GetPool<Monster>(name.Replace("(Clone)","")).ReleaseObject(this);
+    }
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        var player = collision.gameObject.GetComponent<PlayableCharacter>();
+
+        if(player != null)
+        {
+            player.TakeDamage(stat.AttackPower);
+        }
     }
 }

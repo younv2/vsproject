@@ -11,14 +11,47 @@ public class CharacterStat
     private float currentHp;
     private float moveSpeed;
     public float MoveSpeed { get { return moveSpeed; } }
-
+    /// <summary>
+    /// 캐릭터 초기 설정
+    /// </summary>
     public void Init()
     {
         level = 1;
         currentExp = 0;
         maxExp = 0;
-        maxHp = 0;
-        currentHp = 0;
+        maxHp = 50;
+        currentHp = 50;
         moveSpeed = 3f;
+    }
+    /// <summary>
+    /// 체력 감소
+    /// </summary>
+    public void TakeDamage(float damage)
+    {
+        currentHp -= damage;
+        if (currentHp < 0) currentHp = 0;
+
+        Debug.Log($"[MonsterStat] 체력 감소: {damage}, 남은 체력: {currentHp}");
+
+        // 사망 체크
+        if (IsDead())
+        {
+            OnDeath();
+        }
+    }
+    /// <summary>
+    /// 캐릭터가 죽었는지 확인
+    /// </summary>
+    public bool IsDead()
+    {
+        return currentHp <= 0;
+    }
+
+    /// <summary>
+    /// 사망 이벤트
+    /// </summary>
+    private void OnDeath()
+    {
+        Debug.Log("플레이어 사망!");
     }
 }
