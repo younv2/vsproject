@@ -15,8 +15,8 @@ public class DamageTextUI : MonoBehaviour
     {
         text.text = damage.ToString();
         var target = transform.position;
-        target.y += 1f;
-        transform.DOMove(target, 1.5f).SetDelay(1f).OnComplete(
+        target.y += 0.5f;
+        transform.DOMove(target, 1f).OnComplete(
             () =>
             ObjectPoolManager.Instance.GetPool<DamageTextUI>("DamageText").ReleaseObject(this));
     }

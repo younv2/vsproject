@@ -7,6 +7,7 @@ public class Monster : MonoBehaviour, IPoolable
     [SerializeField] private MonsterData baseData;
     private MonsterStat stat = new MonsterStat();
     GameObject player;
+    HPBarUI hPBarUI;
     public void OnEnable()
     {
         stat.InitStat(baseData);
@@ -32,7 +33,8 @@ public class Monster : MonoBehaviour, IPoolable
         var text = ObjectPoolManager.Instance.GetPool<DamageTextUI>("DamageText").GetObject();
         text.transform.position = transform.position + new Vector3(0,1.5f,0);
         text.Setup(damage);
-
+        hPBarUI ??= ObjectPoolManager.Instance.GetPool<HPBarUI>("HPBar").GetObject();
+        hPBarUI.Setup(this.transform,stat.GetCurrentHPPercent());
         if (stat.IsDead())
         {
             OnDeath();
@@ -42,7 +44,8 @@ public class Monster : MonoBehaviour, IPoolable
     /// 몬스터 사망 처리
     /// </summary>
     public void OnDeath()
-    { 
+    {
+        hPBarUI.Remove();
         ObjectPoolManager.Instance.GetPool<Monster>(name.Replace("(Clone)","")).ReleaseObject(this);
     }
     private void OnCollisionStay2D(Collision2D collision)

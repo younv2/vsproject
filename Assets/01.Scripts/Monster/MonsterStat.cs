@@ -3,28 +3,33 @@ using UnityEngine;
 
 public class MonsterStat
 {
-    public float Speed { get; private set; }
-    public float MaxHp { get; private set; }
-    public float AttackPower { get; private set; }
-    public float CurrentHp { get; private set; }
+    private float speed;
+    private float maxHp;
+    private float attackPower;
+    private float currentHp;
+
+    public float Speed { get { return speed; } }
+    public float MaxHp { get { return maxHp; } }
+    public float AttackPower { get { return attackPower; } }
+    public float CurrentHp { get { return currentHp; } }
     /// <summary>
     /// 몬스터의 스탯 정보 초기화
     /// </summary>
     /// <param name="data"></param>
     public void InitStat(MonsterData data)
     {
-        Speed = data.MoveSpeed;
-        MaxHp = data.MaxHp;
-        AttackPower = data.AttackPower;
-        CurrentHp = MaxHp;
+        speed = data.MoveSpeed;
+        maxHp = data.MaxHp;
+        attackPower = data.AttackPower;
+        currentHp = MaxHp;
     }
     /// <summary>
     /// 체력 감소
     /// </summary>
     public void TakeDamage(float damage)
     {
-        CurrentHp -= damage;
-        if (CurrentHp < 0) CurrentHp = 0;
+        currentHp -= damage;
+        if (CurrentHp < 0) currentHp = 0;
 
         Debug.Log($"[MonsterStat] 체력 감소: {damage}, 남은 체력: {CurrentHp}");
 
@@ -48,5 +53,9 @@ public class MonsterStat
     private void OnDeath()
     {
         Debug.Log("몬스터 사망!");
+    }
+    public float GetCurrentHPPercent()
+    {
+        return CurrentHp / MaxHp;
     }
 }

@@ -58,6 +58,11 @@ public class ObjectPoolManager : MonoSingleton<ObjectPoolManager>
             {
                 AddPool(textUI);
             }
+            // HPBarUI 컴포넌트가 있다면 Pool<HPBarUI>로 등록
+            else if (go.TryGetComponent<HPBarUI>(out var hpBar))
+            {
+                AddPool(hpBar);
+            }
             else
             {
                 // 둘 다 없으면 GameObject 자체로 Pool 생성
