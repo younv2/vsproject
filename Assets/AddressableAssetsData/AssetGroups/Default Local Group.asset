@@ -48,6 +48,11 @@ MonoBehaviour:
     m_SerializedLabels:
     - SO/Skill
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4f395f42e2de61a4b9f0b3f5b0c9aa95
+    m_Address: Assets/@Resources/Data/ExpTable.json
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5806c4924ac78434c9a8acf507b2d0e6
     m_Address: Prefab/Skill/Wipe
     m_ReadOnly: 0
