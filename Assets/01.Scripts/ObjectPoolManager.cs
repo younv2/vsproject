@@ -38,6 +38,7 @@ public class ObjectPoolManager : MonoSingleton<ObjectPoolManager>
         }
         foreach (var go in list)
         {
+            // Todo : 해당 반복되는 내용을 추후 줄여보기
             // Monster 컴포넌트가 있다면 Pool<Monster>로 등록
             if (go.TryGetComponent<Monster>(out var monster))
             {
@@ -62,6 +63,11 @@ public class ObjectPoolManager : MonoSingleton<ObjectPoolManager>
             else if (go.TryGetComponent<HPBarUI>(out var hpBar))
             {
                 AddPool(hpBar);
+            }
+            // Item 컴포넌트가 있다면 Pool<Item>로 등록
+            else if (go.TryGetComponent<Item>(out var item))
+            {
+                AddPool(item);
             }
             else
             {

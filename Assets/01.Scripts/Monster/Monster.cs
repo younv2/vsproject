@@ -46,6 +46,8 @@ public class Monster : MonoBehaviour, IPoolable
     public void OnDeath()
     {
         hPBarUI.Remove();
+        var expItem = ObjectPoolManager.Instance.GetPool<Item>("ExpItem1").GetObject();
+        expItem.transform.position = transform.position;
         ObjectPoolManager.Instance.GetPool<Monster>(name.Replace("(Clone)","")).ReleaseObject(this);
     }
     private void OnCollisionStay2D(Collision2D collision)

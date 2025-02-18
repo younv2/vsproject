@@ -2,15 +2,12 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if(collision.TryGetComponent<PlayableCharacter>(out var data))
+        {
+            data.Stat.AddExp(5);
+            ObjectPoolManager.Instance.GetPool<Item>(name.Replace("(Clone)", "")).ReleaseObject(this);
+        }
     }
 }

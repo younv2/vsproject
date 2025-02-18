@@ -1,9 +1,9 @@
-using NUnit.Framework;
+using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class DataManager : MonoSingleton<DataManager>
 {
@@ -13,6 +13,7 @@ public class DataManager : MonoSingleton<DataManager>
 
     public List<AssetReference> skillAddressList;
 
+    private Dictionary<int,int> characterExpTable = new Dictionary<int,int>();
     private bool isSkillDataLoaded = false;
 
     protected override void Awake()
@@ -24,6 +25,7 @@ public class DataManager : MonoSingleton<DataManager>
     public IEnumerator LoadAllData()
     {
         StartCoroutine(LoadSkillData());
+        LoadExpTable();
 
         yield return new WaitUntil(() => isSkillDataLoaded);
     }
@@ -43,13 +45,30 @@ public class DataManager : MonoSingleton<DataManager>
         isSkillDataLoaded = true;
         Debug.Log("DataManager: 스킬 데이터 로드 완료");
     }
-    public SkillData GetSkillData(int skillId)
+    public void LoadExpTable()
     {
-        return skillDataList.Find(x => x.skillId == skillId);
+        string jsonString;
+        if (!File.Exists("Assets/@Resources/Data/ExpTable.json"))
+        {
+            Debug.Log("데이터 파일이 존재하지 않음");
+        }
+        using (FileStream fs = new FileStream("Assets/@Resources/Data/ExpTable.json", FileMode.Open, FileAccess.Read))
+        {
+            using (StreamReader sr = new StreamReader(fs, new System.Text.UTF8Encoding(false)))
+            {
+                jsonString = sr.ReadToEnd();
+            }
+        }
+        characterExpTable = JsonConvert.DeserializeObject<Dictionary<int, int>>(jsonString);
+        if(characterExpTable is not null)
+        {
+            Debug.Log("DataManager: 경험치 테이블 데이터 로드 완료");
+        }
+
     }
-    public SkillData GetSkillData(string skillName)
+    public int GetExpByLevel(int level)
     {
-        return skillDataList.Find(x => x.skillName == skillName);
+        return characterExpTable[level];
     }
 
 

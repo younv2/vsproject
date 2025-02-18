@@ -18,10 +18,11 @@ public class CharacterStat
     {
         level = 1;
         currentExp = 0;
-        maxExp = 0;
+        maxExp = DataManager.Instance.GetExpByLevel(level);
         maxHp = 50;
         currentHp = 50;
         moveSpeed = 3f;
+        Debug.Log(maxExp);
     }
     /// <summary>
     /// 체력 감소
@@ -61,5 +62,25 @@ public class CharacterStat
     public float GetCurrentHPPercent()
     {
         return currentHp / maxHp;
+    }
+    /// <summary>
+    /// 캐릭터 레벨 업
+    /// </summary>
+    public void LevelUp()
+    {
+        level++;
+        currentExp -= maxExp;
+        maxExp = DataManager.Instance.GetExpByLevel(level);
+    }
+    /// <summary>
+    /// 캐릭터 경험치 추가
+    /// </summary>
+    public void AddExp(int exp)
+    {
+        currentExp += exp;
+        if (currentExp >= maxExp)
+        {
+            LevelUp();
+        }
     }
 }

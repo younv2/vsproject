@@ -254,6 +254,11 @@ MonoBehaviour:
     m_SubObjectGUID: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
+  - m_AssetGUID: c3ae85fc7ebdf524587b7fe1448a331f
+    m_SubObjectName: 
+    m_SubObjectGUID: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
 --- !u!4 &537738120
 Transform:
   m_ObjectHideFlags: 0
