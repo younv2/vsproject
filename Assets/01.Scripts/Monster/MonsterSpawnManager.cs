@@ -11,7 +11,7 @@ public class MonsterSpawnManager : MonoSingleton<MonsterSpawnManager>
     private List<Monster> monsterList = new List<Monster>();
     public List<Monster> MonsterList { get { return monsterList; } }
 
-    void Update()
+    public void ManualUpdate()
     {
         if (monsterList.Count >= maxMonsterCnt)
         {

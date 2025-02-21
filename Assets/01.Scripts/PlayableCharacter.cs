@@ -12,7 +12,7 @@ public class PlayableCharacter : MonoBehaviour, IPoolable
     public CharacterStat Stat { get { return stat; } }
 
 
-    void Update()
+    public void ManualFixedUpdate()
     {
         DrainExp();
     }

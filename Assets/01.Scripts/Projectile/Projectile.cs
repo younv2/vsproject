@@ -19,6 +19,7 @@ public class Projectile : MonoBehaviour, IPoolable
     /// <param name="damage">투사체 데미지</param>
     public void Setup(ProjectileData data, Transform owner,Transform target, float damage)
     {
+        BattleManager.Instance.projectileList.Add(this);
         this.data = data;
         this.owner = owner;
         this.damage = damage;
@@ -37,7 +38,7 @@ public class Projectile : MonoBehaviour, IPoolable
     {
         return movDir;
     }
-    void FixedUpdate()
+    public void ManualFixedUpdate()
     {
         // 이동
         transform.Translate(movDir * data.speed * Time.deltaTime,Space.Self);
@@ -76,6 +77,7 @@ public class Projectile : MonoBehaviour, IPoolable
     {
         // onExpire 이펙트
         ExecuteModules(data.onExpireModules, null);
+        BattleManager.Instance.projectileList.Remove(this);
         ObjectPoolManager.Instance.GetPool<Projectile>(name.Replace("(Clone)","")).ReleaseObject(this);
     }
     /// <summary>

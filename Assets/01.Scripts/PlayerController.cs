@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
         player = GetComponent<PlayableCharacter>();
     }
     // Update is called once per frame
-    void Update()
+    public void ManualFixedUpdate()
     {
         if (moveDirection == Vector2.zero)
             return;
