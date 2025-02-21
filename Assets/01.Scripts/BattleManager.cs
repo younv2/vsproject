@@ -7,7 +7,7 @@ public class BattleManager : MonoSingleton<BattleManager>
     MonsterSpawnManager monsterSpawnManagerInstance;
     PlayableCharacter playableCharacter;
 
-    void Start()
+    void Awake()
     {
         skillManagerInstance = SkillManager.Instance;
         timeManagerInstance = TimeManager.Instance;
