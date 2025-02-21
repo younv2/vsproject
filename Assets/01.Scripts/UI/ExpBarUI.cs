@@ -19,11 +19,16 @@ public class ExpBarUI : MonoBehaviour
     {
         CharacterStat.OnExpUpdate += UpdateUI;
         characterStat = BattleManager.Instance.GetPlayableCharacter().Stat;
+        UpdateUI();
     }
     private void OnDisable()
     {
         CharacterStat.OnExpUpdate -= UpdateUI;
     }
+
+    /// <summary>
+    /// UI 업데이트
+    /// </summary>
     public void UpdateUI()
     {
         levelText.text = $"Lv {characterStat.Level}";

@@ -10,13 +10,15 @@ public class CharacterStat
     private float maxHp;
     private float currentHp;
     private float moveSpeed;
-    private float drawItemRange;
+    private float drainItemRange;
 
     public static Action OnExpUpdate;
     public int Level { get { return level; } }
     public int CurrentExp { get { return currentExp; } }
     public int MaxExp { get { return maxExp; } }
     public float MoveSpeed { get { return moveSpeed; } }
+
+    public float DrainItemRange { get {  return drainItemRange; } }
     /// <summary>
     /// 캐릭터 초기 설정
     /// </summary>
@@ -28,7 +30,7 @@ public class CharacterStat
         maxHp = 50;
         currentHp = 50;
         moveSpeed = 3f;
-        drawItemRange = 1f;
+        drainItemRange = 1f;
     }
     /// <summary>
     /// 체력 감소

@@ -35,7 +35,7 @@ public class Monster : MonoBehaviour, IPoolable
         text.Setup(damage);
         hPBarUI ??= ObjectPoolManager.Instance.GetPool<HPBarUI>("HPBar").GetObject();
         hPBarUI.Setup(this.transform,stat.GetCurrentHPPercent());
-        if (stat.IsDead())
+        if (stat.IsDead()&&this.isActiveAndEnabled)
         {
             OnDeath();
         }
@@ -46,8 +46,7 @@ public class Monster : MonoBehaviour, IPoolable
     public void OnDeath()
     {
         hPBarUI.Remove();
-        var expItem = ObjectPoolManager.Instance.GetPool<Item>("ExpItem1").GetObject();
-        expItem.transform.position = transform.position;
+        DropExp();
         ObjectPoolManager.Instance.GetPool<Monster>(name.Replace("(Clone)","")).ReleaseObject(this);
     }
     private void OnCollisionStay2D(Collision2D collision)
@@ -58,5 +57,13 @@ public class Monster : MonoBehaviour, IPoolable
         {
             player.TakeDamage(stat.AttackPower);
         }
+    }
+    /// <summary>
+    /// 경험치 드랍
+    /// </summary>
+    public void DropExp()
+    {
+        var expItem = ObjectPoolManager.Instance.GetPool<Item>("ExpItem1").GetObject();
+        expItem.transform.position = transform.position;
     }
 }

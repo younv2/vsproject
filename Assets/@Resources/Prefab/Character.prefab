@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4035086635492264539}
   - component: {fileID: -4536530116821158343}
   - component: {fileID: 8473487320978379382}
+  - component: {fileID: 1301019810497911421}
   - component: {fileID: -9129384550448871701}
   - component: {fileID: 2384509860063524707}
   m_Layer: 0
@@ -105,6 +106,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aac25f9babec97b4dbd51a96edd40161, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monsterScanner: {fileID: 8473487320978379382}
+  expItemScanner: {fileID: 1301019810497911421}
 --- !u!50 &4035086635492264539
 Rigidbody2D:
   serializedVersion: 5
@@ -186,6 +189,23 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   range: 30
+--- !u!114 &1301019810497911421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2108804025688749355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b47b5584227cb5c4ab607564741f4d27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nearstObject: {fileID: 0}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  range: 2
 --- !u!114 &-9129384550448871701
 MonoBehaviour:
   m_ObjectHideFlags: 0

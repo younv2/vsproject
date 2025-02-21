@@ -1,18 +1,20 @@
+using DG.Tweening;
 using System;
 using UnityEngine;
 
 public class PlayableCharacter : MonoBehaviour, IPoolable
 {
-    private Scanner scanner;
+    [SerializeField]private Scanner monsterScanner;
+    [SerializeField]private Scanner expItemScanner;
     private CharacterStat stat = new CharacterStat();
     private HPBarUI hPBarUI;
 
     public CharacterStat Stat { get { return stat; } }
 
 
-    void Start()
+    void Update()
     {
-        scanner = transform.GetComponent<Scanner>();
+        DrainExp();
     }
     void OnEnable()
     {
@@ -27,11 +29,22 @@ public class PlayableCharacter : MonoBehaviour, IPoolable
         ObjectPoolManager.Instance.GetPool<PlayableCharacter>(name.Replace("(Clone)", "")).ReleaseObject(this);
     }
     /// <summary>
-    /// 캐릭터 사망 처리
+    /// 캐릭터 근처 몬스터 반환
     /// </summary>
     public Transform GetNearstTarget()
     {
-        return scanner.nearstObject?.transform;
+        return monsterScanner.nearstObject?.transform;
+    }
+    public void DrainExp()
+    {
+        expItemScanner.range = Stat.DrainItemRange;
+        if (expItemScanner.hitList != null)
+        {
+            foreach (var item in expItemScanner.hitList)
+            {
+                item.transform.Translate(Vector3.Normalize(transform.position - item.transform.position) * Time.deltaTime * 5f);
+            }
+        }
     }
     /// <summary>
     /// 캐릭터 데미지 처리
