@@ -26,6 +26,16 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 18fe825ab1331a1409e67849fd3c9938
+    m_Address: Prefab/UI/SkillUpElement
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 27e2d7b7a18ac164ba95992b79175358
+    m_Address: Prefab/UI/SelectSkillUpUI
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 3ced201c3248da84db43f778cac9f72e
     m_Address: SO/Skill/Wipe
     m_ReadOnly: 0
@@ -60,12 +70,12 @@ MonoBehaviour:
     - Prefab/Skill
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 92e6f3df6f3f31141813dcc765275701
-    m_Address: Assets/@Resources/Prefab/UI/HPBar.prefab
+    m_Address: Prefab/UI/HPBar
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a2bfe652dfb70844c856cd21e0ebb5de
-    m_Address: Assets/@Resources/Prefab/Text (TMP).prefab
+    m_Address: Prefab/DamageText
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

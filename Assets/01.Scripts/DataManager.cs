@@ -70,6 +70,10 @@ public class DataManager : MonoSingleton<DataManager>
     {
         return characterExpTable[level];
     }
+    public SkillData GetSkillData(string  skillName)
+    {
+        return skillDataList.Find(x => x.skillName.Equals(skillName));
+    }
 
 
 }

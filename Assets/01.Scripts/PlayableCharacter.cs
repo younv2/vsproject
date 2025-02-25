@@ -33,7 +33,9 @@ public class PlayableCharacter : MonoBehaviour, IPoolable
     /// </summary>
     public Transform GetNearstTarget()
     {
-        return monsterScanner.nearstObject?.transform;
+        if (monsterScanner.nearstObject == null)
+            return null;
+        return monsterScanner.nearstObject.transform;
     }
     public void DrainExp()
     {

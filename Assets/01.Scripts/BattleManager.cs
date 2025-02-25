@@ -3,28 +3,29 @@ using UnityEngine;
 
 public class BattleManager : MonoSingleton<BattleManager>
 {
-    SkillManager skillManagerInstance;
-    TimeManager timeManagerInstance;
-    MonsterSpawnManager monsterSpawnManagerInstance;
+    SkillManager skillManager;
+    TimeManager timeManager;
+    MonsterSpawnManager monsterSpawnManager;
     PlayableCharacter playableCharacter;
     public List<Projectile> projectileList;
     private bool isPause = false;
 
     void Awake()
     {
-        skillManagerInstance = SkillManager.Instance;
-        timeManagerInstance = TimeManager.Instance;
-        monsterSpawnManagerInstance = MonsterSpawnManager.Instance;
+        skillManager = SkillManager.Instance;
+        timeManager = TimeManager.Instance;
+        monsterSpawnManager = MonsterSpawnManager.Instance;
         playableCharacter = ObjectPoolManager.Instance.GetPool<PlayableCharacter>(Global.CHARACTER).GetObject();
+        skillManager.LearnSkill(DataManager.Instance.GetSkillData("ThrowRock"));
     }
 
     void Update()
     {
         if (isPause)
             return;
-        skillManagerInstance.ManualUpdate();
-        timeManagerInstance.ManualUpdate();
-        monsterSpawnManagerInstance.ManualUpdate();
+        skillManager.ManualUpdate();
+        timeManager.ManualUpdate();
+        monsterSpawnManager.ManualUpdate();
     }
     private void FixedUpdate()
     {
@@ -32,13 +33,13 @@ public class BattleManager : MonoSingleton<BattleManager>
             return;
         playableCharacter.gameObject.GetComponent<PlayerController>().ManualFixedUpdate();
         playableCharacter.ManualFixedUpdate();
-        foreach (var data in monsterSpawnManagerInstance.MonsterList)
+        foreach (var data in monsterSpawnManager.MonsterList)
         {
             data.ManualFixedUpdate();
         }
-        foreach (var data in projectileList)
+        for(int i = projectileList.Count-1; i >= 0; i--)
         {
-            data.ManualFixedUpdate();
+            projectileList[i].ManualFixedUpdate();
         }
 
         //TODO - Physics Settings의 Simulation Monde 추후 Script로 수정해서 직접 Physics 관리 할 것 
