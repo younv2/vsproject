@@ -3,7 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class Pool<T> : MonoBehaviour where T : Object
+public class Pool<T> where T : Object
 {
     private ObjectPool<T> pool;
      
@@ -44,7 +44,7 @@ public class Pool<T> : MonoBehaviour where T : Object
             parent = ObjectPoolManager.Instance.transform;
         }
 
-        T data = Instantiate(prefab, parent);
+        T data = GameObject.Instantiate(prefab, parent);
 
         return data;
     }
@@ -76,7 +76,7 @@ public class Pool<T> : MonoBehaviour where T : Object
 
     private void DestroyPoolObject(T obj) // 오브젝트 삭제
     {
-        Destroy(obj);
+        GameObject.Destroy(obj);
     }
 
     public T GetObject()

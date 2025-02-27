@@ -5,7 +5,7 @@ using System.Collections;
 
 public class ObjectPoolManager : MonoSingleton<ObjectPoolManager>
 {
-    private Dictionary<string,object> pools;
+    private Dictionary<string,object> pools = new Dictionary<string, object>();
     public Dictionary<string, object> Pools { get { return pools; } }
 
     private AddressablesLoader loader = new AddressablesLoader();
@@ -19,39 +19,34 @@ public class ObjectPoolManager : MonoSingleton<ObjectPoolManager>
     // Todo - IPoolable로 묶어 간단하게 표현할 방법 찾아보기
     public IEnumerator InitPools()
     {
-        pools = new Dictionary<string, object>();
-        List<GameObject> list = new List<GameObject>();
-        // Addressables 로드
         bool loadDone = false;
+        // Addressables 로드
         loader.LoadAssetListAsync<GameObject>(addressList, (loadedList) =>
         {
-            list = loadedList;
-            
+            foreach (var go in loadedList)
+            {
+                // 순서대로 검사, 성공하면 true 반환 → 다음 if-else 검사 안 함
+                if (TryAddPool<Monster>(go)) { }
+                else if (TryAddPool<PlayableCharacter>(go)) { }
+                else if (TryAddPool<Projectile>(go)) { }
+                else if (TryAddPool<DamageTextUI>(go)) { }
+                else if (TryAddPool<HPBarUI>(go)) { }
+                else if (TryAddPool<Item>(go)) { }
+                else
+                {
+                    AddPool(go);
+                }
+            }
             loadDone = true;
         });
         
         // 로딩 종료 대기
         while (!loadDone)
         {
-
             yield return null;
         }
         // 반복되는 TryGetComponent 패턴을 헬퍼 메서드로 정리
-        foreach (var go in list)
-        {
-            // 순서대로 검사, 성공하면 true 반환 → 다음 if-else 검사 안 함
-            if (TryAddPool<Monster>(go)) { }
-            else if (TryAddPool<PlayableCharacter>(go)) { }
-            else if (TryAddPool<Projectile>(go)) { }
-            else if (TryAddPool<DamageTextUI>(go)) { }
-            else if (TryAddPool<HPBarUI>(go)) { }
-            else if (TryAddPool<Item>(go)) { }
-            else
-            {
-                // 어떤 컴포넌트도 없으면 GameObject 자체로 Pool 생성
-                AddPool(go);
-            }
-        }
+        
         Debug.Log("ObjectPoolManager: 풀 초기화 완료");
     }
     /// <summary>
