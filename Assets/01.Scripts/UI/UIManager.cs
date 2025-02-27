@@ -9,7 +9,7 @@ public class UIManager : MonoSingleton<UIManager>
     public AssetLabelReference addressablePopupLabel;
     private List<BasePopup> popupList = new List<BasePopup>();
     private AddressablesLoader loader = new AddressablesLoader();
-    [SerializeField]private SkillUpPopup skillUpPopup;
+    public SkillUpPopup skillUpPopup;
     private void Start()
     {
         StartCoroutine(Initialize());
@@ -28,9 +28,7 @@ public class UIManager : MonoSingleton<UIManager>
             isLoadDone = true;
         });
         yield return new WaitUntil(() => isLoadDone);
-        skillUpPopup = popupList.OfType<SkillUpPopup>().FirstOrDefault();
+        skillUpPopup = (SkillUpPopup)popupList.Find(x=>x.GetType() == typeof(SkillUpPopup));
         yield return null;
     }
-
-
 }

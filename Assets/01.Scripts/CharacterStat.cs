@@ -79,6 +79,7 @@ public class CharacterStat
         level++;
         currentExp -= maxExp;
         maxExp = DataManager.Instance.GetExpByLevel(level);
+        UIManager.Instance.skillUpPopup.Show();
     }
     /// <summary>
     /// 캐릭터 경험치 추가

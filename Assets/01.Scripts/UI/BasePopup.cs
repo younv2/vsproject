@@ -6,9 +6,9 @@ public class BasePopup : MonoBehaviour
     public Button closeBtn;
     public void Initialize()
     {
-        if (transform.Find("CloseBtn") != null)
+        if (transform.Find("Close") != null)
         {
-            closeBtn = transform.Find("CloseBtn").GetComponent<Button>();
+            closeBtn = transform.Find("Close").GetComponent<Button>();
             closeBtn.onClick.AddListener(() =>
             {
                 Close();
@@ -16,11 +16,11 @@ public class BasePopup : MonoBehaviour
         }
         Close();
     }
-    public void Show()
+    public virtual void Show()
     {
         gameObject.SetActive(true);
     }
-    public void Close()
+    public virtual void Close()
     {
         gameObject.SetActive(false);
     }
