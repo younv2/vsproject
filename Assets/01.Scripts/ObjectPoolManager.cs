@@ -36,46 +36,36 @@ public class ObjectPoolManager : MonoSingleton<ObjectPoolManager>
 
             yield return null;
         }
+        // 반복되는 TryGetComponent 패턴을 헬퍼 메서드로 정리
         foreach (var go in list)
         {
-            // Todo : 해당 반복되는 내용을 추후 줄여보기
-            // Monster 컴포넌트가 있다면 Pool<Monster>로 등록
-            if (go.TryGetComponent<Monster>(out var monster))
-            {
-                AddPool(monster);
-            }
-            // Character 컴포넌트가 있다면 Pool<Character>로 등록
-            else if (go.TryGetComponent<PlayableCharacter>(out var character))
-            {
-                AddPool(character);
-            }
-            // Projectile 컴포넌트가 있다면 Pool<Projectile>로 등록
-            else if (go.TryGetComponent<Projectile>(out var projectile))
-            {
-                AddPool(projectile);
-            }
-            // DamageTextUI 컴포넌트가 있다면 Pool<DamageTextUI>로 등록
-            else if (go.TryGetComponent<DamageTextUI>(out var textUI))
-            {
-                AddPool(textUI);
-            }
-            // HPBarUI 컴포넌트가 있다면 Pool<HPBarUI>로 등록
-            else if (go.TryGetComponent<HPBarUI>(out var hpBar))
-            {
-                AddPool(hpBar);
-            }
-            // Item 컴포넌트가 있다면 Pool<Item>로 등록
-            else if (go.TryGetComponent<Item>(out var item))
-            {
-                AddPool(item);
-            }
+            // 순서대로 검사, 성공하면 true 반환 → 다음 if-else 검사 안 함
+            if (TryAddPool<Monster>(go)) { }
+            else if (TryAddPool<PlayableCharacter>(go)) { }
+            else if (TryAddPool<Projectile>(go)) { }
+            else if (TryAddPool<DamageTextUI>(go)) { }
+            else if (TryAddPool<HPBarUI>(go)) { }
+            else if (TryAddPool<Item>(go)) { }
             else
             {
-                // 둘 다 없으면 GameObject 자체로 Pool 생성
+                // 어떤 컴포넌트도 없으면 GameObject 자체로 Pool 생성
                 AddPool(go);
             }
         }
         Debug.Log("ObjectPoolManager: 풀 초기화 완료");
+    }
+    /// <summary>
+    /// 제네릭 헬퍼 메서드:
+    /// GameObject에서 T 컴포넌트를 찾으면 풀에 등록 후 true 반환
+    /// </summary>
+    private bool TryAddPool<T>(GameObject go) where T : Object
+    {
+        if (go.TryGetComponent<T>(out var component))
+        {
+            AddPool(component);
+            return true;
+        }
+        return false;
     }
     public void AddPool<T>(T prefab) where T: Object
     {

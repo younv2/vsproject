@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -7,7 +8,7 @@ public class UIManager : MonoSingleton<UIManager>
     public AssetLabelReference addressablePopupLabel;
     private List<BasePopup> popupList = new List<BasePopup>();
     private AddressablesLoader loader = new AddressablesLoader();
-    private SkillUpPopup skillUpPopup;
+    [SerializeField]private SkillUpPopup skillUpPopup;
     private void Start()
     {
         loader.LoadAssetListAsync<GameObject>(addressablePopupLabel, (callback) =>
@@ -19,7 +20,7 @@ public class UIManager : MonoSingleton<UIManager>
                 temp.Initialize();
             }
         });
-        
+        skillUpPopup = popupList.OfType<SkillUpPopup>().FirstOrDefault();
     }
 
 }
