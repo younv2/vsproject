@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: 0dd17e9b7a0b3884ea127fffbb9f0209
   m_currentHash:
     serializedVersion: 2
-    Hash: 4f2ec6ef340c811c85908f20b2473adf
+    Hash: 449e2285896973b1593b2096f590a514
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_CatalogRequestsTimeout: 0
@@ -101,6 +101,7 @@ MonoBehaviour:
     - default
     - Prefab/Skill
     - SO/Skill
+    - UI/Popup
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 375386efa4e8c2a429cd87098884acc1, type: 2}

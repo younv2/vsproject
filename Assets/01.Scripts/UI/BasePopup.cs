@@ -16,6 +16,10 @@ public class BasePopup : MonoBehaviour
         }
         Close();
     }
+    public void Show()
+    {
+        gameObject.SetActive(true);
+    }
     public void Close()
     {
         gameObject.SetActive(false);

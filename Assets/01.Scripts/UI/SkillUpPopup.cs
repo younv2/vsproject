@@ -1,19 +1,16 @@
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class SkillUpPopup : BasePopup
 {
-    private List<SkillUpElement> elementList;
+    [SerializeField]private List<SkillUpElement> elementList;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void Setting()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        foreach(var data in elementList)
+        {
+            data.Setting(DataManager.Instance.GetSkillData("ThrowRock"));
+        }
     }
 }

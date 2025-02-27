@@ -1,16 +1,13 @@
+using TMPro;
 using UnityEngine;
 
 public class SkillUpElement : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public TextMeshProUGUI nameText;
+    private SkillData skillData;
+    public void Setting(SkillData data)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        skillData = data;
+        nameText.text = skillData.name;
     }
 }
