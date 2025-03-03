@@ -11,12 +11,14 @@ public class CharacterStat
     private float currentHp;
     private float moveSpeed;
     private float drainItemRange;
+    private float luck;
 
     public static Action OnExpUpdate;
     public int Level { get { return level; } }
     public int CurrentExp { get { return currentExp; } }
     public int MaxExp { get { return maxExp; } }
     public float MoveSpeed { get { return moveSpeed; } }
+    public float Luck { get { return luck; } }
 
     public float DrainItemRange { get {  return drainItemRange; } }
     /// <summary>
@@ -31,6 +33,7 @@ public class CharacterStat
         currentHp = 50;
         moveSpeed = 3f;
         drainItemRange = 1f;
+        luck = 40f;
     }
     /// <summary>
     /// 체력 감소

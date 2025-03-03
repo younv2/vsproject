@@ -8,6 +8,11 @@ using static UnityEngine.AddressableAssets.Addressables;
 
 public class AddressablesLoader
 {
+    /// <summary>
+    /// 에셋 로드
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="list"></param>
     public void LoadAssetAsync<T>(AssetReference list)
     {
         T result = default(T);
@@ -17,6 +22,12 @@ public class AddressablesLoader
             Debug.Log(op.ToString());
         };
     }
+    /// <summary>
+    /// 에셋 리스트 로드
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="list"></param>
+    /// <param name="callback"></param>
     public void LoadAssetListAsync<T>(List<AssetReference> list, Action<List<T>> callback = null)
     {
         List<T> result  = new List<T>();
@@ -59,7 +70,6 @@ public class AddressablesLoader
     {
         if (handle.Status == AsyncOperationStatus.Succeeded)
         {
-            Debug.Log("All assets loaded successfully!");
         }
         else
         {

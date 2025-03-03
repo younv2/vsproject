@@ -21,7 +21,10 @@ public class DataManager : MonoSingleton<DataManager>
         base.Awake();
         DontDestroyOnLoad(this);
     }
-    //전체 데이터 로드
+    /// <summary>
+    /// 게임에 필요한 전체 데이터 로드
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator LoadAllData()
     {
         StartCoroutine(LoadSkillData());
@@ -29,7 +32,10 @@ public class DataManager : MonoSingleton<DataManager>
 
         yield return new WaitUntil(() => isSkillDataLoaded);
     }
-    //스킬 데이터 로드
+    /// <summary>
+    /// 스킬 데이터 로드
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator LoadSkillData()
     {
         bool loadDone = false;
@@ -45,14 +51,17 @@ public class DataManager : MonoSingleton<DataManager>
         isSkillDataLoaded = true;
         Debug.Log("DataManager: 스킬 데이터 로드 완료");
     }
+    /// <summary>
+    /// 경험치 테이블 로드
+    /// </summary>
     public void LoadExpTable()
     {
         string jsonString;
-        if (!File.Exists("Assets/@Resources/Data/ExpTable.json"))
+        if (!File.Exists(Global.EXP_TABLE_PATH))
         {
             Debug.Log("데이터 파일이 존재하지 않음");
         }
-        using (FileStream fs = new FileStream("Assets/@Resources/Data/ExpTable.json", FileMode.Open, FileAccess.Read))
+        using (FileStream fs = new FileStream(Global.EXP_TABLE_PATH, FileMode.Open, FileAccess.Read))
         {
             using (StreamReader sr = new StreamReader(fs, new System.Text.UTF8Encoding(false)))
             {

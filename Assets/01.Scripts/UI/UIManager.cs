@@ -14,6 +14,10 @@ public class UIManager : MonoSingleton<UIManager>
     {
         StartCoroutine(Initialize());
     }
+    /// <summary>
+    /// UIManager 초기 설정
+    /// </summary>
+    /// <returns></returns>
     IEnumerator Initialize()
     {
         bool isLoadDone = false;

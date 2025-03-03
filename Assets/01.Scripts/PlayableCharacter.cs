@@ -37,6 +37,9 @@ public class PlayableCharacter : MonoBehaviour, IPoolable
             return null;
         return monsterScanner.nearstObject.transform;
     }
+    /// <summary>
+    /// 경험치 아이템 흡수
+    /// </summary>
     public void DrainExp()
     {
         expItemScanner.range = Stat.DrainItemRange;

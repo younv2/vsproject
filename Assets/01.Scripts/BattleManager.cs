@@ -10,8 +10,9 @@ public class BattleManager : MonoSingleton<BattleManager>
     public List<Projectile> projectileList;
     private bool isPause = false;
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         skillManager = SkillManager.Instance;
         timeManager = TimeManager.Instance;
         monsterSpawnManager = MonsterSpawnManager.Instance;

@@ -54,6 +54,10 @@ public class MonsterStat
     {
         Debug.Log("몬스터 사망!");
     }
+    /// <summary>
+    /// 현재 체력 퍼센트 확인
+    /// </summary>
+    /// <returns></returns>
     public float GetCurrentHPPercent()
     {
         return currentHp / maxHp;

@@ -4,6 +4,9 @@ using UnityEngine.UI;
 public class BasePopup : MonoBehaviour
 {
     public Button closeBtn;
+    /// <summary>
+    /// 팝업 초기 설정
+    /// </summary>
     public void Initialize()
     {
         if (transform.Find("Close") != null)
@@ -16,10 +19,16 @@ public class BasePopup : MonoBehaviour
         }
         Close();
     }
+    /// <summary>
+    /// 팝업 오브젝트 활성화
+    /// </summary>
     public virtual void Show()
     {
         gameObject.SetActive(true);
     }
+    /// <summary>
+    /// 팝업 오브젝트 비활성화
+    /// </summary>
     public virtual void Close()
     {
         gameObject.SetActive(false);
