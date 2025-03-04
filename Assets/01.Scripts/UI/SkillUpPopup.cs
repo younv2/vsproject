@@ -11,16 +11,18 @@ public class SkillUpPopup : BasePopup
     /// </summary>
     public void Setting()
     {
-        int threshold = 50;
+        float threshold = Random.Range(0,1f);
         int elementCount = BattleManager.Instance.GetPlayableCharacter().Stat.Luck >= threshold ? 4 : 3;
-
+        var skillDataList  = new List<SkillDataBase>(DataManager.Instance.GetAllSkillData());
+        skillDataList.Shuffle();
         // 리스트에 들어있는 SkillUpElement 중 원하는 개수만 활성화하고 나머지는 비활성화
         for (int i = 0; i < elementList.Count; i++)
         {
             if (i < elementCount)
             {
+                
                 elementList[i].gameObject.SetActive(true);
-                elementList[i].Setting(DataManager.Instance.GetSkillData("ThrowRock"), this);
+                elementList[i].Setting(skillDataList[i], this);
             }
             else
             {
