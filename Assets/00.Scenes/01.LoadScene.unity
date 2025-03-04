@@ -305,12 +305,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillAddressList:
-  - m_AssetGUID: 4d5f8d1f647494a489946c0fa13d1895
+  - m_AssetGUID: e23d3224b1186454eb7e0e6afaf58137
     m_SubObjectName: 
     m_SubObjectGUID: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  - m_AssetGUID: 3ced201c3248da84db43f778cac9f72e
+  - m_AssetGUID: 111566f8508c71c4fa50be440da01e7b
+    m_SubObjectName: 
+    m_SubObjectGUID: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: 61d27845b6a2ad04c843f31200fe56b3
+    m_SubObjectName: 
+    m_SubObjectGUID: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: f4d35881dd33617479860d3f3f80297e
+    m_SubObjectName: 
+    m_SubObjectGUID: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: 333f32173ee95004c8027340ea6fddd0
+    m_SubObjectName: 
+    m_SubObjectGUID: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: 90111c4ab5fcc04478a3dcc5752451e1
+    m_SubObjectName: 
+    m_SubObjectGUID: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: 91c49e4bb75961542abfaab8bc020a78
     m_SubObjectName: 
     m_SubObjectGUID: 
     m_SubObjectType: 

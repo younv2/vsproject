@@ -5,8 +5,8 @@ using UnityEngine.UI;
 public class SkillUpElement : MonoBehaviour
 {
     public TextMeshProUGUI nameText;
-    private SkillData skillData;
-    public void Setting(SkillData data,SkillUpPopup popup)
+    private SkillDataBase skillData;
+    public void Setting(SkillDataBase data,SkillUpPopup popup)
     {
         skillData = data;
         nameText.text = skillData.name;

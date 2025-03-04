@@ -33,7 +33,7 @@ public class CharacterStat
         currentHp = 50;
         moveSpeed = 3f;
         drainItemRange = 1f;
-        luck = 40f;
+        luck = 0f;
     }
     /// <summary>
     /// 체력 감소

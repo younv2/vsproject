@@ -8,8 +8,8 @@ using UnityEngine.AddressableAssets;
 public class DataManager : MonoSingleton<DataManager>
 {
     AddressablesLoader loader = new AddressablesLoader();
-    private List<SkillData> skillDataList = new List<SkillData>();
-    public List<SkillData> SkillDataList { get { return skillDataList; } }
+    private List<SkillDataBase> skillDataList = new List<SkillDataBase>();
+    public List<SkillDataBase> SkillDataList { get { return skillDataList; } }
 
     public List<AssetReference> skillAddressList;
 
@@ -39,7 +39,7 @@ public class DataManager : MonoSingleton<DataManager>
     public IEnumerator LoadSkillData()
     {
         bool loadDone = false;
-        loader.LoadAssetListAsync<SkillData>(skillAddressList, (callback) =>
+        loader.LoadAssetListAsync<SkillDataBase>(skillAddressList, (callback) =>
         {
             skillDataList = callback;
             loadDone = true;
@@ -79,10 +79,17 @@ public class DataManager : MonoSingleton<DataManager>
     {
         return characterExpTable[level];
     }
-    public SkillData GetSkillData(string  skillName)
+    public SkillDataBase GetSkillData(string  skillName)
     {
         return skillDataList.Find(x => x.skillName.Equals(skillName));
     }
-
+    public SkillDataBase GetRandomSkillData()
+    {
+        return skillDataList[Random.Range(0, skillDataList.Count)];
+    }
+    public List<SkillDataBase> GetAllSkillData()
+    {
+        return skillDataList;
+    }
 
 }

@@ -21,6 +21,11 @@ MonoBehaviour:
     m_SerializedLabels:
     - Prefab/Skill
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 111566f8508c71c4fa50be440da01e7b
+    m_Address: SO/Skill/Wipe
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 150e7ef5d39904848925ac20a4999554
     m_Address: SO/Module/SpawnProjectile
     m_ReadOnly: 0
@@ -37,11 +42,10 @@ MonoBehaviour:
     m_SerializedLabels:
     - UI/Popup
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3ced201c3248da84db43f778cac9f72e
-    m_Address: SO/Skill/Wipe
+  - m_GUID: 333f32173ee95004c8027340ea6fddd0
+    m_Address: SO/Skill/ExpBuff
     m_ReadOnly: 0
-    m_SerializedLabels:
-    - SO/Skill
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4342570d480e69d45a51892afb95f38a
     m_Address: Assets/@Resources/SO/Projectile/New Projectile Data.asset
@@ -53,12 +57,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4d5f8d1f647494a489946c0fa13d1895
-    m_Address: SO/Skill/ThrowRock
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - SO/Skill
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4f395f42e2de61a4b9f0b3f5b0c9aa95
     m_Address: Assets/@Resources/Data/ExpTable.json
     m_ReadOnly: 0
@@ -69,6 +67,21 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Prefab/Skill
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 61d27845b6a2ad04c843f31200fe56b3
+    m_Address: SO/Skill/DamageBuff
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 90111c4ab5fcc04478a3dcc5752451e1
+    m_Address: SO/Skill/HPBuff
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 91c49e4bb75961542abfaab8bc020a78
+    m_Address: Assets/@Resources/SO/Skill/LuckBuff.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 92e6f3df6f3f31141813dcc765275701
     m_Address: Prefab/UI/HPBar
@@ -92,6 +105,16 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c70f7df651785474a99055c6b2b8e7b2
     m_Address: SO/Module/KnockbackRock
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e23d3224b1186454eb7e0e6afaf58137
+    m_Address: SO/Skill/ThrowRock
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f4d35881dd33617479860d3f3f80297e
+    m_Address: SO/Skill/DropRangeBuff
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

@@ -7,7 +7,7 @@ using UnityEngine;
 public abstract class SkillModule : ScriptableObject
 {
     // 1) 스킬 발동 시점에 실행되는 메서드
-    public virtual void Execute(SkillRuntime skill) { }
+    public virtual void Execute(ActiveSkillRuntime skill) { }
 
     // 2) 투사체 이벤트(충돌, 만료 등) 시점에 실행되는 메서드
     public virtual void Execute(ProjectileContext context) { }

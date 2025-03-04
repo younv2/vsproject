@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class SkillManager : MonoSingleton<SkillManager>
 {
-    private List<SkillRuntime> activeSkills = new List<SkillRuntime>();
+    private List<ActiveSkillRuntime> activeSkills = new List<ActiveSkillRuntime>();
+    private List<PassiveSkillRuntime> passiveSkills = new List<PassiveSkillRuntime>();
     public void ManualUpdate()
     {
         float dt = Time.deltaTime;
@@ -18,19 +19,33 @@ public class SkillManager : MonoSingleton<SkillManager>
     /// <summary>
     /// 스킬을 새로 습득하거나 레벨업한다
     /// </summary>
-    public void LearnSkill(SkillData data)
+    public void LearnSkill(SkillDataBase data)
     {
-        // 이미 같은 SkillData를 가진 스킬이 있으면 레벨업
-        var existing = activeSkills.Find(s => s.Data == data);
-        if (existing != null)
+        if (data is ActiveSkillData activeData)
         {
-            existing.LevelUp();
+            var existingActive = activeSkills.Find(s => s.Data == activeData);
+            if (existingActive != null)
+            {
+                existingActive.LevelUp();
+            }
+            else
+            {
+                var newSkill = new ActiveSkillRuntime(activeData, BattleManager.Instance.GetPlayableCharacter().transform);
+                activeSkills.Add(newSkill);
+            }
         }
-        else
+        else if (data is PassiveSkillData passiveData)
         {
-            // 없으면 새로 추가
-            var newSkill = new SkillRuntime(data,BattleManager.Instance.GetPlayableCharacter().transform);
-            activeSkills.Add(newSkill);
+            var existingPassive = passiveSkills.Find(s => s.Data == passiveData);
+            if (existingPassive != null)
+            {
+                existingPassive.LevelUp();
+            }
+            else
+            {
+                var newSkill = new PassiveSkillRuntime(passiveData, BattleManager.Instance.GetPlayableCharacter().transform);
+                passiveSkills.Add(newSkill);
+            }
         }
     }
 }
