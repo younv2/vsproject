@@ -14,6 +14,7 @@ public class CharacterStat
     private float luck;
 
     public static Action OnExpUpdate;
+    public float MaxHp { get {  return StatCalculator.CalculateModifiedHP(maxHp); } }
     public int Level { get { return level; } }
     public int CurrentExp { get { return currentExp; } }
     public int MaxExp { get { return maxExp; } }
@@ -72,7 +73,7 @@ public class CharacterStat
     /// <returns></returns>
     public float GetCurrentHPPercent()
     {
-        return currentHp / maxHp;
+        return currentHp / MaxHp;
     }
     /// <summary>
     /// 캐릭터 레벨 업
@@ -89,7 +90,7 @@ public class CharacterStat
     /// </summary>
     public void AddExp(int exp)
     {
-        currentExp += exp;
+        currentExp += StatCalculator.CalculateModifiedExp(exp);
         if (currentExp >= maxExp)
         {
             LevelUp();

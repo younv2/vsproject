@@ -18,6 +18,23 @@ public class PassiveSkillLevelInfo
     public float dropRangeBonus;
     public float expBonus;
     public float luckBonus;
+
+    public PassiveSkillLevelInfo(float attackBonus, float hpBonus, float dropRangeBonus, float expBonus, float luckBonus)
+    {
+        this.attackBonus = attackBonus;
+        this.hpBonus = hpBonus;
+        this.dropRangeBonus = dropRangeBonus;
+        this.expBonus = expBonus;
+        this.luckBonus = luckBonus;
+    }
+    public static PassiveSkillLevelInfo operator +(PassiveSkillLevelInfo data1, PassiveSkillLevelInfo data2)
+    {
+        return new PassiveSkillLevelInfo(data1.attackBonus + data2.attackBonus,
+            data1.hpBonus + data2.hpBonus,
+            data1.dropRangeBonus + data2.dropRangeBonus,
+            data1.expBonus + data2.expBonus,
+            data1.luckBonus + data2.luckBonus);
+    }
 }
 public class SkillDataBase : ScriptableObject
 {

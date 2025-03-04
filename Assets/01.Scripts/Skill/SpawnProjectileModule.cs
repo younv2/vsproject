@@ -21,9 +21,11 @@ public class SpawnProjectileModule : SkillModule
 
             projObj.transform.position = runtime.Owner.position;
             projObj.transform.rotation = rotation;
+
+            float damage = StatCalculator.CalculateModifiedDamage(curSkillData.baseDamage);
             if (projObj)
             {
-                projObj.Setup(projectileData, runtime.Owner,runtime.Target, curSkillData.baseDamage);
+                projObj.Setup(projectileData, runtime.Owner,runtime.Target, damage);
             }
         }
     }

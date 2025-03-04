@@ -17,9 +17,11 @@ MonoBehaviour:
   levelInfos:
   - attackBonus: 0
     hpBonus: 0
-    dropRangeBonus: 10
+    dropRangeBonus: 1000
     expBonus: 0
+    luckBonus: 0
   - attackBonus: 0
     hpBonus: 0
     dropRangeBonus: 20
     expBonus: 0
+    luckBonus: 0

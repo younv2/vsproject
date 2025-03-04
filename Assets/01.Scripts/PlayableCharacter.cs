@@ -42,7 +42,7 @@ public class PlayableCharacter : MonoBehaviour, IPoolable
     /// </summary>
     public void DrainExp()
     {
-        expItemScanner.range = Stat.DrainItemRange;
+        expItemScanner.range = StatCalculator.CalculateModifiedDrop(Stat.DrainItemRange);
         if (expItemScanner.hitList != null)
         {
             foreach (var item in expItemScanner.hitList)
