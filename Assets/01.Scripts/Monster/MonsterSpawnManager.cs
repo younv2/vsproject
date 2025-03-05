@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MonsterSpawnManager : MonoSingleton<MonsterSpawnManager>
 {
-    private int maxMonsterCnt = 3;
+    private int maxMonsterCnt = 10;
 
     private float maxSpawnDistance = 20;
     private float minSpawnDistance = 10;

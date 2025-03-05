@@ -10,7 +10,9 @@ public class SkillUpElement : MonoBehaviour
     {
         skillData = data;
         nameText.text = skillData.name;
-        this.GetComponent<Button>().onClick.AddListener(() =>
+        Button button = this.GetComponent<Button>();
+        button.onClick.RemoveAllListeners();
+        button.onClick.AddListener(() =>
         {
             SkillManager.Instance.LearnSkill(skillData);
 
