@@ -11,7 +11,7 @@ public class DataManager : MonoSingleton<DataManager>
     private List<SkillDataBase> skillDataList = new List<SkillDataBase>();
     public List<SkillDataBase> SkillDataList { get { return skillDataList; } }
 
-    public List<AssetReference> skillAddressList;
+    public AssetLabelReference skillAddressableLabel;
 
     private Dictionary<int,int> characterExpTable = new Dictionary<int,int>();
     private bool isSkillDataLoaded = false;
@@ -39,7 +39,7 @@ public class DataManager : MonoSingleton<DataManager>
     public IEnumerator LoadSkillData()
     {
         bool loadDone = false;
-        loader.LoadAssetListAsync<SkillDataBase>(skillAddressList, (callback) =>
+        loader.LoadAssetListAsync<SkillDataBase>(skillAddressableLabel, (callback) =>
         {
             skillDataList = callback;
             loadDone = true;

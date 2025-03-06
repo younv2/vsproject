@@ -12,7 +12,8 @@ public class SkillUpPopup : BasePopup
     public void Setting()
     {
         float threshold = Random.Range(0,1f);
-        int elementCount = StatCalculator.CalculateModifiedLuck(BattleManager.Instance.GetPlayableCharacter().Stat.Luck) >= threshold ? 4 : 3;
+        int elementCount = StatCalculator.CalculateModifiedLuck(
+            SkillManager.Instance.GetAllPassiveStat(), BattleManager.Instance.GetPlayableCharacter().Stat.Luck) >= threshold ? 4 : 3;
         var skillDataList  = new List<SkillDataBase>(DataManager.Instance.GetAllSkillData());
         skillDataList.Shuffle();
         // 리스트에 들어있는 SkillUpElement 중 원하는 개수만 활성화하고 나머지는 비활성화

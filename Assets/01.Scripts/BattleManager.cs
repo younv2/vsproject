@@ -17,7 +17,7 @@ public class BattleManager : MonoSingleton<BattleManager>
         timeManager = TimeManager.Instance;
         monsterSpawnManager = MonsterSpawnManager.Instance;
         playableCharacter = ObjectPoolManager.Instance.GetPool<PlayableCharacter>(Global.CHARACTER).GetObject();
-        skillManager.LearnSkill(DataManager.Instance.GetSkillData("ThrowRock"));
+        skillManager.LearnSkill(DataManager.Instance.GetSkillData(Global.PLAYER_FIRST_SKILL_NAME));
     }
 
     void Update()
@@ -32,7 +32,6 @@ public class BattleManager : MonoSingleton<BattleManager>
     {
         if (isPause)
             return;
-        playableCharacter.gameObject.GetComponent<PlayerController>().ManualFixedUpdate();
         playableCharacter.ManualFixedUpdate();
         foreach (var data in monsterSpawnManager.MonsterList)
         {

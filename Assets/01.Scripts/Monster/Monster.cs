@@ -11,7 +11,7 @@ public class Monster : MonoBehaviour, IPoolable
     public void OnEnable()
     {
         stat.InitStat(baseData);
-        player = GameObject.FindWithTag("Player");
+        player = GameObject.FindWithTag(Global.Unity.PLAYER_TAG);
     }
     /// <summary>
     /// 매니저 클래스에서 업데이트를 관리하기 위함.
@@ -48,6 +48,7 @@ public class Monster : MonoBehaviour, IPoolable
         hPBarUI.Remove();
         DropExp();
         ObjectPoolManager.Instance.GetPool<Monster>(name.Replace("(Clone)","")).ReleaseObject(this);
+        MonsterSpawnManager.Instance.MonsterList.Remove(this);
     }
     private void OnCollisionStay2D(Collision2D collision)
     {

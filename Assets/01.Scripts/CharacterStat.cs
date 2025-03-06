@@ -14,7 +14,7 @@ public class CharacterStat
     private float luck;
 
     public static Action OnExpUpdate;
-    public float MaxHp { get {  return StatCalculator.CalculateModifiedHP(maxHp); } }
+    public float MaxHp { get {  return StatCalculator.CalculateModifiedHP(SkillManager.Instance.GetAllPassiveStat(),maxHp); } }
     public int Level { get { return level; } }
     public int CurrentExp { get { return currentExp; } }
     public int MaxExp { get { return maxExp; } }
@@ -90,7 +90,7 @@ public class CharacterStat
     /// </summary>
     public void AddExp(int exp)
     {
-        currentExp += StatCalculator.CalculateModifiedExp(exp);
+        currentExp += StatCalculator.CalculateModifiedExp(SkillManager.Instance.GetAllPassiveStat(),exp);
         if (currentExp >= maxExp)
         {
             LevelUp();

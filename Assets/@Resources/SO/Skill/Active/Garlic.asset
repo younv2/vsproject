@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d46cc52aeb4c9ce4b8fbcc3cd6518934, type: 3}
-  m_Name: Wipe
+  m_Name: Garlic
   m_EditorClassIdentifier: 
-  skillId: 1
-  skillName: Wipe
+  skillId: 2
+  skillName: Garlic
   levelInfos:
-  - cooldown: 1
-    baseDamage: 10
-    projectileCount: 1
+  - cooldown: 0.4
+    baseDamage: 2
+    projectileCount: 0
     angleBetweenProjectiles: 0
     levelModules:
-    - {fileID: 11400000, guid: 150e7ef5d39904848925ac20a4999554, type: 2}
-  - cooldown: 0.5
-    baseDamage: 15
-    projectileCount: 3
-    angleBetweenProjectiles: 10
+    - {fileID: 11400000, guid: 1624dc51206838f408a34454ab1709a3, type: 2}
+  - cooldown: 0.4
+    baseDamage: 4
+    projectileCount: 0
+    angleBetweenProjectiles: 0
     levelModules:
-    - {fileID: 11400000, guid: 150e7ef5d39904848925ac20a4999554, type: 2}
+    - {fileID: 11400000, guid: 1624dc51206838f408a34454ab1709a3, type: 2}

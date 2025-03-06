@@ -22,7 +22,8 @@ public class SpawnProjectileModule : SkillModule
             projObj.transform.position = runtime.Owner.position;
             projObj.transform.rotation = rotation;
 
-            float damage = StatCalculator.CalculateModifiedDamage(curSkillData.baseDamage);
+            float damage = StatCalculator.CalculateModifiedDamage(
+                SkillManager.Instance.GetAllPassiveStat(), curSkillData.baseDamage);
             if (projObj)
             {
                 projObj.Setup(projectileData, runtime.Owner,runtime.Target, damage);

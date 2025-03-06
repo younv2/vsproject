@@ -11,7 +11,7 @@ public class ActiveSkillLevelInfo
     public List<SkillModule> levelModules;   // 해당 레벨에서 실행될 모듈 목록
 }
 [System.Serializable]
-public class PassiveSkillLevelInfo
+public struct PassiveSkillLevelInfo
 {
     public float attackBonus;
     public float hpBonus;

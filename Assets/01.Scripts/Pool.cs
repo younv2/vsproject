@@ -28,8 +28,11 @@ public class Pool<T> where T : Object
             pool.Release(tempList[i]);
         }
     }
-
-    private T CreateObject() // 오브젝트 생성
+    /// <summary>
+    /// 오브젝트 생성
+    /// </summary>
+    /// <returns></returns>
+    private T CreateObject()
     {
 
         Transform parent = null;
@@ -48,8 +51,11 @@ public class Pool<T> where T : Object
 
         return data;
     }
-
-    private void ActivatePoolObject(T obj) // 오브젝트 활성화
+    /// <summary>
+    /// 오브젝트 활성화
+    /// </summary>
+    /// <param name="obj"></param>
+    private void ActivatePoolObject(T obj)
     {
         if (obj is MonoBehaviour mono)
         {
@@ -61,8 +67,11 @@ public class Pool<T> where T : Object
         }
         
     }
-
-    private void DisablePoolObject(T obj) // 오브젝트 비활성화
+    /// <summary>
+    /// 오브젝트 비활성화
+    /// </summary>
+    /// <param name="obj"></param>
+    private void DisablePoolObject(T obj)
     {
         if (obj is MonoBehaviour mono)
         {
@@ -73,12 +82,18 @@ public class Pool<T> where T : Object
             go.SetActive(false);
         }
     }
-
-    private void DestroyPoolObject(T obj) // 오브젝트 삭제
+    /// <summary>
+    /// 오브젝트 삭제
+    /// </summary>
+    /// <param name="obj"></param>
+    private void DestroyPoolObject(T obj)
     {
         GameObject.Destroy(obj);
     }
-
+    /// <summary>
+    /// 오브젝트 가져오기
+    /// </summary>
+    /// <returns></returns>
     public T GetObject()
     {
         T sel = null;
@@ -87,7 +102,10 @@ public class Pool<T> where T : Object
 
         return sel;
     }
-
+    /// <summary>
+    /// 오브젝트 제거
+    /// </summary>
+    /// <param name="obj"></param>
     public void ReleaseObject(T obj)
     {
         pool.Release(obj);

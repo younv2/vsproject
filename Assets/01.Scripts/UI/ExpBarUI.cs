@@ -10,9 +10,6 @@ public class ExpBarUI : MonoBehaviour
     [SerializeField] private Slider expSlider;
 
     private CharacterStat characterStat;
-    int curExp;
-    int maxExp;
-    int level;
 
 
     private void OnEnable()

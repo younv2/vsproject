@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour, IPoolable
@@ -17,7 +18,7 @@ public class Projectile : MonoBehaviour, IPoolable
     /// <param name="owner">투사체를 생성할 위치</param>
     /// <param name="target">투사체 이동할 목표</param>
     /// <param name="damage">투사체 데미지</param>
-    public void Setup(ProjectileData data, Transform owner,Transform target, float damage)
+    public void Setup(ProjectileData data, Transform owner, Transform target, float damage)
     {
         BattleManager.Instance.projectileList.Add(this);
         this.data = data;
@@ -25,7 +26,7 @@ public class Projectile : MonoBehaviour, IPoolable
         this.damage = damage;
         this.target = target;
         movDir = this.target == null ? Vector3.zero : Vector3.Normalize(this.target.position - this.owner.position);
-        
+
         timeAlive = 0f;
         // onSpawn 이펙트 실행
         ExecuteModules(data.onSpawnModules, null);
@@ -41,7 +42,7 @@ public class Projectile : MonoBehaviour, IPoolable
     public void ManualFixedUpdate()
     {
         // 이동
-        transform.Translate(movDir * data.speed * Time.deltaTime,Space.Self);
+        transform.Translate(movDir * data.speed * Time.deltaTime, Space.Self);
 
         // 수명 체크
         timeAlive += Time.deltaTime;
@@ -53,22 +54,22 @@ public class Projectile : MonoBehaviour, IPoolable
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        var enemy = other.GetComponent<Monster>();
-        if (enemy != null)
+        if (!other.TryGetComponent<Monster>(out Monster enemy))
         {
-            // 즉시 적에게 데미지
-            enemy.TakeDamage(damage);
-
-            // 관통 횟수
-            hitCount++;
-            if (hitCount > data.penetrateCount)
-            {
-                Expire();
-            }
-
-            // onHit 이펙트
-            ExecuteModules(data.onHitModules, other.transform);
+            return;
         }
+        // 즉시 적에게 데미지
+        enemy.TakeDamage(damage);
+
+        // 관통 횟수
+        hitCount++;
+        if (hitCount > data.penetrateCount)
+        {
+            Expire();
+        }
+
+        // onHit 이펙트
+        ExecuteModules(data.onHitModules, other.transform);
     }
     /// <summary>
     /// 투사체가 만료됐을 때 실행되는 함수
@@ -78,12 +79,12 @@ public class Projectile : MonoBehaviour, IPoolable
         // onExpire 이펙트
         ExecuteModules(data.onExpireModules, null);
         BattleManager.Instance.projectileList.Remove(this);
-        ObjectPoolManager.Instance.GetPool<Projectile>(name.Replace("(Clone)","")).ReleaseObject(this);
+        ObjectPoolManager.Instance.GetPool<Projectile>(name.Replace("(Clone)", "")).ReleaseObject(this);
     }
     /// <summary>
     /// 스킬 모듈 실행
     /// </summary>
-    private void ExecuteModules(System.Collections.Generic.List<SkillModule> modules, Transform collisionTarget)
+    private void ExecuteModules(List<SkillModule> modules, Transform collisionTarget)
     {
         if (modules == null) return;
         var context = new ProjectileContext(this, collisionTarget);

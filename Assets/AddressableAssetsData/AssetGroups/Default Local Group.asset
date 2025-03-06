@@ -22,12 +22,18 @@ MonoBehaviour:
     - Prefab/Skill
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 111566f8508c71c4fa50be440da01e7b
-    m_Address: SO/Skill/Wipe
+    m_Address: SO/Skill/Whip
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - SO/Skill
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 150e7ef5d39904848925ac20a4999554
     m_Address: SO/Module/SpawnProjectile
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1624dc51206838f408a34454ab1709a3
+    m_Address: SO/Module/Garlic
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -45,12 +51,19 @@ MonoBehaviour:
   - m_GUID: 333f32173ee95004c8027340ea6fddd0
     m_Address: SO/Skill/ExpBuff
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - SO/Skill
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4342570d480e69d45a51892afb95f38a
     m_Address: Assets/@Resources/SO/Projectile/New Projectile Data.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 491b5e35aa88caf40af7c8988779f06a
+    m_Address: SO/Skill/Garlic
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SO/Skill
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4c3340c044884984eb590db173be8a76
     m_Address: Prefab/Monster/Slime
@@ -71,17 +84,20 @@ MonoBehaviour:
   - m_GUID: 61d27845b6a2ad04c843f31200fe56b3
     m_Address: SO/Skill/DamageBuff
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - SO/Skill
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 90111c4ab5fcc04478a3dcc5752451e1
     m_Address: SO/Skill/HPBuff
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - SO/Skill
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 91c49e4bb75961542abfaab8bc020a78
-    m_Address: Assets/@Resources/SO/Skill/LuckBuff.asset
+    m_Address: SO/Skill/LuckBuff
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - SO/Skill
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 92e6f3df6f3f31141813dcc765275701
     m_Address: Prefab/UI/HPBar
@@ -111,12 +127,14 @@ MonoBehaviour:
   - m_GUID: e23d3224b1186454eb7e0e6afaf58137
     m_Address: SO/Skill/ThrowRock
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - SO/Skill
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f4d35881dd33617479860d3f3f80297e
     m_Address: SO/Skill/DropRangeBuff
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - SO/Skill
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f6d5d98f66d270743bef686a3d09994f
     m_Address: ScriptableObject/Monster/Slime

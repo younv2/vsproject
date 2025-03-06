@@ -15,8 +15,10 @@ public class ObjectPoolManager : MonoSingleton<ObjectPoolManager>
         base.Awake();
         DontDestroyOnLoad(this);
     }
-    // 풀 초기화 (코루틴) 
-    // Todo - IPoolable로 묶어 간단하게 표현할 방법 찾아보기
+    /// <summary>
+    /// 풀 초기 세팅
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator InitPools()
     {
         bool loadDone = false;
@@ -25,7 +27,7 @@ public class ObjectPoolManager : MonoSingleton<ObjectPoolManager>
         {
             foreach (var go in loadedList)
             {
-                // 순서대로 검사, 성공하면 true 반환 → 다음 if-else 검사 안 함
+                // 순서대로 검사, 성공하면 true 반환
                 if (TryAddPool<Monster>(go)) { }
                 else if (TryAddPool<PlayableCharacter>(go)) { }
                 else if (TryAddPool<Projectile>(go)) { }
@@ -69,7 +71,12 @@ public class ObjectPoolManager : MonoSingleton<ObjectPoolManager>
             pools.Add(prefab.name, new Pool<T>(prefab));
         }
     }
-    // 특정 풀을 가져오는 메서드
+    /// <summary>
+    /// 특정 풀을 가져오는 메서드
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="prefabName"></param>
+    /// <returns></returns>
     public Pool<T> GetPool<T>(string prefabName) where T : Object
     {
         // pools에서 object로 저장된 풀을 T 타입으로 캐스팅해서 반환

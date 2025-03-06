@@ -50,7 +50,7 @@ public class SkillManager : MonoSingleton<SkillManager>
     }
     public PassiveSkillLevelInfo GetAllPassiveStat()
     {
-        PassiveSkillLevelInfo passiveStat = new PassiveSkillLevelInfo(0,0,0,0,0);
+        PassiveSkillLevelInfo passiveStat = new PassiveSkillLevelInfo();
         foreach(var skill in passiveSkills)
         {
             passiveStat += skill.Data.levelInfos[skill.Level -1];
