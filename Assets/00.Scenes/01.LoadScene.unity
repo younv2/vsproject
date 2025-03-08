@@ -224,41 +224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   addressList:
-  - m_AssetGUID: a347464297ce8f84cadc1dba275b895e
-    m_SubObjectName: 
-    m_SubObjectGUID: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  - m_AssetGUID: 4c3340c044884984eb590db173be8a76
-    m_SubObjectName: 
-    m_SubObjectGUID: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  - m_AssetGUID: 0015df6562545dd4ebcf323b16b81a8d
-    m_SubObjectName: 
-    m_SubObjectGUID: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  - m_AssetGUID: 5806c4924ac78434c9a8acf507b2d0e6
-    m_SubObjectName: 
-    m_SubObjectGUID: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  - m_AssetGUID: a2bfe652dfb70844c856cd21e0ebb5de
-    m_SubObjectName: 
-    m_SubObjectGUID: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  - m_AssetGUID: 92e6f3df6f3f31141813dcc765275701
-    m_SubObjectName: 
-    m_SubObjectGUID: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  - m_AssetGUID: c3ae85fc7ebdf524587b7fe1448a331f
-    m_SubObjectName: 
-    m_SubObjectGUID: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
+    m_LabelString: Prefab
 --- !u!4 &537738120
 Transform:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ public class PlayableCharacter : MonoBehaviour, IPoolable
     [SerializeField]private Scanner monsterScanner;
     [SerializeField]private Scanner expItemScanner;
     private CharacterStat stat = new CharacterStat();
+    private PlayerController playerController;
     private HPBarUI hPBarUI;
 
     public CharacterStat Stat { get { return stat; } }
@@ -15,10 +16,12 @@ public class PlayableCharacter : MonoBehaviour, IPoolable
     public void ManualFixedUpdate()
     {
         DrainExp();
+        playerController.ManualFixedUpdate();
     }
     void OnEnable()
     {
         Stat.Init();
+        playerController = this.GetComponent<PlayerController>();
     }
     /// <summary>
     /// 캐릭터 사망 처리

@@ -15,17 +15,17 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: 0dd17e9b7a0b3884ea127fffbb9f0209
   m_SerializeEntries:
-  - m_GUID: 0015df6562545dd4ebcf323b16b81a8d
-    m_Address: Prefab/Skill/ThrowRock
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Prefab/Skill
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 111566f8508c71c4fa50be440da01e7b
     m_Address: SO/Skill/Whip
     m_ReadOnly: 0
     m_SerializedLabels:
     - SO/Skill
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1499097e96bc0874baeeccbfc168a055
+    m_Address: Prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefab
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 150e7ef5d39904848925ac20a4999554
     m_Address: SO/Module/SpawnProjectile
@@ -38,12 +38,12 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 18fe825ab1331a1409e67849fd3c9938
-    m_Address: Prefab/UI/SkillUpElement
+    m_Address: Prefab/UI/SkillUpElement.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 27e2d7b7a18ac164ba95992b79175358
-    m_Address: Prefab/UI/SelectSkillUpUI
+    m_Address: Prefab/UI/SelectSkillUpUI.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - UI/Popup
@@ -65,21 +65,10 @@ MonoBehaviour:
     m_SerializedLabels:
     - SO/Skill
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4c3340c044884984eb590db173be8a76
-    m_Address: Prefab/Monster/Slime
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4f395f42e2de61a4b9f0b3f5b0c9aa95
     m_Address: Assets/@Resources/Data/ExpTable.json
     m_ReadOnly: 0
     m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 5806c4924ac78434c9a8acf507b2d0e6
-    m_Address: Prefab/Skill/Wipe
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Prefab/Skill
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 61d27845b6a2ad04c843f31200fe56b3
     m_Address: SO/Skill/DamageBuff
@@ -98,26 +87,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - SO/Skill
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 92e6f3df6f3f31141813dcc765275701
-    m_Address: Prefab/UI/HPBar
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a2bfe652dfb70844c856cd21e0ebb5de
-    m_Address: Prefab/DamageText
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a347464297ce8f84cadc1dba275b895e
-    m_Address: Prefab/Character
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c3ae85fc7ebdf524587b7fe1448a331f
-    m_Address: Assets/@Resources/Prefab/Item/ExpItem1.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c70f7df651785474a99055c6b2b8e7b2
     m_Address: SO/Module/KnockbackRock

@@ -33,7 +33,7 @@ public class Monster : MonoBehaviour, IPoolable
         var text = ObjectPoolManager.Instance.GetPool<DamageTextUI>("DamageText").GetObject();
         text.transform.position = transform.position + new Vector3(0,1.5f,0);
         text.Setup(damage);
-        hPBarUI ??= ObjectPoolManager.Instance.GetPool<HPBarUI>("HPBar").GetObject();
+        hPBarUI ??= ObjectPoolManager.Instance.GetPool<HPBarUI>("HPBar").GetObject();//Todo: 20번 나오고 안나오는 문제 확인
         hPBarUI.Setup(this.transform,stat.GetCurrentHPPercent());
         if (stat.IsDead()&&this.isActiveAndEnabled)
         {

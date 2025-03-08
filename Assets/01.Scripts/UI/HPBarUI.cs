@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class HPBarUI : MonoBehaviour
 {
-    public Slider slider;
-    Transform target;
+    private Slider slider;
+    private Transform target;
     private void Awake()
     {
         slider = GetComponent<Slider>();

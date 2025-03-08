@@ -39,6 +39,33 @@ public class AddressablesLoader
         }, MergeMode.Union).Completed += HandleCompletion;
     }
     /// <summary>
+    /// 어드레서블 주소를 통한 에셋 리스트 로드
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="list"></param>
+    /// <param name="callback"></param>
+    public void LoadAssetListAsync<T>(string address, Action<List<T>> callback = null)
+    {
+        List<T> result = new List<T>();
+        Addressables.LoadResourceLocationsAsync(address).Completed += (list) =>
+        {
+            if (list.Status == AsyncOperationStatus.Succeeded && list.Result != null)
+            {
+                IList<IResourceLocation> locations = list.Result;
+
+                Addressables.LoadAssetsAsync<T>(locations, asset =>
+                {
+                    result.Add(asset);
+                    callback?.Invoke(result);
+                }).Completed += HandleCompletion;
+            }
+            else
+            {
+                Debug.LogError($"❌ LoadResourceLocationsAsync 실패 또는 결과 없음: {address}");
+            }
+        };
+    }
+    /// <summary>
     /// 라벨 정보를 통해 에셋 리스트 로드
     /// </summary>
     /// <typeparam name="T"></typeparam>

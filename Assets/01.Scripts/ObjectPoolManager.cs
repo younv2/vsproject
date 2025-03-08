@@ -9,7 +9,7 @@ public class ObjectPoolManager : MonoSingleton<ObjectPoolManager>
     public Dictionary<string, object> Pools { get { return pools; } }
 
     private AddressablesLoader loader = new AddressablesLoader();
-    [SerializeField]private List<AssetReference> addressList;
+    [SerializeField]private AssetLabelReference addressList;
     protected override void Awake()
     {
         base.Awake();
