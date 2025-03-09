@@ -49,6 +49,15 @@ public class Pool<T> where T : Object
 
         T data = GameObject.Instantiate(prefab, parent);
 
+        if (data is GameObject go)
+        {
+            go.name = prefab.name;
+        }
+        else if(data is MonoBehaviour monoBehaviour)
+        {
+            monoBehaviour.gameObject.name = prefab.name;
+        }
+            
         return data;
     }
     /// <summary>

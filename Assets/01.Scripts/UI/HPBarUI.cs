@@ -35,6 +35,6 @@ public class HPBarUI : MonoBehaviour
     internal void Remove()
     {
         target = null;
-        ObjectPoolManager.Instance.GetPool<HPBarUI>(name.Replace("(Clone)", "")).ReleaseObject(this);
+        ObjectPoolManager.Instance.GetPool<HPBarUI>(name).ReleaseObject(this);
     }
 }

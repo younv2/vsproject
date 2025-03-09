@@ -79,7 +79,7 @@ public class Projectile : MonoBehaviour, IPoolable
         // onExpire 이펙트
         ExecuteModules(data.onExpireModules, null);
         BattleManager.Instance.projectileList.Remove(this);
-        ObjectPoolManager.Instance.GetPool<Projectile>(name.Replace("(Clone)", "")).ReleaseObject(this);
+        ObjectPoolManager.Instance.GetPool<Projectile>(name).ReleaseObject(this);
     }
     /// <summary>
     /// 스킬 모듈 실행

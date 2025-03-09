@@ -16,7 +16,7 @@ public class BattleManager : MonoSingleton<BattleManager>
         skillManager = SkillManager.Instance;
         timeManager = TimeManager.Instance;
         monsterSpawnManager = MonsterSpawnManager.Instance;
-        playableCharacter = ObjectPoolManager.Instance.GetPool<PlayableCharacter>(Global.CHARACTER).GetObject();
+        playableCharacter = ObjectPoolManager.Instance.GetPool<PlayableCharacter>(Global.PoolKey.CHARACTER).GetObject();
         skillManager.LearnSkill(DataManager.Instance.GetSkillData(Global.PLAYER_FIRST_SKILL_NAME));
     }
 

@@ -8,6 +8,11 @@ public class Monster : MonoBehaviour, IPoolable
     private MonsterStat stat = new MonsterStat();
     private GameObject player;
     private HPBarUI hPBarUI;
+    private ObjectPoolManager poolManager;
+    public void Start()
+    {
+        poolManager = ObjectPoolManager.Instance;
+    }
     public void OnEnable()
     {
         stat.InitStat(baseData);
@@ -30,10 +35,10 @@ public class Monster : MonoBehaviour, IPoolable
         Debug.Log($"{damage}의 데미지를 입음");
         stat.TakeDamage(damage);
 
-        var text = ObjectPoolManager.Instance.GetPool<DamageTextUI>("DamageText").GetObject();
+        var text = poolManager.GetPool<DamageTextUI>(Global.PoolKey.DAMAGE_TEXT).GetObject();
         text.transform.position = transform.position + new Vector3(0,1.5f,0);
         text.Setup(damage);
-        hPBarUI ??= ObjectPoolManager.Instance.GetPool<HPBarUI>("HPBar").GetObject();//Todo: 20번 나오고 안나오는 문제 확인
+        hPBarUI ??= poolManager.GetPool<HPBarUI>(Global.PoolKey.HPBAR).GetObject();//Todo: 20번 나오고 안나오는 문제 확인
         hPBarUI.Setup(this.transform,stat.GetCurrentHPPercent());
         if (stat.IsDead()&&this.isActiveAndEnabled)
         {
@@ -46,8 +51,9 @@ public class Monster : MonoBehaviour, IPoolable
     public void OnDeath()
     {
         hPBarUI.Remove();
+        hPBarUI = null;
         DropExp();
-        ObjectPoolManager.Instance.GetPool<Monster>(name.Replace("(Clone)","")).ReleaseObject(this);
+        poolManager.GetPool<Monster>(name).ReleaseObject(this);
         MonsterSpawnManager.Instance.MonsterList.Remove(this);
     }
     private void OnCollisionStay2D(Collision2D collision)
@@ -64,7 +70,7 @@ public class Monster : MonoBehaviour, IPoolable
     /// </summary>
     public void DropExp()
     {
-        var expItem = ObjectPoolManager.Instance.GetPool<Item>("ExpItem1").GetObject();
+        var expItem = poolManager.GetPool<Item>(Global.PoolKey.EXP_ITEM).GetObject();
         expItem.transform.position = transform.position;
     }
 }

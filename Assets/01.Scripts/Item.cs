@@ -7,7 +7,7 @@ public class Item : MonoBehaviour
         if(collision.TryGetComponent<PlayableCharacter>(out var data))
         {
             data.Stat.AddExp(10);
-            ObjectPoolManager.Instance.GetPool<Item>(name.Replace("(Clone)", "")).ReleaseObject(this);
+            ObjectPoolManager.Instance.GetPool<Item>(name).ReleaseObject(this);
         }
     }
 }

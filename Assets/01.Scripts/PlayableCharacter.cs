@@ -29,7 +29,7 @@ public class PlayableCharacter : MonoBehaviour, IPoolable
     public void OnDeath()
     {
         hPBarUI.Remove();
-        ObjectPoolManager.Instance.GetPool<PlayableCharacter>(name.Replace("(Clone)", "")).ReleaseObject(this);
+        ObjectPoolManager.Instance.GetPool<PlayableCharacter>(name).ReleaseObject(this);
     }
     /// <summary>
     /// 캐릭터 근처 몬스터 반환

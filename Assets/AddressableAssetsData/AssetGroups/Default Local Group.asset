@@ -15,12 +15,6 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: 0dd17e9b7a0b3884ea127fffbb9f0209
   m_SerializeEntries:
-  - m_GUID: 111566f8508c71c4fa50be440da01e7b
-    m_Address: SO/Skill/Whip
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - SO/Skill
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1499097e96bc0874baeeccbfc168a055
     m_Address: Prefab
     m_ReadOnly: 0
@@ -48,19 +42,13 @@ MonoBehaviour:
     m_SerializedLabels:
     - UI/Popup
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 333f32173ee95004c8027340ea6fddd0
-    m_Address: SO/Skill/ExpBuff
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - SO/Skill
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4342570d480e69d45a51892afb95f38a
     m_Address: Assets/@Resources/SO/Projectile/New Projectile Data.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 491b5e35aa88caf40af7c8988779f06a
-    m_Address: SO/Skill/Garlic
+  - m_GUID: 4c1a8623fe4b47c4683dd8b883aa2b87
+    m_Address: Assets/@Resources/SO/Skill
     m_ReadOnly: 0
     m_SerializedLabels:
     - SO/Skill
@@ -70,40 +58,10 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 61d27845b6a2ad04c843f31200fe56b3
-    m_Address: SO/Skill/DamageBuff
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - SO/Skill
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 90111c4ab5fcc04478a3dcc5752451e1
-    m_Address: SO/Skill/HPBuff
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - SO/Skill
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 91c49e4bb75961542abfaab8bc020a78
-    m_Address: SO/Skill/LuckBuff
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - SO/Skill
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c70f7df651785474a99055c6b2b8e7b2
     m_Address: SO/Module/KnockbackRock
     m_ReadOnly: 0
     m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e23d3224b1186454eb7e0e6afaf58137
-    m_Address: SO/Skill/ThrowRock
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - SO/Skill
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f4d35881dd33617479860d3f3f80297e
-    m_Address: SO/Skill/DropRangeBuff
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - SO/Skill
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f6d5d98f66d270743bef686a3d09994f
     m_Address: ScriptableObject/Monster/Slime
