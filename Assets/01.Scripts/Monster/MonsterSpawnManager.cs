@@ -8,12 +8,12 @@ public class MonsterSpawnManager : MonoSingleton<MonsterSpawnManager>
     private float maxSpawnDistance = 20;
     private float minSpawnDistance = 10;
 
-    private List<Monster> monsterList = new List<Monster>();
-    public List<Monster> MonsterList { get { return monsterList; } }
+    private Dictionary<int,Monster> monsterDic = new Dictionary<int,Monster>();
+    public Dictionary<int, Monster> MonsterDic { get { return monsterDic; } }
 
     public void ManualUpdate()
     {
-        if (monsterList.Count >= maxMonsterCnt)
+        if (monsterDic.Count >= maxMonsterCnt)
         {
             return;
         }
@@ -29,7 +29,7 @@ public class MonsterSpawnManager : MonoSingleton<MonsterSpawnManager>
 
         temp.transform.position = GetSpawnPosition();
 
-        monsterList.Add(temp);
+        monsterDic.Add(temp.gameObject.GetInstanceID(),temp);
     }
 
     private Vector2 GetSpawnPosition()

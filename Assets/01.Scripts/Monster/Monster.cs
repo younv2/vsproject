@@ -54,15 +54,14 @@ public class Monster : MonoBehaviour, IPoolable
         hPBarUI = null;
         DropExp();
         poolManager.GetPool<Monster>(name).ReleaseObject(this);
-        MonsterSpawnManager.Instance.MonsterList.Remove(this);
+        MonsterSpawnManager.Instance.MonsterDic.Remove(this);
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
-        var player = collision.gameObject.GetComponent<PlayableCharacter>();
-
-        if(player != null)
+        var character = BattleManager.Instance.GetCharacterFromInstanceId(collision.gameObject.GetInstanceID());
+        if (character != null)
         {
-            player.TakeDamage(stat.AttackPower);
+            character.TakeDamage(stat.AttackPower);
         }
     }
     /// <summary>

@@ -54,7 +54,8 @@ public class Projectile : MonoBehaviour, IPoolable
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!other.TryGetComponent<Monster>(out Monster enemy))
+        var enemy = BattleManager.Instance.GetMonsterFromInstanceId(other.gameObject.GetInstanceID());
+        if (enemy == null)
         {
             return;
         }
