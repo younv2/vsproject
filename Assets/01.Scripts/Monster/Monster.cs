@@ -54,8 +54,9 @@ public class Monster : MonoBehaviour, IPoolable
         hPBarUI = null;
         DropExp();
         poolManager.GetPool<Monster>(name).ReleaseObject(this);
-        MonsterSpawnManager.Instance.MonsterDic.Remove(this);
+        MonsterSpawnManager.Instance.MonsterDic.Remove(gameObject.GetInstanceID());
     }
+
     private void OnCollisionStay2D(Collision2D collision)
     {
         var character = BattleManager.Instance.GetCharacterFromInstanceId(collision.gameObject.GetInstanceID());
