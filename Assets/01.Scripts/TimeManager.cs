@@ -5,11 +5,13 @@ public class TimeManager : MonoSingleton<TimeManager>
 {
     private float gameTime;
     public float GameTime {  get { return gameTime; } }
+
+    public Action OnTimeChanged;
     public void ManualUpdate()
     {
-        gameTime += Time.fixedDeltaTime;
-
-        if(gameTime > Global.CLEAR_TIME)
+        gameTime += Time.deltaTime;
+        OnTimeChanged?.Invoke();
+        if (gameTime > Global.CLEAR_TIME)
         {
             UIManager.Instance.gameResultPopup.Show(true);
         }
@@ -17,6 +19,7 @@ public class TimeManager : MonoSingleton<TimeManager>
 
     internal void Reset()
     {
+        OnTimeChanged?.Invoke();
         gameTime = 0;
     }
 }

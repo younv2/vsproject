@@ -52,6 +52,9 @@ public class BattleManager : MonoSingleton<BattleManager>
         }
 
     }
+    /// <summary>
+    /// 게임 리셋
+    /// </summary>
     public void GemeReset()
     {
         foreach (var key in playableCharacter.Keys.ToList())

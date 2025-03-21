@@ -19,6 +19,8 @@ public static class Global
         public const string DAMAGE_TEXT = "DamageText";
         public const string HPBAR = "HPBar";
         public const string EXP_ITEM = "ExpItem1";
+        public const string GARLIC_SKILL = "Garlic";
+        public const string WHIP_SKILL = "Whip";
     }
     public const string PLAYER = "Player";
     public const string PLAYER_FIRST_SKILL_NAME = "ThrowRock";

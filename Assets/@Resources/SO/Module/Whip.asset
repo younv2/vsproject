@@ -18,3 +18,6 @@ MonoBehaviour:
   circleRadius: 5
   rectangleSize: {x: 5, y: 3}
   centerOffset: {x: 3.16, y: 0}
+  isPersistentVisual: 0
+  vfxPrefab: {fileID: 6453856148457167990, guid: 5806c4924ac78434c9a8acf507b2d0e6, type: 3}
+  oneShotDuration: 0.2

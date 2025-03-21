@@ -16,7 +16,15 @@ public class AreaAttackModule : SkillModule
     public AttackAreaType areaType = AttackAreaType.Circle;
     public float circleRadius = 5f;         
     public Vector2 rectangleSize = new Vector2(5f, 3f);
-    public Vector2 centerOffset;            
+    public Vector2 centerOffset;
+
+    [Header("이미지")]
+    public bool isPersistentVisual = false;
+    public GameObject vfxPrefab;
+    public float oneShotDuration = 0.5f;
+
+    private GameObject vfxInstance;
+    private Transform vfxOriginParent;
 
     public override void Execute(ActiveSkillRuntime runtime)
     {
@@ -54,6 +62,38 @@ public class AreaAttackModule : SkillModule
                 {
                     enemy.TakeDamage(finalDamage);
                 }
+            }
+        }
+
+        // vfx 처리
+        if (vfxPrefab != null)
+        {
+            if (vfxInstance == null)
+            {
+                vfxInstance = ObjectPoolManager.Instance.GetPool<GameObject>(vfxPrefab.name).GetObject();
+                if(isPersistentVisual)
+                {
+                    vfxOriginParent = vfxInstance.transform.parent;
+                    vfxInstance.transform.SetParent(runtime.Owner.transform, false);
+                }
+                vfxInstance.transform.position = runtime.Owner.position + (Vector3)centerOffset;
+                vfxInstance.transform.rotation = runtime.Owner.rotation;
+            }
+            //vfx 사이즈 조절
+            if (areaType == AttackAreaType.Circle)
+            {
+                float diameter = circleRadius * 2f;
+                vfxInstance.transform.localScale = new Vector3(diameter, diameter, 1f);
+            }
+            else if (areaType == AttackAreaType.Rectangle)
+            {
+                vfxInstance.transform.localScale = new Vector3(rectangleSize.x, rectangleSize.y, 1f);
+            }
+            if(!isPersistentVisual)
+            {
+                yield return new WaitForSeconds(oneShotDuration);
+                ObjectPoolManager.Instance.GetPool<GameObject>(vfxPrefab.name).ReleaseObject(vfxInstance);
+                vfxInstance = null;
             }
         }
         yield return new WaitForSeconds(afterDelay);
