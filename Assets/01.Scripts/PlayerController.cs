@@ -28,4 +28,8 @@ public class PlayerController : MonoBehaviour
 
         }
     }
+    public void ResetInput()
+    {
+        moveDirection = new Vector2();
+    }
 }

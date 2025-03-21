@@ -10,6 +10,7 @@ public class UIManager : MonoSingleton<UIManager>
     private List<BasePopup> popupList = new List<BasePopup>();
     private AddressablesLoader loader = new AddressablesLoader();
     public SkillUpPopup skillUpPopup;
+    public GameResultPopup gameResultPopup;
     private void Start()
     {
         StartCoroutine(Initialize());
@@ -33,6 +34,7 @@ public class UIManager : MonoSingleton<UIManager>
         });
         yield return new WaitUntil(() => isLoadDone);
         skillUpPopup = (SkillUpPopup)popupList.Find(x=>x.GetType() == typeof(SkillUpPopup));
+        gameResultPopup = (GameResultPopup)popupList.Find(x=>x.GetType() == typeof(GameResultPopup));
         yield return null;
     }
 }

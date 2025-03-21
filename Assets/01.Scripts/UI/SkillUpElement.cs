@@ -4,16 +4,12 @@ using UnityEngine.UI;
 
 public class SkillUpElement : MonoBehaviour
 {
-    public TextMeshProUGUI nameText;
-    public TextMeshProUGUI lvText;
     public TextMeshProUGUI descriptionText;
     private SkillDataBase skillData;
     public void Setting(SkillDataBase data,SkillUpPopup popup)
     {
         skillData = data;
-        nameText.text = skillData.name;
-        lvText.text = skillData.name;
-        descriptionText.text = skillData.name;
+        descriptionText.text = SkillManager.Instance.GetNextLevelDescription(data);
         Button button = this.GetComponent<Button>();
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(() =>

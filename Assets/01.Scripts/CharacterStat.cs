@@ -35,6 +35,7 @@ public class CharacterStat
         moveSpeed = 3f;
         drainItemRange = 1f;
         luck = 0f;
+        OnExpUpdate?.Invoke();
     }
     /// <summary>
     /// 체력 감소

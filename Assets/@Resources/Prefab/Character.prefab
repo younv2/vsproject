@@ -11,13 +11,13 @@ GameObject:
   - component: {fileID: 1313085688498921249}
   - component: {fileID: 302100342136427817}
   - component: {fileID: 4706289054420553321}
-  - component: {fileID: 4035086635492264539}
   - component: {fileID: -4536530116821158343}
   - component: {fileID: 8473487320978379382}
   - component: {fileID: 1301019810497911421}
   - component: {fileID: -9129384550448871701}
   - component: {fileID: 2384509860063524707}
   - component: {fileID: -7391213092554028891}
+  - component: {fileID: -2025171344070341486}
   m_Layer: 0
   m_Name: Character
   m_TagString: Player
@@ -109,33 +109,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterScanner: {fileID: 8473487320978379382}
   expItemScanner: {fileID: 1301019810497911421}
---- !u!50 &4035086635492264539
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2108804025688749355}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!70 &-4536530116821158343
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -262,3 +235,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackModule: {fileID: 11400000, guid: 132c683cedea2fe47bccb24c8189780c, type: 2}
+--- !u!50 &-2025171344070341486
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2108804025688749355}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4

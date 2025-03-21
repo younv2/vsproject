@@ -1,13 +1,22 @@
+using System;
 using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D collision)
+    /// <summary>
+    /// 아이템 사용
+    /// </summary>
+    public void Use()
     {
-        if(collision.TryGetComponent<PlayableCharacter>(out var data))
-        {
-            data.Stat.AddExp(10);
-            ObjectPoolManager.Instance.GetPool<Item>(name).ReleaseObject(this);
-        }
+        BattleManager.Instance.GetPlayableCharacter().Stat.AddExp(10);
+        Remove();
+    }
+    /// <summary>
+    /// 아이템 삭제
+    /// </summary>
+    public void Remove()
+    {
+        BattleManager.Instance.itemDic.Remove(gameObject.GetInstanceID());
+        ObjectPoolManager.Instance.GetPool<Item>(name).ReleaseObject(this);
     }
 }

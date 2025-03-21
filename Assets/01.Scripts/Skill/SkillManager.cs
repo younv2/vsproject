@@ -7,6 +7,28 @@ public class SkillManager : MonoSingleton<SkillManager>
 {
     private List<ActiveSkillRuntime> activeSkills = new List<ActiveSkillRuntime>();
     private List<PassiveSkillRuntime> passiveSkills = new List<PassiveSkillRuntime>();
+
+    public void Reset()
+    {
+        activeSkills.Clear();
+        passiveSkills.Clear();
+    }
+    public int GetLevel(SkillDataBase skillData)
+    {
+        int level = 0;
+        level = activeSkills.Find(x => x.Data == skillData)?.Level ?? 0;
+        if(level == 0)
+        {
+            level = passiveSkills.Find(x => x.Data == skillData)?.Level ?? 0;
+        }
+        return level;
+    }
+    public string GetNextLevelDescription(SkillDataBase skillData)
+    {
+        int level = GetLevel(skillData);
+
+        return SkillDescriptionGenerator.GetDescription(skillData, ++level);
+    }
     public void ManualUpdate()
     {
         float dt = Time.deltaTime;

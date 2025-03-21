@@ -1,3 +1,4 @@
+using Mono.Cecil;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -43,6 +44,8 @@ public class Projectile : MonoBehaviour, IPoolable
     {
         // 이동
         transform.Translate(movDir * data.speed * Time.deltaTime, Space.Self);
+        
+        Scan();
 
         // 수명 체크
         timeAlive += Time.deltaTime;
@@ -52,13 +55,18 @@ public class Projectile : MonoBehaviour, IPoolable
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void Scan()
     {
-        var enemy = BattleManager.Instance.GetMonsterFromInstanceId(other.gameObject.GetInstanceID());
-        if (enemy == null)
-        {
+        Collider2D hit = null;
+        hit = Physics2D.OverlapCircle(this.transform.position, 0.5f,1<<LayerMask.NameToLayer("Enemy"));
+
+        if (hit == null)
             return;
-        }
+
+        var enemy = BattleManager.Instance.GetMonsterFromInstanceId(hit.gameObject.GetInstanceID());
+        if (enemy == null)
+            return;
+
         // 즉시 적에게 데미지
         enemy.TakeDamage(damage);
 
@@ -70,7 +78,7 @@ public class Projectile : MonoBehaviour, IPoolable
         }
 
         // onHit 이펙트
-        ExecuteModules(data.onHitModules, other.transform);
+        ExecuteModules(data.onHitModules, hit.transform);
     }
     /// <summary>
     /// 투사체가 만료됐을 때 실행되는 함수
@@ -79,6 +87,14 @@ public class Projectile : MonoBehaviour, IPoolable
     {
         // onExpire 이펙트
         ExecuteModules(data.onExpireModules, null);
+        BattleManager.Instance.projectileList.Remove(this);
+        ObjectPoolManager.Instance.GetPool<Projectile>(name).ReleaseObject(this);
+    }
+    /// <summary>
+    /// 투사체 삭제
+    /// </summary>
+    public void Remove()
+    {
         BattleManager.Instance.projectileList.Remove(this);
         ObjectPoolManager.Instance.GetPool<Projectile>(name).ReleaseObject(this);
     }

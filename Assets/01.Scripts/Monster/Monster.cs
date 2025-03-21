@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.tvOS;
 
 public class Monster : MonoBehaviour, IPoolable
 {
@@ -16,7 +17,7 @@ public class Monster : MonoBehaviour, IPoolable
     public void OnEnable()
     {
         stat.InitStat(baseData);
-        player = GameObject.FindWithTag(Global.Unity.PLAYER_TAG);
+        player = GameObject.FindWithTag(Global.UnityTag.PLAYER_TAG);
     }
     /// <summary>
     /// 매니저 클래스에서 업데이트를 관리하기 위함.
@@ -46,15 +47,23 @@ public class Monster : MonoBehaviour, IPoolable
         }
     }
     /// <summary>
+    /// 몬스터 삭제 처리
+    /// </summary>
+    public void Remove()
+    {
+        if(hPBarUI != null)
+            hPBarUI.Remove();
+        hPBarUI = null;
+        poolManager.GetPool<Monster>(name).ReleaseObject(this);
+        MonsterSpawnManager.Instance.MonsterDic.Remove(gameObject.GetInstanceID());
+    }
+    /// <summary>
     /// 몬스터 사망 처리
     /// </summary>
     public void OnDeath()
     {
-        hPBarUI.Remove();
-        hPBarUI = null;
+        Remove();
         DropExp();
-        poolManager.GetPool<Monster>(name).ReleaseObject(this);
-        MonsterSpawnManager.Instance.MonsterDic.Remove(gameObject.GetInstanceID());
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -72,5 +81,6 @@ public class Monster : MonoBehaviour, IPoolable
     {
         var expItem = poolManager.GetPool<Item>(Global.PoolKey.EXP_ITEM).GetObject();
         expItem.transform.position = transform.position;
+        BattleManager.Instance.itemDic.Add(expItem.gameObject.GetInstanceID(), expItem);
     }
 }

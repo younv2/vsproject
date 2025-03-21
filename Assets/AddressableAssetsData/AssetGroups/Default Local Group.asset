@@ -15,6 +15,12 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: 0dd17e9b7a0b3884ea127fffbb9f0209
   m_SerializeEntries:
+  - m_GUID: 055711f974dbacf44a250ba13aa222aa
+    m_Address: Prefab/UI/Popup
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI/Popup
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1499097e96bc0874baeeccbfc168a055
     m_Address: Prefab
     m_ReadOnly: 0
@@ -35,12 +41,6 @@ MonoBehaviour:
     m_Address: Prefab/UI/SkillUpElement.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 27e2d7b7a18ac164ba95992b79175358
-    m_Address: Prefab/UI/SelectSkillUpUI.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - UI/Popup
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4342570d480e69d45a51892afb95f38a
     m_Address: Assets/@Resources/SO/Projectile/New Projectile Data.asset

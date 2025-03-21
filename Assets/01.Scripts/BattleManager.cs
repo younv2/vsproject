@@ -8,7 +8,8 @@ public class BattleManager : MonoSingleton<BattleManager>
     SkillManager skillManager;
     TimeManager timeManager;
     MonsterSpawnManager monsterSpawnManager;
-    Dictionary<int,PlayableCharacter> playableCharacter;
+    public Dictionary<int,PlayableCharacter> playableCharacter;
+    public Dictionary<int, Item> itemDic;
     public List<Projectile> projectileList;
     private bool isPause = false;
 
@@ -18,6 +19,7 @@ public class BattleManager : MonoSingleton<BattleManager>
         skillManager = SkillManager.Instance;
         timeManager = TimeManager.Instance;
         monsterSpawnManager = MonsterSpawnManager.Instance;
+        itemDic = new Dictionary<int, Item>();
         playableCharacter = new Dictionary<int, PlayableCharacter>();
         var character = ObjectPoolManager.Instance.GetPool<PlayableCharacter>(Global.PoolKey.CHARACTER).GetObject();
         playableCharacter.Add(character.gameObject.GetInstanceID(),character);
@@ -37,7 +39,9 @@ public class BattleManager : MonoSingleton<BattleManager>
         if (isPause)
             return;
         foreach(var data in playableCharacter)
+        {
             data.Value.ManualFixedUpdate();
+        }
         foreach (var data in monsterSpawnManager.MonsterDic)
         {
             data.Value.ManualFixedUpdate();
@@ -47,11 +51,32 @@ public class BattleManager : MonoSingleton<BattleManager>
             projectileList[i].ManualFixedUpdate();
         }
 
-        //TODO - Physics Settings의 Simulation Monde 추후 Script로 수정해서 직접 Physics 관리 할 것 
     }
-    public PlayableCharacter GetPlayableCharacter()
+    public void GemeReset()
     {
-        return playableCharacter.Values.First();
+        foreach (var key in playableCharacter.Keys.ToList())
+        {
+            playableCharacter[key].Remove();
+        }
+        foreach (var key in monsterSpawnManager.MonsterDic.Keys.ToList())
+        {
+            monsterSpawnManager.MonsterDic[key].Remove();
+        }
+        foreach (var key in itemDic.Keys.ToList())
+        {
+            itemDic[key].Remove();
+        }
+        for (int i = projectileList.Count - 1; i >= 0; i--)
+        {
+            projectileList[i].Remove();
+        }
+        var character = ObjectPoolManager.Instance.GetPool<PlayableCharacter>(Global.PoolKey.CHARACTER).GetObject();
+        playableCharacter.Add(character.gameObject.GetInstanceID(),character);
+        SkillManager.Instance.Reset();
+        TimeManager.Instance.Reset();
+        skillManager.LearnSkill(DataManager.Instance.GetSkillData(Global.PLAYER_FIRST_SKILL_NAME));
+
+        
     }
     /// <summary>
     /// 게임 일시정지
@@ -60,6 +85,15 @@ public class BattleManager : MonoSingleton<BattleManager>
     public void Pause(bool flag)
     {
         isPause = flag;
+    }
+    #region Gettter
+    /// <summary>
+    /// 캐릭터 반환
+    /// </summary>
+    /// <returns></returns>
+    public PlayableCharacter GetPlayableCharacter()
+    {
+        return playableCharacter.Values.First();
     }
     /// <summary>
     /// 인스턴스 ID를 통해 캐릭터 반환
@@ -85,4 +119,17 @@ public class BattleManager : MonoSingleton<BattleManager>
         else
             return null;
     }
+    /// <summary>
+    /// 인스턴스 ID를 통해 아이템 반환
+    /// </summary>
+    /// <param name="instanceId"></param>
+    /// <returns></returns>
+    public Item GetItemFromInstanceId(int instanceId)
+    {
+        if (itemDic.ContainsKey(instanceId))
+            return itemDic[instanceId];
+        else
+            return null;
+    }
+    #endregion
 }

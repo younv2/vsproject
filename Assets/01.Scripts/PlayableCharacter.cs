@@ -24,12 +24,24 @@ public class PlayableCharacter : MonoBehaviour, IPoolable
         playerController = this.GetComponent<PlayerController>();
     }
     /// <summary>
+    /// 캐릭터 삭제 처리
+    /// </summary>
+    public void Remove()
+    {
+        transform.position = Vector3.zero;
+        if(hPBarUI != null)
+            hPBarUI.Remove();
+        playerController.ResetInput();
+        ObjectPoolManager.Instance.GetPool<PlayableCharacter>(name).ReleaseObject(this);
+        BattleManager.Instance.playableCharacter.Remove(gameObject.GetInstanceID());
+    }
+    /// <summary>
     /// 캐릭터 사망 처리
     /// </summary>
     public void OnDeath()
     {
-        hPBarUI.Remove();
-        ObjectPoolManager.Instance.GetPool<PlayableCharacter>(name).ReleaseObject(this);
+        Remove();
+        UIManager.Instance.gameResultPopup.Show(false);
     }
     /// <summary>
     /// 캐릭터 근처 몬스터 반환
@@ -52,6 +64,12 @@ public class PlayableCharacter : MonoBehaviour, IPoolable
             {
                 item.transform.Translate(Vector3.Normalize(transform.position - item.transform.position) * Time.deltaTime * 5f);
             }
+        }
+        var hit = Physics2D.OverlapCircle(transform.position, 0.5f, LayerMask.GetMask(Global.UnityLayer.EXP_LAYER));
+        if (hit != null)
+        {
+            var item = BattleManager.Instance.GetItemFromInstanceId(hit.gameObject.GetInstanceID());
+            item.Use();
         }
     }
     /// <summary>
