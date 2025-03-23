@@ -9,9 +9,9 @@ public class PlayableCharacter : MonoBehaviour, IPoolable
     private CharacterStat stat = new CharacterStat();
     private PlayerController playerController;
     private HPBarUI hPBarUI;
-
+    private bool isFlip = false;
     public CharacterStat Stat { get { return stat; } }
-
+    public bool IsFlip { get {  return isFlip; } set { isFlip = value; } }
 
     public void ManualFixedUpdate()
     {

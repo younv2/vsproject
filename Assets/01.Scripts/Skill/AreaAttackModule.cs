@@ -18,6 +18,7 @@ public class AreaAttackModule : SkillModule
     public Vector2 rectangleSize = new Vector2(5f, 3f);
     public Vector2 centerOffset;
 
+    private bool isOwnerFliped = false;
     [Header("이미지")]
     public bool isPersistentVisual = false;
     public GameObject vfxPrefab;
@@ -30,15 +31,15 @@ public class AreaAttackModule : SkillModule
     {
         if (runtime == null || runtime.Owner == null)
             return;
-
+        isOwnerFliped = runtime.Owner.GetComponent<PlayableCharacter>()?.IsFlip ?? false;
         runtime.Owner.GetComponent<PlayableCharacter>()?.StartCoroutine(AttackCoroutine(runtime));
     }
 
     private IEnumerator AttackCoroutine(ActiveSkillRuntime runtime)
     {
         yield return new WaitForSeconds(startupDelay);
-
-        Vector2 attackCenter = (Vector2)runtime.Owner.position + centerOffset;
+        int flip = (isOwnerFliped ? -1 : 0);
+        Vector2 attackCenter = (Vector2)runtime.Owner.position + centerOffset * flip;
 
         float finalDamage = StatCalculator.CalculateModifiedDamage(
             SkillManager.Instance.GetAllPassiveStat(),runtime.Data.levelInfos[runtime.Level - 1].baseDamage);
@@ -75,8 +76,14 @@ public class AreaAttackModule : SkillModule
                 {
                     vfxOriginParent = vfxInstance.transform.parent;
                     vfxInstance.transform.SetParent(runtime.Owner.transform, false);
+                    runtime.Owner.GetComponent<PersistentVfxController>().OnOwnerDestroyed += () =>
+                    {
+                        vfxInstance.transform.SetParent(vfxOriginParent, false);
+                        ObjectPoolManager.Instance.GetPool<GameObject>(vfxPrefab.name).ReleaseObject(vfxInstance);
+                        vfxInstance = null;
+                    };
                 }
-                vfxInstance.transform.position = runtime.Owner.position + (Vector3)centerOffset;
+                vfxInstance.transform.position = runtime.Owner.position + (Vector3)centerOffset * flip;
                 vfxInstance.transform.rotation = runtime.Owner.rotation;
             }
             //vfx 사이즈 조절
