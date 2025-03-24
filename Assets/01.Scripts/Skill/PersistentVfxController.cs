@@ -5,16 +5,7 @@ public class PersistentVfxController : MonoBehaviour
 {
     public Action OnOwnerDestroyed;
 
-    private void OnDisable()
-    {
-        Clean();
-    }
-
-    private void OnDestroy()
-    {
-        Clean();
-    }
-    private void Clean()
+    public void Clean()
     {
         if (OnOwnerDestroyed != null)
         {

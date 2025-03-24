@@ -1,5 +1,3 @@
-using DG.Tweening;
-using System;
 using UnityEngine;
 
 public class PlayableCharacter : MonoBehaviour, IPoolable
@@ -29,6 +27,7 @@ public class PlayableCharacter : MonoBehaviour, IPoolable
     public void Remove()
     {
         transform.position = Vector3.zero;
+        GetComponent<PersistentVfxController>()?.Clean();
         if(hPBarUI != null)
             hPBarUI.Remove();
         playerController.ResetInput();
