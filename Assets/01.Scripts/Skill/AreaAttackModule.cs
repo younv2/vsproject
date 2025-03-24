@@ -10,11 +10,11 @@ public class AreaAttackModule : SkillModule
 {
     [Header("공격 딜레이")]
     public float startupDelay = 0.3f;
-    public float afterDelay = 0.2f; 
+    public float afterDelay = 0.2f;
 
     [Header("공격 영역 설정")]
     public AttackAreaType areaType = AttackAreaType.Circle;
-    public float circleRadius = 5f;         
+    public float circleRadius = 5f;
     public Vector2 rectangleSize = new Vector2(5f, 3f);
     public Vector2 centerOffset;
 
@@ -38,11 +38,11 @@ public class AreaAttackModule : SkillModule
     private IEnumerator AttackCoroutine(ActiveSkillRuntime runtime)
     {
         yield return new WaitForSeconds(startupDelay);
-        int flip = (isOwnerFliped ? -1 : 0);
+        int flip = (isOwnerFliped ? -1 : 1);
         Vector2 attackCenter = (Vector2)runtime.Owner.position + centerOffset * flip;
 
         float finalDamage = StatCalculator.CalculateModifiedDamage(
-            SkillManager.Instance.GetAllPassiveStat(),runtime.Data.levelInfos[runtime.Level - 1].baseDamage);
+            SkillManager.Instance.GetAllPassiveStat(), runtime.Data.levelInfos[runtime.Level - 1].baseDamage);
 
         Collider2D[] hits = null;
         if (areaType == AttackAreaType.Circle)
@@ -72,13 +72,16 @@ public class AreaAttackModule : SkillModule
             if (vfxInstance == null)
             {
                 vfxInstance = ObjectPoolManager.Instance.GetPool<GameObject>(vfxPrefab.name).GetObject();
-                if(isPersistentVisual)
+                if (isPersistentVisual)
                 {
                     vfxOriginParent = vfxInstance.transform.parent;
                     vfxInstance.transform.SetParent(runtime.Owner.transform, false);
                     runtime.Owner.GetComponent<PersistentVfxController>().OnOwnerDestroyed += () =>
                     {
-                        vfxInstance.transform.SetParent(vfxOriginParent, false);
+                        if (vfxOriginParent != null&&runtime.Owner.transform!=null)
+                        {
+                            vfxInstance.transform.SetParent(vfxOriginParent, false);
+                        }
                         ObjectPoolManager.Instance.GetPool<GameObject>(vfxPrefab.name).ReleaseObject(vfxInstance);
                         vfxInstance = null;
                     };
@@ -96,7 +99,7 @@ public class AreaAttackModule : SkillModule
             {
                 vfxInstance.transform.localScale = new Vector3(rectangleSize.x, rectangleSize.y, 1f);
             }
-            if(!isPersistentVisual)
+            if (!isPersistentVisual)
             {
                 yield return new WaitForSeconds(oneShotDuration);
                 ObjectPoolManager.Instance.GetPool<GameObject>(vfxPrefab.name).ReleaseObject(vfxInstance);
