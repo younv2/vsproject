@@ -13,8 +13,8 @@ public class InBattleUI : MonoSingleton<InBattleUI>
         TimeManager.Instance.OnTimeChanged -= UpdateTimeUI;
     }
 
-    public void UpdateTimeUI()
+    public void UpdateTimeUI(float time)
     {
-        timeTxt.text = Formatter.TimeFormat(TimeManager.Instance.GameTime);
+        timeTxt.text = Formatter.TimeFormat(time);
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class BasePopup : MonoBehaviour
 {
     public Button closeBtn;
+    public bool isOn;
     /// <summary>
     /// 팝업 초기 설정
     /// </summary>
@@ -25,6 +26,7 @@ public class BasePopup : MonoBehaviour
     public virtual void Show()
     {
         gameObject.SetActive(true);
+        isOn = true;
     }
     /// <summary>
     /// 팝업 오브젝트 비활성화
@@ -32,5 +34,6 @@ public class BasePopup : MonoBehaviour
     public virtual void Close()
     {
         gameObject.SetActive(false);
+        isOn = false;
     }
 }

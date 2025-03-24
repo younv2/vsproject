@@ -22,11 +22,11 @@ public class MonsterSpawnManager : MonoSingleton<MonsterSpawnManager>
             return;
         }
         SpawnMonster(0);
+        maxMonsterCnt = DataManager.Instance.TimeBasedBattleScalers.GetCurrentMonsterCountLimit();
     }
     public void SpawnMonster(int monsterId)
     {
         Monster temp = ObjectPoolManager.Instance.GetPool<Monster>(Global.PoolKey.SLIME).GetObject();
-
         temp.transform.position = GetSpawnPosition();
 
         monsterDic.Add(temp.gameObject.GetInstanceID(),temp);

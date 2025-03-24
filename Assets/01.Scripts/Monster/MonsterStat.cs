@@ -19,8 +19,8 @@ public class MonsterStat
     public void InitStat(MonsterData data)
     {
         speed = data.MoveSpeed;
-        maxHp = data.MaxHp;
-        attackPower = data.AttackPower;
+        maxHp = data.MaxHp * DataManager.Instance.TimeBasedBattleScalers.GetCurrentMonsterPowerMultiple();
+        attackPower = data.AttackPower * DataManager.Instance.TimeBasedBattleScalers.GetCurrentMonsterPowerMultiple();
         currentHp = MaxHp;
     }
     /// <summary>

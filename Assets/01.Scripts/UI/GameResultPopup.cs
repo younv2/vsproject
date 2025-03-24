@@ -24,6 +24,8 @@ public class GameResultPopup : BasePopup
         });
         resultTxt.text = iswin? Global.WIN : Global.LOSE;
         timeTxt.text = Formatter.TimeFormat(TimeManager.Instance.GameTime);
+        if (UIManager.Instance.skillUpPopup.isOn)
+            UIManager.Instance.skillUpPopup.Close();
 
     }
     public void Show(bool isWin)

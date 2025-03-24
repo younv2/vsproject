@@ -6,11 +6,16 @@ public class TimeManager : MonoSingleton<TimeManager>
     private float gameTime;
     public float GameTime {  get { return gameTime; } }
 
-    public Action OnTimeChanged;
+    public Action<float> OnTimeChanged;
+
+    private void Start()
+    {
+        OnTimeChanged += (GameTime) => DataManager.Instance.TimeBasedBattleScalers.SetCurrentLevel(GameTime);
+    }
     public void ManualUpdate()
     {
         gameTime += Time.deltaTime;
-        OnTimeChanged?.Invoke();
+        OnTimeChanged?.Invoke(GameTime);
         if (gameTime > Global.CLEAR_TIME)
         {
             UIManager.Instance.gameResultPopup.Show(true);
@@ -19,7 +24,7 @@ public class TimeManager : MonoSingleton<TimeManager>
 
     internal void Reset()
     {
-        OnTimeChanged?.Invoke();
+        OnTimeChanged?.Invoke(GameTime);
         gameTime = 0;
     }
 }

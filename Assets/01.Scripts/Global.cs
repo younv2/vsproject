@@ -25,6 +25,7 @@ public static class Global
     public const string PLAYER = "Player";
     public const string PLAYER_FIRST_SKILL_NAME = "ThrowRock";
     public const string EXP_TABLE_PATH = "Assets/@Resources/Data/ExpTable.json";
+    public const string TIME_BASED_BATTLE_SCALER_TABLE_PATH = "Assets/@Resources/Data/TimeBasedBattleScaler.csv";
 
     public const string WIN = "승 리";
     public const string LOSE = "패 배";

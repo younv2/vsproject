@@ -39,7 +39,7 @@ public class Monster : MonoBehaviour, IPoolable
         var text = poolManager.GetPool<DamageTextUI>(Global.PoolKey.DAMAGE_TEXT).GetObject();
         text.transform.position = transform.position + new Vector3(0,1.5f,0);
         text.Setup(damage);
-        hPBarUI ??= poolManager.GetPool<HPBarUI>(Global.PoolKey.HPBAR).GetObject();//Todo: 20번 나오고 안나오는 문제 확인
+        hPBarUI ??= poolManager.GetPool<HPBarUI>(Global.PoolKey.HPBAR).GetObject();
         hPBarUI.Setup(this.transform,stat.GetCurrentHPPercent());
         if (stat.IsDead()&&this.isActiveAndEnabled)
         {
@@ -79,7 +79,8 @@ public class Monster : MonoBehaviour, IPoolable
     /// </summary>
     public void DropExp()
     {
-        var expItem = poolManager.GetPool<Item>(Global.PoolKey.EXP_ITEM).GetObject();
+        var expItem = (ExpItem)poolManager.GetPool<Item>(Global.PoolKey.EXP_ITEM).GetObject();
+        expItem.SetExp(Mathf.RoundToInt(baseData.Exp*DataManager.Instance.TimeBasedBattleScalers.GetCurrentMonsterExpMultiple()));
         expItem.transform.position = transform.position;
         BattleManager.Instance.itemDic.Add(expItem.gameObject.GetInstanceID(), expItem);
     }

@@ -6,9 +6,8 @@ public class Item : MonoBehaviour
     /// <summary>
     /// 아이템 사용
     /// </summary>
-    public void Use()
+    public virtual void Use()
     {
-        BattleManager.Instance.GetPlayableCharacter().Stat.AddExp(10);
         Remove();
     }
     /// <summary>

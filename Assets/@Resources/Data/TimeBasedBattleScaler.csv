@@ -1,0 +1,6 @@
+Time,MonsterCountLimit,MonsterPowerMultiple,MonsterExpMultiple
+0,10,1,1
+10,30,2,2
+180,100,3,3
+300,200,5,5
+1800,0,0,0

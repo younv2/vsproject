@@ -8,12 +8,14 @@ using UnityEngine.AddressableAssets;
 public class DataManager : MonoSingleton<DataManager>
 {
     AddressablesLoader loader = new AddressablesLoader();
+
     private List<SkillDataBase> skillDataList = new List<SkillDataBase>();
-    public List<SkillDataBase> SkillDataList { get { return skillDataList; } }
-
     public AssetLabelReference skillAddressableLabel;
+    private Dictionary<int, int> characterExpTable = new Dictionary<int, int>();
+    private TimeBasedBattleScaler timeBasedBattleScalers = new TimeBasedBattleScaler();
 
-    private Dictionary<int,int> characterExpTable = new Dictionary<int,int>();
+    public List<SkillDataBase> SkillDataList { get { return skillDataList; } }
+    public TimeBasedBattleScaler TimeBasedBattleScalers { get { return timeBasedBattleScalers; } }
     private bool isSkillDataLoaded = false;
 
     protected override void Awake()
@@ -29,6 +31,7 @@ public class DataManager : MonoSingleton<DataManager>
     {
         StartCoroutine(LoadSkillData());
         LoadExpTable();
+        LoadTimeBasedBattleScaler();
 
         yield return new WaitUntil(() => isSkillDataLoaded);
     }
@@ -69,17 +72,27 @@ public class DataManager : MonoSingleton<DataManager>
             }
         }
         characterExpTable = JsonConvert.DeserializeObject<Dictionary<int, int>>(jsonString);
-        if(characterExpTable is not null)
+        if (characterExpTable is not null)
         {
             Debug.Log("DataManager: 경험치 테이블 데이터 로드 완료");
         }
-
     }
+    /// <summary>
+    /// 시간별 몬스터 스케일 데이터 로드
+    /// </summary>
+    public void LoadTimeBasedBattleScaler()
+    {
+        var datas = CSVReader.Read(Global.TIME_BASED_BATTLE_SCALER_TABLE_PATH);
+
+        timeBasedBattleScalers.DataSetting(datas);
+    }
+
+    #region Getter
     public int GetExpByLevel(int level)
     {
         return characterExpTable[level];
     }
-    public SkillDataBase GetSkillData(string  skillName)
+    public SkillDataBase GetSkillData(string skillName)
     {
         return skillDataList.Find(x => x.skillName.Equals(skillName));
     }
@@ -91,5 +104,5 @@ public class DataManager : MonoSingleton<DataManager>
     {
         return skillDataList;
     }
-
+    #endregion
 }
