@@ -1,59 +1,69 @@
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class ActiveSkillRuntime
 {
-    public ActiveSkillData Data { get; private set; }
-    public Transform Owner { get; private set; }
-    public Transform Target { get; private set; }
-    public int Level { get; private set; } = 1;
+    private ActiveSkillData data;
+    private Transform owner;
+    private Transform target;
+    private int level = 1;
+
+
+    public ActiveSkillData Data { get { return data; } }
+    public Transform Owner { get { return owner; } }
+    public Transform Target { get { return target; } }
+    public int Level { get { return level; } }
 
     private float cooldownTimer;
 
     public ActiveSkillRuntime(ActiveSkillData data, Transform owner)
     {
-        Data = data;
-        Owner = owner;
-        // 초기 쿨타임 설정
-        cooldownTimer = Data.GetCooldown(Level);
+        this.data = data;
+        this.owner = owner;
+        cooldownTimer = data.GetCooldown(level);
     }
 
     public void Update(float deltaTime)
     {
         cooldownTimer -= deltaTime;
-        Target = BattleManager.Instance.GetPlayableCharacter().GetNearstTarget();
+        target = BattleManager.Instance.GetPlayableCharacter().GetNearstTarget();
         if (cooldownTimer <= 0f)
         {
-            Data.Activate(this);
-            cooldownTimer = Data.GetCooldown(Level);
+            data.Activate(this);
+            cooldownTimer = data.GetCooldown(Level);
         }
     }
 
     public void LevelUp()
     {
-        Level++;
-        // 레벨 최대치 제한 등은 필요시 추가
-        if (Level > Data.levelInfos.Count)
-            Level = Data.levelInfos.Count;
+        level++;
+
+        if (level > data.levelInfos.Count)
+            level = data.levelInfos.Count;
     }
 }
 
 public class PassiveSkillRuntime
 {
-    public PassiveSkillData Data { get; private set; }
-    public Transform Owner { get; private set; }
-    public int Level { get; private set; } = 1;
+    private PassiveSkillData data;
+    private Transform owner;
+    private int level = 1;
+
+    public PassiveSkillData Data { get { return data; } }
+    public Transform Owner { get { return owner; } }
+    public int Level { get { return level; } }
 
     public PassiveSkillRuntime(PassiveSkillData data, Transform owner)
     {
-        Data = data;
-        Owner = owner;
+        this.data = data;
+        this.owner = owner;
     }
 
     public void LevelUp()
     {
-        Level++;
-        // 레벨 최대치 제한 등은 필요시 추가
-        if (Level > Data.levelInfos.Count)
-            Level = Data.levelInfos.Count;
+        level++;
+
+        if (level > data.levelInfos.Count)
+            level = data.levelInfos.Count;
     }
 }

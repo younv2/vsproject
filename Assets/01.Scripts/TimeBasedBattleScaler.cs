@@ -13,10 +13,10 @@ public class TimeBasedBattleScaler
 
     public void DataSetting(List<Dictionary<string, object>> datas)
     {
-        time = new List<float>();
-        monsterCountLimit = new List<int>();
-        monsterPowerMultiple = new List<float>();
-        monsterExpMultiple = new List<float>();
+        time = new List<float>(datas.Count);
+        monsterCountLimit = new List<int>(datas.Count);
+        monsterPowerMultiple = new List<float>(datas.Count);
+        monsterExpMultiple = new List<float>(datas.Count);
 
         foreach (var data in datas)
         {

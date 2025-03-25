@@ -25,9 +25,6 @@ public class AddressablesLoader
     /// <summary>
     /// 에셋 리스트 로드
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="list"></param>
-    /// <param name="callback"></param>
     public void LoadAssetListAsync<T>(List<AssetReference> list, Action<List<T>> callback = null)
     {
         List<T> result  = new List<T>();
@@ -41,9 +38,6 @@ public class AddressablesLoader
     /// <summary>
     /// 어드레서블 주소를 통한 에셋 리스트 로드
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="list"></param>
-    /// <param name="callback"></param>
     public void LoadAssetListAsync<T>(string address, Action<List<T>> callback = null)
     {
         List<T> result = new List<T>();
@@ -68,9 +62,6 @@ public class AddressablesLoader
     /// <summary>
     /// 라벨 정보를 통해 에셋 리스트 로드
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="label"></param>
-    /// <param name="callback"></param>
     public void LoadAssetListAsync<T>(AssetLabelReference label, Action<List<T>> callback = null)
     {
         List<T> result = new List<T>();

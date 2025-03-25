@@ -1,7 +1,4 @@
-using JetBrains.Annotations;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.tvOS;
 
 public class Monster : MonoBehaviour, IPoolable
 {
@@ -10,30 +7,28 @@ public class Monster : MonoBehaviour, IPoolable
     private GameObject player;
     private HPBarUI hPBarUI;
     private ObjectPoolManager poolManager;
+
     public void Start()
     {
         poolManager = ObjectPoolManager.Instance;
     }
+
     public void OnEnable()
     {
         stat.InitStat(baseData);
         player = GameObject.FindWithTag(Global.UnityTag.PLAYER_TAG);
     }
-    /// <summary>
-    /// 매니저 클래스에서 업데이트를 관리하기 위함.
-    /// </summary>
+
     public void ManualFixedUpdate()
     {
-        if (player == null)
+        if (player == null) 
             return;
+
         transform.position  = Vector3.MoveTowards(transform.position, player.transform.position, baseData.MoveSpeed * Time.deltaTime);
     }
-    /// <summary>
-    /// 몬스터 체력 감소
-    /// </summary>
+
     public void TakeDamage(float damage)
     {
-        Debug.Log($"{damage}의 데미지를 입음");
         stat.TakeDamage(damage);
 
         var text = poolManager.GetPool<DamageTextUI>(Global.PoolKey.DAMAGE_TEXT).GetObject();
@@ -46,9 +41,7 @@ public class Monster : MonoBehaviour, IPoolable
             OnDeath();
         }
     }
-    /// <summary>
-    /// 몬스터 삭제 처리
-    /// </summary>
+
     public void Remove()
     {
         if(hPBarUI != null)
@@ -57,9 +50,7 @@ public class Monster : MonoBehaviour, IPoolable
         poolManager.GetPool<Monster>(name).ReleaseObject(this);
         MonsterSpawnManager.Instance.MonsterDic.Remove(gameObject.GetInstanceID());
     }
-    /// <summary>
-    /// 몬스터 사망 처리
-    /// </summary>
+
     public void OnDeath()
     {
         Remove();
@@ -74,9 +65,7 @@ public class Monster : MonoBehaviour, IPoolable
             character.TakeDamage(stat.AttackPower);
         }
     }
-    /// <summary>
-    /// 경험치 드랍
-    /// </summary>
+
     public void DropExp()
     {
         var expItem = (ExpItem)poolManager.GetPool<Item>(Global.PoolKey.EXP_ITEM).GetObject();

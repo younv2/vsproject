@@ -4,9 +4,11 @@ using UnityEngine;
 public class SpawnProjectileModule : SkillModule
 {
     [Header("투사체 프리팹 & 데이터")]
-    public GameObject projectilePrefab;   // Projectile 컴포넌트가 달린 프리팹
+    public GameObject projectilePrefab;
     public ProjectileData projectileData;
-    ActiveSkillLevelInfo curSkillData;
+
+    private ActiveSkillLevelInfo curSkillData;
+
     public override void Execute(ActiveSkillRuntime runtime)
     {
         if (!projectilePrefab || !projectileData) return;

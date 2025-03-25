@@ -3,9 +3,7 @@ using System.Linq;
 using UnityEngine;
 
 /// <summary>
-/// 목적이 무엇인가
 /// 해당 컴포넌트를 가지고 있는 개체가 주변에 해당하는 레이어를 찾아내기 위함
-/// 참조 - 골드메탈 유튜브 - 뱀서라이크 원거리 공격 구현하기
 /// </summary>
 public class Scanner : MonoBehaviour 
 {
@@ -14,17 +12,16 @@ public class Scanner : MonoBehaviour
     public LayerMask layerMask;
     public float range;
 
-    // Update is called once per frame
     void Update()
     {
         hitList = Physics2D.CircleCastAll(transform.position,range,Vector2.zero,0,layerMask).ToList();
 
         nearstObject = FindNearstObject();
     }
+
     /// <summary>
     /// 설정한 레이어의 근처에 있는 오브젝트를 찾는 함수
     /// </summary>
-    /// <returns></returns>
     public Transform FindNearstObject()
     {
         Transform result = null;

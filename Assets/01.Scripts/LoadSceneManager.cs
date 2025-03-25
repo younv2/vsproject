@@ -8,16 +8,12 @@ public class LoadingSceneManager : MonoBehaviour
 
     private IEnumerator Start()
     {
-        // 로딩 UI 표시
         LoadingUI.Instance.ShowLoading();
 
         // 풀 초기화 진행
         yield return StartCoroutine(DataManager.Instance.LoadAllData());
-
         yield return StartCoroutine(ObjectPoolManager.Instance.InitPools());
 
-
-        // 로딩 UI 끄기
         LoadingUI.Instance.HideLoading();
 
         // MainScene 로드

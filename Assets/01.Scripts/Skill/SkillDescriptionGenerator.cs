@@ -4,7 +4,7 @@ using UnityEngine;
 public static class SkillDescriptionGenerator
 {
     /// <summary>
-    /// 주어진 스킬 데이터와 현재 레벨에 맞는 Active, Passive 정보를 바탕으로 설명을 생성합니다.
+    /// 주어진 스킬 데이터와 현재 레벨에 맞는 Active, Passive 설명 생성
     /// </summary>
     public static string GetDescription(SkillDataBase skillData, int level)
     {
@@ -12,7 +12,6 @@ public static class SkillDescriptionGenerator
         sb.AppendLine($"[스킬명] {skillData.skillName}");
         sb.AppendLine($"[레벨] {level}");
 
-        // 액티브 스킬 설명 추가 (있다면)
         if (skillData is ActiveSkillData activeSkillData && activeSkillData.levelInfos.Count > 0)
         {
             int idx = Mathf.Clamp(level-1, 0, activeSkillData.levelInfos.Count-1);
@@ -22,18 +21,8 @@ public static class SkillDescriptionGenerator
             sb.AppendLine($"기본 데미지: {activeInfo.baseDamage}");
             sb.AppendLine($"발사체 개수: {activeInfo.projectileCount}");
             sb.AppendLine($"발사 각도: {activeInfo.angleBetweenProjectiles}°");
-            /*// 추가적으로 levelModules에 대한 설명도 포함할 수 있습니다.
-            if (activeInfo.levelModules != null && activeInfo.levelModules.Count > 0)
-            {
-                sb.AppendLine("모듈 효과:");
-                foreach (var module in activeInfo.levelModules)
-                {
-                    sb.AppendLine($"- {module.GetDescription()}"); // 모듈마다 GetDescription() 메서드를 구현한다고 가정
-                }
-            }*/
         }
 
-        // 패시브 스킬 설명 추가 (있다면)
         if (skillData is PassiveSkillData passiveSkillData && passiveSkillData.levelInfos.Count > 0)
         {
             int idx = Mathf.Clamp(level - 1, 0, passiveSkillData.levelInfos.Count-1);
@@ -67,7 +56,6 @@ public static class SkillDescriptionGenerator
                 passiveSb.AppendLine($"럭 보너스: {passiveInfo.luckBonus}%");
                 hasPassiveEffect = true;
             }
-            // 하나라도 패시브 효과가 있으면 패시브 효과 문단 추가
             if (hasPassiveEffect)
             {
                 sb.Append(passiveSb.ToString());

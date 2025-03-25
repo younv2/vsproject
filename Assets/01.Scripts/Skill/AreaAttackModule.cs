@@ -45,14 +45,10 @@ public class AreaAttackModule : SkillModule
             SkillManager.Instance.GetAllPassiveStat(), runtime.Data.levelInfos[runtime.Level - 1].baseDamage);
 
         Collider2D[] hits = null;
-        if (areaType == AttackAreaType.Circle)
-        {
+        if (areaType == AttackAreaType.Circle) 
             hits = Physics2D.OverlapCircleAll(attackCenter, circleRadius);
-        }
         else if (areaType == AttackAreaType.Rectangle)
-        {
             hits = Physics2D.OverlapBoxAll(attackCenter, rectangleSize, 0f);
-        }
 
         if (hits != null)
         {

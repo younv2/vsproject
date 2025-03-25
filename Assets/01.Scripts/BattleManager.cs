@@ -52,9 +52,6 @@ public class BattleManager : MonoSingleton<BattleManager>
         }
 
     }
-    /// <summary>
-    /// 게임 리셋
-    /// </summary>
     public void GemeReset()
     {
         foreach (var key in playableCharacter.Keys.ToList())
@@ -81,58 +78,11 @@ public class BattleManager : MonoSingleton<BattleManager>
 
         
     }
-    /// <summary>
-    /// 게임 일시정지
-    /// </summary>
-    /// <param name="flag"></param>
-    public void Pause(bool flag)
-    {
-        isPause = flag;
-    }
+    public void Pause(bool flag) => isPause = flag;
     #region Gettter
-    /// <summary>
-    /// 캐릭터 반환
-    /// </summary>
-    /// <returns></returns>
-    public PlayableCharacter GetPlayableCharacter()
-    {
-        return playableCharacter.Values.First();
-    }
-    /// <summary>
-    /// 인스턴스 ID를 통해 캐릭터 반환
-    /// </summary>
-    /// <param name="instanceId"></param>
-    /// <returns></returns>
-    public PlayableCharacter GetCharacterFromInstanceId(int instanceId)
-    {
-        if(playableCharacter.ContainsKey(instanceId))
-            return playableCharacter[instanceId];
-        else
-            return null;
-    }
-    /// <summary>
-    /// 인스턴스 ID를 통해 몬스터 반환
-    /// </summary>
-    /// <param name="instanceId"></param>
-    /// <returns></returns>
-    public Monster GetMonsterFromInstanceId(int instanceId)
-    {
-        if (monsterSpawnManager.MonsterDic.ContainsKey(instanceId))
-            return monsterSpawnManager.MonsterDic[instanceId];
-        else
-            return null;
-    }
-    /// <summary>
-    /// 인스턴스 ID를 통해 아이템 반환
-    /// </summary>
-    /// <param name="instanceId"></param>
-    /// <returns></returns>
-    public Item GetItemFromInstanceId(int instanceId)
-    {
-        if (itemDic.ContainsKey(instanceId))
-            return itemDic[instanceId];
-        else
-            return null;
-    }
+    public PlayableCharacter GetPlayableCharacter() => playableCharacter.Values.First();
+    public PlayableCharacter GetCharacterFromInstanceId(int instanceId) => playableCharacter.TryGetValue(instanceId, out var character) ? character : null;
+    public Monster GetMonsterFromInstanceId(int instanceId) => monsterSpawnManager.MonsterDic.TryGetValue(instanceId, out var monster) ? monster : null;
+    public Item GetItemFromInstanceId(int instanceId) => itemDic.TryGetValue(instanceId, out var item) ? item : null;
     #endregion
 }

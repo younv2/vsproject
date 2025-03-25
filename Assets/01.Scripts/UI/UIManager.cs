@@ -11,14 +11,12 @@ public class UIManager : MonoSingleton<UIManager>
     private AddressablesLoader loader = new AddressablesLoader();
     public SkillUpPopup skillUpPopup;
     public GameResultPopup gameResultPopup;
+
     private void Start()
     {
         StartCoroutine(Initialize());
     }
-    /// <summary>
-    /// UIManager 초기 설정
-    /// </summary>
-    /// <returns></returns>
+
     IEnumerator Initialize()
     {
         bool isLoadDone = false;
@@ -33,6 +31,7 @@ public class UIManager : MonoSingleton<UIManager>
             isLoadDone = true;
         });
         yield return new WaitUntil(() => isLoadDone);
+
         skillUpPopup = (SkillUpPopup)popupList.Find(x=>x.GetType() == typeof(SkillUpPopup));
         gameResultPopup = (GameResultPopup)popupList.Find(x=>x.GetType() == typeof(GameResultPopup));
         yield return null;

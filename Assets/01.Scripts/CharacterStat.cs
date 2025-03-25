@@ -20,7 +20,6 @@ public class CharacterStat
     public int MaxExp { get { return maxExp; } }
     public float MoveSpeed { get { return moveSpeed; } }
     public float Luck { get { return luck; } }
-
     public float DrainItemRange { get {  return drainItemRange; } }
     /// <summary>
     /// 캐릭터 초기 설정
@@ -45,40 +44,14 @@ public class CharacterStat
         currentHp -= damage;
         if (currentHp < 0) currentHp = 0;
 
-        Debug.Log($"[MonsterStat] 체력 감소: {damage}, 남은 체력: {currentHp}");
-
         // 사망 체크
         if (IsDead())
         {
             OnDeath();
         }
     }
-    /// <summary>
-    /// 캐릭터가 죽었는지 확인
-    /// </summary>
-    public bool IsDead()
-    {
-        return currentHp <= 0;
-    }
-
-    /// <summary>
-    /// 사망 이벤트
-    /// </summary>
-    private void OnDeath()
-    {
-        Debug.Log("플레이어 사망!");
-    }
-    /// <summary>
-    /// 현재 체력 퍼센트
-    /// </summary>
-    /// <returns></returns>
-    public float GetCurrentHPPercent()
-    {
-        return currentHp / MaxHp;
-    }
-    /// <summary>
-    /// 캐릭터 레벨 업
-    /// </summary>
+    public bool IsDead() => currentHp <= 0;
+    private void OnDeath() => Debug.Log("플레이어 사망!");
     public void LevelUp()
     {
         level++;
@@ -86,9 +59,6 @@ public class CharacterStat
         maxExp = DataManager.Instance.GetExpByLevel(level);
         UIManager.Instance.skillUpPopup.Show();
     }
-    /// <summary>
-    /// 캐릭터 경험치 추가
-    /// </summary>
     public void AddExp(int exp)
     {
         currentExp += StatCalculator.CalculateModifiedExp(SkillManager.Instance.GetAllPassiveStat(),exp);
@@ -98,4 +68,7 @@ public class CharacterStat
         }
         OnExpUpdate?.Invoke();
     }
+
+    public float GetCurrentHPPercent() => currentHp / MaxHp;
+
 }

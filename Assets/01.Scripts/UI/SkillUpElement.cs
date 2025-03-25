@@ -6,6 +6,7 @@ public class SkillUpElement : MonoBehaviour
 {
     public TextMeshProUGUI descriptionText;
     private SkillDataBase skillData;
+
     public void Setting(SkillDataBase data,SkillUpPopup popup)
     {
         skillData = data;

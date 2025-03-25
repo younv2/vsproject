@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
         player = GetComponent<PlayableCharacter>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
-    // Update is called once per frame
+
     public void ManualFixedUpdate()
     {
         if (moveDirection == Vector2.zero)
@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
             player.IsFlip = temp;
         }
     }
+
     private void OnMove(InputValue inputValue)
     {
         Vector2 input = inputValue.Get<Vector2>();
@@ -36,8 +37,6 @@ public class PlayerController : MonoBehaviour
 
         }
     }
-    public void ResetInput()
-    {
-        moveDirection = new Vector2();
-    }
+
+    public void ResetInput() => moveDirection = new Vector2();
 }

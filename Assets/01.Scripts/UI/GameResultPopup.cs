@@ -11,9 +11,7 @@ public class GameResultPopup : BasePopup
     public Button restartBtn;
     public TextMeshProUGUI resultTxt;
     public TextMeshProUGUI timeTxt;
-    /// <summary>
-    /// 요소의 세부 설정 및 갯수 세팅
-    /// </summary>
+
     public void Setting(bool iswin)
     {
         restartBtn.onClick.AddListener(() =>
@@ -26,8 +24,8 @@ public class GameResultPopup : BasePopup
         timeTxt.text = Formatter.TimeFormat(TimeManager.Instance.GameTime);
         if (UIManager.Instance.skillUpPopup.isOn)
             UIManager.Instance.skillUpPopup.Close();
-
     }
+
     public void Show(bool isWin)
     {
         base.Show();

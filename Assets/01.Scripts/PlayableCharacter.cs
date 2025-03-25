@@ -21,9 +21,7 @@ public class PlayableCharacter : MonoBehaviour, IPoolable
         Stat.Init();
         playerController = this.GetComponent<PlayerController>();
     }
-    /// <summary>
-    /// 캐릭터 삭제 처리
-    /// </summary>
+
     public void Remove()
     {
         transform.position = Vector3.zero;
@@ -34,26 +32,13 @@ public class PlayableCharacter : MonoBehaviour, IPoolable
         ObjectPoolManager.Instance.GetPool<PlayableCharacter>(name).ReleaseObject(this);
         BattleManager.Instance.playableCharacter.Remove(gameObject.GetInstanceID());
     }
-    /// <summary>
-    /// 캐릭터 사망 처리
-    /// </summary>
+
     public void OnDeath()
     {
         Remove();
         UIManager.Instance.gameResultPopup.Show(false);
     }
-    /// <summary>
-    /// 캐릭터 근처 몬스터 반환
-    /// </summary>
-    public Transform GetNearstTarget()
-    {
-        if (monsterScanner.nearstObject == null)
-            return null;
-        return monsterScanner.nearstObject.transform;
-    }
-    /// <summary>
-    /// 경험치 아이템 흡수
-    /// </summary>
+
     public void DrainExp()
     {
         expItemScanner.range = StatCalculator.CalculateModifiedDrop(SkillManager.Instance.GetAllPassiveStat(),Stat.DrainItemRange);
@@ -71,12 +56,9 @@ public class PlayableCharacter : MonoBehaviour, IPoolable
             item.Use();
         }
     }
-    /// <summary>
-    /// 캐릭터 데미지 처리
-    /// </summary>
+
     internal void TakeDamage(float damage)
     {
-        Debug.Log($"{damage}의 데미지를 입음");
         stat.TakeDamage(damage);
         var text = ObjectPoolManager.Instance.GetPool<DamageTextUI>("DamageText").GetObject();
         text.transform.position = transform.position + new Vector3(0, 1.5f, 0);
@@ -88,4 +70,6 @@ public class PlayableCharacter : MonoBehaviour, IPoolable
             OnDeath();
         }
     }
+
+    public Transform GetNearstTarget() => monsterScanner.nearstObject == null ? null : monsterScanner.nearstObject.transform;
 }

@@ -272,6 +272,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillAddressableLabel:
     m_LabelString: SO/Skill
+  monsterAddressableLabel:
+    m_LabelString: SO/Monster
 --- !u!4 &541881856
 Transform:
   m_ObjectHideFlags: 0

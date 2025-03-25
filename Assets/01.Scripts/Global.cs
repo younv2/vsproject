@@ -36,8 +36,6 @@ public static class Formatter
     /// <summary>
     /// 시간 포맷 문자열 반환
     /// </summary>
-    /// <param name="time"></param>
-    /// <returns></returns>
     public static string TimeFormat(float time)
     {
         int m = (int)time / 60;

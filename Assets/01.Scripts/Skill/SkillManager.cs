@@ -13,6 +13,7 @@ public class SkillManager : MonoSingleton<SkillManager>
         activeSkills.Clear();
         passiveSkills.Clear();
     }
+
     public int GetLevel(SkillDataBase skillData)
     {
         int level = 0;
@@ -23,12 +24,14 @@ public class SkillManager : MonoSingleton<SkillManager>
         }
         return level;
     }
+
     public string GetNextLevelDescription(SkillDataBase skillData)
     {
         int level = GetLevel(skillData);
 
         return SkillDescriptionGenerator.GetDescription(skillData, ++level);
     }
+
     public void ManualUpdate()
     {
         float dt = Time.deltaTime;
@@ -38,9 +41,6 @@ public class SkillManager : MonoSingleton<SkillManager>
         }
     }
 
-    /// <summary>
-    /// 스킬을 새로 습득하거나 레벨업한다
-    /// </summary>
     public void LearnSkill(SkillDataBase data)
     {
         if (data is ActiveSkillData activeData)
@@ -70,6 +70,7 @@ public class SkillManager : MonoSingleton<SkillManager>
             }
         }
     }
+
     public PassiveSkillLevelInfo GetAllPassiveStat()
     {
         PassiveSkillLevelInfo passiveStat = new PassiveSkillLevelInfo();
