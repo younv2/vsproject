@@ -9,24 +9,22 @@ public class MonsterSpawnManager : MonoSingleton<MonsterSpawnManager>
     private float minSpawnDistance = 10;
 
     private Dictionary<int,Monster> monsterDic = new Dictionary<int,Monster>();
+
     public Dictionary<int, Monster> MonsterDic { get { return monsterDic; } }
 
     public void ManualUpdate()
     {
-        if (monsterDic.Count >= maxMonsterCnt)
-        {
+        if (monsterDic.Count >= maxMonsterCnt) 
             return;
-        }
-        if(GameObject.FindWithTag(Global.PLAYER) == null)
-        {
+        if(GameObject.FindWithTag(Global.PLAYER) == null) 
             return;
-        }
-        SpawnMonster(0);
+
+        SpawnMonster(1);
         maxMonsterCnt = DataManager.Instance.TimeBasedBattleScalers.GetCurrentMonsterCountLimit();
     }
     public void SpawnMonster(int monsterId)
     {
-        Monster temp = ObjectPoolManager.Instance.GetPool<Monster>(Global.PoolKey.SLIME).GetObject();
+        Monster temp = ObjectPoolManager.Instance.GetPool<Monster>(DataManager.Instance.GetMonsterData(monsterId).MonsterName).GetObject();
         temp.transform.position = GetSpawnPosition();
 
         monsterDic.Add(temp.gameObject.GetInstanceID(),temp);
@@ -34,7 +32,6 @@ public class MonsterSpawnManager : MonoSingleton<MonsterSpawnManager>
 
     private Vector2 GetSpawnPosition()
     {
-        // 플레이어 위치 기준으로 랜덤 방향과 거리 계산
         float angle = Random.Range(0, 360) * Mathf.Deg2Rad;
         float distance = Random.Range(minSpawnDistance, maxSpawnDistance);
 

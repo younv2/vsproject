@@ -8,43 +8,61 @@ using UnityEngine.AddressableAssets;
 public class DataManager : MonoSingleton<DataManager>
 {
     AddressablesLoader loader = new AddressablesLoader();
-
-    private List<SkillDataBase> skillDataList = new List<SkillDataBase>();
+    [Header("어드레서블 라벨")]
     public AssetLabelReference skillAddressableLabel;
+    public AssetLabelReference monsterAddressableLabel;
+
+    private List<SkillDataBase> skillDataList;
+    private List<MonsterData> monsterDataList;
+    
     private Dictionary<int, int> characterExpTable = new Dictionary<int, int>();
     private TimeBasedBattleScaler timeBasedBattleScalers = new TimeBasedBattleScaler();
 
+    private bool isSkillDataLoaded = false;
+    private bool isMonsterDataLoaded = false;
+
     public List<SkillDataBase> SkillDataList { get { return skillDataList; } }
     public TimeBasedBattleScaler TimeBasedBattleScalers { get { return timeBasedBattleScalers; } }
-    private bool isSkillDataLoaded = false;
 
     protected override void Awake()
     {
         base.Awake();
         DontDestroyOnLoad(this);
     }
-    /// <summary>
-    /// 게임에 필요한 전체 데이터 로드
-    /// </summary>
-    /// <returns></returns>
+
     public IEnumerator LoadAllData()
     {
         StartCoroutine(LoadSkillData());
+        StartCoroutine(LoadMonsterData());
         LoadExpTable();
         LoadTimeBasedBattleScaler();
 
         yield return new WaitUntil(() => isSkillDataLoaded);
+        yield return new WaitUntil(() => isMonsterDataLoaded);
     }
-    /// <summary>
-    /// 스킬 데이터 로드
-    /// </summary>
-    /// <returns></returns>
+
     public IEnumerator LoadSkillData()
     {
         bool loadDone = false;
-        loader.LoadAssetListAsync<SkillDataBase>(skillAddressableLabel, (callback) =>
+        loader.LoadAssetListAsync<SkillDataBase>(skillAddressableLabel, (skillDataList) =>
         {
-            skillDataList = callback;
+            this.skillDataList = skillDataList;
+            loadDone = true;
+        });
+        while (!loadDone)
+        {
+            yield return null;
+        }
+        isMonsterDataLoaded = true;
+        Debug.Log("DataManager: 스킬 데이터 로드 완료");
+    }
+
+    public IEnumerator LoadMonsterData()
+    {
+        bool loadDone = false;
+        loader.LoadAssetListAsync<MonsterData>(monsterAddressableLabel, (monsterDataList) =>
+        {
+            this.monsterDataList = monsterDataList;
             loadDone = true;
         });
         while (!loadDone)
@@ -54,9 +72,7 @@ public class DataManager : MonoSingleton<DataManager>
         isSkillDataLoaded = true;
         Debug.Log("DataManager: 스킬 데이터 로드 완료");
     }
-    /// <summary>
-    /// 경험치 테이블 로드
-    /// </summary>
+
     public void LoadExpTable()
     {
         string jsonString;
@@ -77,32 +93,19 @@ public class DataManager : MonoSingleton<DataManager>
             Debug.Log("DataManager: 경험치 테이블 데이터 로드 완료");
         }
     }
-    /// <summary>
-    /// 시간별 몬스터 스케일 데이터 로드
-    /// </summary>
+
     public void LoadTimeBasedBattleScaler()
     {
-        var datas = CSVReader.Read(Global.TIME_BASED_BATTLE_SCALER_TABLE_PATH);
+        List<Dictionary<string, object>> datas = CSVReader.Read(Global.TIME_BASED_BATTLE_SCALER_TABLE_PATH);
 
         timeBasedBattleScalers.DataSetting(datas);
     }
 
     #region Getter
-    public int GetExpByLevel(int level)
-    {
-        return characterExpTable[level];
-    }
-    public SkillDataBase GetSkillData(string skillName)
-    {
-        return skillDataList.Find(x => x.skillName.Equals(skillName));
-    }
-    public SkillDataBase GetRandomSkillData()
-    {
-        return skillDataList[Random.Range(0, skillDataList.Count)];
-    }
-    public List<SkillDataBase> GetAllSkillData()
-    {
-        return skillDataList;
-    }
+    public int GetExpByLevel(int level) => characterExpTable[level];
+    public SkillDataBase GetSkillData(string skillName) => skillDataList.Find(x => x.skillName.Equals(skillName));
+    public SkillDataBase GetSkillData(int skillId) => skillDataList.Find(x => x.skillId.Equals(skillId));
+    public MonsterData GetMonsterData(string monsterName) => monsterDataList.Find(x => x.MonsterName.Equals(monsterName));
+    public MonsterData GetMonsterData(int monsterId) => monsterDataList.Find(x => x.MonsterId.Equals(monsterId));
     #endregion
 }
