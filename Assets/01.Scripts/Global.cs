@@ -22,6 +22,13 @@ public static class Global
         public const string GARLIC_SKILL = "Garlic";
         public const string WHIP_SKILL = "Whip";
     }
+    public static class CollectionCapacity
+    {
+        public const int ITEM_DIC_CAPACITY_INIT_VALUE = 100;
+        public const int MONSTER_DIC_CAPACITY_INIT_VALUE = 300;
+        public const int CHARACTER_DIC_CAPACITY_INIT_VALUE = 10;
+        public const int PROJECTILE_LIST_CAPACITY_INIT_VALUE = 300;
+    }
     public const string PLAYER = "Player";
     public const string PLAYER_FIRST_SKILL_NAME = "ThrowRock";
     public const string EXP_TABLE_PATH = "Assets/@Resources/Data/ExpTable.json";

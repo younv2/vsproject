@@ -8,10 +8,13 @@ public class MonsterSpawnManager : MonoSingleton<MonsterSpawnManager>
     private float maxSpawnDistance = 20;
     private float minSpawnDistance = 10;
 
-    private Dictionary<int,Monster> monsterDic = new Dictionary<int,Monster>();
+    private Dictionary<int,Monster> monsterDic;
 
     public Dictionary<int, Monster> MonsterDic { get { return monsterDic; } }
 
+    MonsterSpawnManager() { 
+        monsterDic = new Dictionary<int, Monster>(Global.CollectionCapacity.MONSTER_DIC_CAPACITY_INIT_VALUE);
+    }
     public void ManualUpdate()
     {
         if (monsterDic.Count >= maxMonsterCnt) 

@@ -19,8 +19,10 @@ public class BattleManager : MonoSingleton<BattleManager>
         skillManager = SkillManager.Instance;
         timeManager = TimeManager.Instance;
         monsterSpawnManager = MonsterSpawnManager.Instance;
-        itemDic = new Dictionary<int, Item>();
-        playableCharacter = new Dictionary<int, PlayableCharacter>();
+
+        projectileList = new List<Projectile>(Global.CollectionCapacity.PROJECTILE_LIST_CAPACITY_INIT_VALUE);
+        itemDic = new Dictionary<int, Item>(Global.CollectionCapacity.ITEM_DIC_CAPACITY_INIT_VALUE);
+        playableCharacter = new Dictionary<int, PlayableCharacter>(Global.CollectionCapacity.CHARACTER_DIC_CAPACITY_INIT_VALUE);
         var character = ObjectPoolManager.Instance.GetPool<PlayableCharacter>(Global.PoolKey.CHARACTER).GetObject();
         playableCharacter.Add(character.gameObject.GetInstanceID(),character);
         skillManager.LearnSkill(DataManager.Instance.GetSkillData(Global.PLAYER_FIRST_SKILL_NAME));
@@ -79,6 +81,7 @@ public class BattleManager : MonoSingleton<BattleManager>
         
     }
     public void Pause(bool flag) => isPause = flag;
+
     #region Gettter
     public PlayableCharacter GetPlayableCharacter() => playableCharacter.Values.First();
     public PlayableCharacter GetCharacterFromInstanceId(int instanceId) => playableCharacter.TryGetValue(instanceId, out var character) ? character : null;
