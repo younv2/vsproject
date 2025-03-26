@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.AddressableAssets;
 using System.Collections;
+using System.Threading.Tasks;
 
 public class ObjectPoolManager : MonoSingleton<ObjectPoolManager>
 {
@@ -17,36 +18,31 @@ public class ObjectPoolManager : MonoSingleton<ObjectPoolManager>
         DontDestroyOnLoad(this);
     }
 
-    public IEnumerator InitPools()
+    public async Task InitPools()
     {
-        bool loadDone = false;
-
-        loader.LoadAssetListAsync<GameObject>(addressList, (loadedList) =>
+        var task = loader.LoadAssetListAsync<GameObject>(addressList);
+        await task;
+        if (task.IsCompleted && task.Result != null)
         {
-            foreach (var go in loadedList)
+            List<GameObject> goList = task.Result as List<GameObject>;
+
+            foreach (var go in goList)
             {
-                if (TryAddPool<Monster>(go)) { }
-                else if (TryAddPool<PlayableCharacter>(go)) { }
-                else if (TryAddPool<Projectile>(go)) { }
-                else if (TryAddPool<DamageTextUI>(go)) { }
-                else if (TryAddPool<HPBarUI>(go)) { }
-                else if (TryAddPool<Item>(go)) { }
-                else
-                {
-                    AddPool(go);
-                }
-            }
-            loadDone = true;
-        });
-        
-        while (!loadDone)
-        {
-            yield return null;
-        }
-        
-        Debug.Log("ObjectPoolManager: 풀 초기화 완료");
-    }
+                bool hasPoolingComponent = TryAddPool<Monster>(go) ||
+                    TryAddPool<PlayableCharacter>(go) ||
+                    TryAddPool<Projectile>(go) ||
+                    TryAddPool<DamageTextUI>(go) ||
+                    TryAddPool<HPBarUI>(go) ||
+                    TryAddPool<Item>(go);
 
+                if (!hasPoolingComponent) 
+                { 
+                    AddPool(go); 
+                }   
+            }
+            Debug.Log("ObjectPoolManager: 풀 초기화 완료");
+        } 
+    }
     private bool TryAddPool<T>(GameObject go) where T : Object
     {
         if (go.TryGetComponent<T>(out var component))

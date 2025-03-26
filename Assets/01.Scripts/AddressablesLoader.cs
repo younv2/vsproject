@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -33,25 +34,30 @@ public class AddressablesLoader
         {
             result.Add(asset);
             callback?.Invoke(result);
-        }, MergeMode.Union).Completed += HandleCompletion;
+        }, MergeMode.Union).Completed += (handle) => {
+            HandleCompletion(handle);
+            callback?.Invoke(result);
+        };
     }
     /// <summary>
     /// 어드레서블 주소를 통한 에셋 리스트 로드
     /// </summary>
-    public void LoadAssetListAsync<T>(string address, Action<List<T>> callback = null)
+    public async void LoadAssetListAsync<T>(string address, Action<List<T>> callback = null)
     {
         List<T> result = new List<T>();
-        Addressables.LoadResourceLocationsAsync(address).Completed += (list) =>
+        LoadResourceLocationsAsync(address).Completed += (handle) =>
         {
-            if (list.Status == AsyncOperationStatus.Succeeded && list.Result != null)
+            if (handle.Status == AsyncOperationStatus.Succeeded && handle.Result != null)
             {
-                IList<IResourceLocation> locations = list.Result;
+                IList<IResourceLocation> list = handle.Result;
 
-                Addressables.LoadAssetsAsync<T>(locations, asset =>
+                LoadAssetsAsync<T>(list, asset =>
                 {
                     result.Add(asset);
+                }).Completed += (handle) => {
+                    HandleCompletion(handle);
                     callback?.Invoke(result);
-                }).Completed += HandleCompletion;
+                };
             }
             else
             {
@@ -62,27 +68,26 @@ public class AddressablesLoader
     /// <summary>
     /// 라벨 정보를 통해 에셋 리스트 로드
     /// </summary>
-    public void LoadAssetListAsync<T>(AssetLabelReference label, Action<List<T>> callback = null)
+    public async Task<IList<T>> LoadAssetListAsync<T>(AssetLabelReference label)
     {
-        List<T> result = new List<T>();
-        Addressables.LoadResourceLocationsAsync(label).Completed += (list) =>
+        List<T> result;
+        AsyncOperationHandle<IList<IResourceLocation>> handle = LoadResourceLocationsAsync(label);
+        await handle.Task;
+        if (handle.Status != AsyncOperationStatus.Succeeded || handle.Result == null)
         {
-            if (list.Status == AsyncOperationStatus.Succeeded && list.Result != null)
-            {
-                IList<IResourceLocation> locations = list.Result;
+            Debug.LogError($"❌ LoadResourceLocationsAsync 실패 또는 결과 없음: {label}");
+            return null;
+        }
 
-                Addressables.LoadAssetsAsync<T>(locations, asset =>
-                {
-                    result.Add(asset);
-                    callback?.Invoke(result);
-                }).Completed += HandleCompletion;
-            }
-            else
-            {
-                Debug.LogError($"❌ LoadResourceLocationsAsync 실패 또는 결과 없음: {label}");
-            }
-        };
-
+        IList<IResourceLocation> list = handle.Result;
+        result = new List<T>(list.Count);
+        AsyncOperationHandle<IList<T>> assetHandle = LoadAssetsAsync<T>(list, asset =>
+        {
+            result.Add(asset);
+        });
+        await assetHandle.Task;
+        HandleCompletion(assetHandle);
+        return assetHandle.Task.Result;
     }
     private void HandleCompletion<T>(AsyncOperationHandle<IList<T>> handle)
     {

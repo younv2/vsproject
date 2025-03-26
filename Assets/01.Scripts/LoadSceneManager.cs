@@ -1,18 +1,19 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System.Threading.Tasks;
 
 public class LoadingSceneManager : MonoBehaviour
 {
     [SerializeField] private string nextSceneName = "00.Scenes/02.InGame";
 
-    private IEnumerator Start()
+    private async void Start()
     {
         LoadingUI.Instance.ShowLoading();
 
-        // 풀 초기화 진행
-        yield return StartCoroutine(DataManager.Instance.LoadAllData());
-        yield return StartCoroutine(ObjectPoolManager.Instance.InitPools());
+        Task loadedData = DataManager.Instance.LoadAllData();
+        Task loadedObjectPool =  ObjectPoolManager.Instance.InitPools();
+        await Task.WhenAll(loadedData, loadedObjectPool);
 
         LoadingUI.Instance.HideLoading();
 

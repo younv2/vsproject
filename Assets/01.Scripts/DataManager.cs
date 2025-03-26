@@ -2,6 +2,7 @@ using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -18,9 +19,6 @@ public class DataManager : MonoSingleton<DataManager>
     private Dictionary<int, int> characterExpTable = new Dictionary<int, int>();
     private TimeBasedBattleScaler timeBasedBattleScalers = new TimeBasedBattleScaler();
 
-    private bool isSkillDataLoaded = false;
-    private bool isMonsterDataLoaded = false;
-
     public List<SkillDataBase> SkillDataList { get { return skillDataList; } }
     public TimeBasedBattleScaler TimeBasedBattleScalers { get { return timeBasedBattleScalers; } }
 
@@ -30,75 +28,66 @@ public class DataManager : MonoSingleton<DataManager>
         DontDestroyOnLoad(this);
     }
 
-    public IEnumerator LoadAllData()
+    public Task LoadAllData()
     {
-        StartCoroutine(LoadSkillData());
-        StartCoroutine(LoadMonsterData());
-        LoadExpTable();
-        LoadTimeBasedBattleScaler();
+        Task skillTask = LoadSkillDataAsync();
+        Task monsterTask = LoadMonsterDataAsync();
+        Task expTask = LoadExpTableAsync();
+        Task scalerTask = LoadTimeBasedBattleScalerAsync();
 
-        yield return new WaitUntil(() => isSkillDataLoaded);
-        yield return new WaitUntil(() => isMonsterDataLoaded);
+        return Task.WhenAll(skillTask, monsterTask, expTask, scalerTask);
     }
 
-    public IEnumerator LoadSkillData()
+    public async Task LoadSkillDataAsync()
     {
-        bool loadDone = false;
-        loader.LoadAssetListAsync<SkillDataBase>(skillAddressableLabel, (skillDataList) =>
+        var task = loader.LoadAssetListAsync<SkillDataBase>(skillAddressableLabel);
+        await task;
+        if(task.IsCompleted &&task.Result!= null)
         {
-            this.skillDataList = skillDataList;
-            loadDone = true;
-        });
-        while (!loadDone)
-        {
-            yield return null;
+            skillDataList = task.Result as List<SkillDataBase>;
+            Debug.Log("DataManager: 스킬 데이터 로드 완료");
         }
-        isMonsterDataLoaded = true;
-        Debug.Log("DataManager: 스킬 데이터 로드 완료");
     }
 
-    public IEnumerator LoadMonsterData()
+    public async Task LoadMonsterDataAsync()
     {
-        bool loadDone = false;
-        loader.LoadAssetListAsync<MonsterData>(monsterAddressableLabel, (monsterDataList) =>
+        var task = loader.LoadAssetListAsync<MonsterData>(monsterAddressableLabel);
+        await task;
+        if (task.IsCompleted && task.Result != null)
         {
-            this.monsterDataList = monsterDataList;
-            loadDone = true;
-        });
-        while (!loadDone)
-        {
-            yield return null;
+            this.monsterDataList = task.Result as List<MonsterData>;
+            Debug.Log("DataManager: 몬스터 데이터 로드 완료");
         }
-        isSkillDataLoaded = true;
-        Debug.Log("DataManager: 스킬 데이터 로드 완료");
     }
 
-    public void LoadExpTable()
+    public async Task LoadExpTableAsync()
     {
-        string jsonString;
         if (!File.Exists(Global.EXP_TABLE_PATH))
         {
             Debug.Log("데이터 파일이 존재하지 않음");
+            return;
         }
-        using (FileStream fs = new FileStream(Global.EXP_TABLE_PATH, FileMode.Open, FileAccess.Read))
+
+        string jsonString;
+        using (FileStream fs = new FileStream(Global.EXP_TABLE_PATH, FileMode.Open, FileAccess.Read, FileShare.Read))
+        using (StreamReader sr = new StreamReader(fs, new System.Text.UTF8Encoding(false)))
         {
-            using (StreamReader sr = new StreamReader(fs, new System.Text.UTF8Encoding(false)))
-            {
-                jsonString = sr.ReadToEnd();
-            }
+            jsonString = await sr.ReadToEndAsync();
         }
         characterExpTable = JsonConvert.DeserializeObject<Dictionary<int, int>>(jsonString);
-        if (characterExpTable is not null)
+        if (characterExpTable != null)
         {
             Debug.Log("DataManager: 경험치 테이블 데이터 로드 완료");
         }
     }
 
-    public void LoadTimeBasedBattleScaler()
+    public async Task LoadTimeBasedBattleScalerAsync()
     {
-        List<Dictionary<string, object>> datas = CSVReader.Read(Global.TIME_BASED_BATTLE_SCALER_TABLE_PATH);
-
+        List<Dictionary<string, object>> datas = await Task.Run(() => CSVReader.Read(Global.TIME_BASED_BATTLE_SCALER_TABLE_PATH));
+        
         timeBasedBattleScalers.DataSetting(datas);
+        
+        Debug.Log("DataManager: 시간 기반 배틀 스케일러 로드 완료");
     }
 
     #region Getter

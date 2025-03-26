@@ -1,21 +1,22 @@
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
-using UnityEngine;
 
 public class BattleManager : MonoSingleton<BattleManager>
 {
     SkillManager skillManager;
     TimeManager timeManager;
     MonsterSpawnManager monsterSpawnManager;
-    public Dictionary<int,PlayableCharacter> playableCharacter;
+
+    public Dictionary<int, PlayableCharacter> playableCharacter;
     public Dictionary<int, Item> itemDic;
+
     public List<Projectile> projectileList;
     private bool isPause = false;
 
     protected override void Awake()
     {
         base.Awake();
+
         skillManager = SkillManager.Instance;
         timeManager = TimeManager.Instance;
         monsterSpawnManager = MonsterSpawnManager.Instance;
@@ -23,6 +24,7 @@ public class BattleManager : MonoSingleton<BattleManager>
         projectileList = new List<Projectile>(Global.CollectionCapacity.PROJECTILE_LIST_CAPACITY_INIT_VALUE);
         itemDic = new Dictionary<int, Item>(Global.CollectionCapacity.ITEM_DIC_CAPACITY_INIT_VALUE);
         playableCharacter = new Dictionary<int, PlayableCharacter>(Global.CollectionCapacity.CHARACTER_DIC_CAPACITY_INIT_VALUE);
+
         var character = ObjectPoolManager.Instance.GetPool<PlayableCharacter>(Global.PoolKey.CHARACTER).GetObject();
         playableCharacter.Add(character.gameObject.GetInstanceID(),character);
         skillManager.LearnSkill(DataManager.Instance.GetSkillData(Global.PLAYER_FIRST_SKILL_NAME));

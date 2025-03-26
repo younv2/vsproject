@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -12,28 +13,27 @@ public class UIManager : MonoSingleton<UIManager>
     public SkillUpPopup skillUpPopup;
     public GameResultPopup gameResultPopup;
 
-    private void Start()
+    private async void Start()
     {
-        StartCoroutine(Initialize());
+        await Initialize();
     }
 
-    IEnumerator Initialize()
+    public async Task Initialize()
     {
-        bool isLoadDone = false;
-        loader.LoadAssetListAsync<GameObject>(addressablePopupLabel, (callback) =>
+        var task = loader.LoadAssetListAsync<GameObject>(addressablePopupLabel);
+        await task;
+        if(task.Result != null)
         {
-            foreach (var data in callback)
+            foreach (var data in task.Result)
             {
                 var temp = Instantiate(data.GetComponent<BasePopup>(), this.transform);
                 popupList.Add(temp);
                 temp.Initialize();
             }
-            isLoadDone = true;
-        });
-        yield return new WaitUntil(() => isLoadDone);
+        }
 
         skillUpPopup = (SkillUpPopup)popupList.Find(x=>x.GetType() == typeof(SkillUpPopup));
         gameResultPopup = (GameResultPopup)popupList.Find(x=>x.GetType() == typeof(GameResultPopup));
-        yield return null;
+
     }
 }
